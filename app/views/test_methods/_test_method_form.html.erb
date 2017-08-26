@@ -1,0 +1,21 @@
+<%= form_for @test_method do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name, class: 'form-control' %>
+
+  <%= f.label :target_organism %>
+  <%= select_tag(:target_organism, options_for_select(@target_organisms)) %>
+
+  <%= f.label :reference_method %>
+  <%= select_tag(:reference_method, options_for_select(@reference_methods)) %>
+  
+  <%= f.label :turn_around_time %>
+  <%= f.number_field :turn_around_time, class: 'form-control' %>
+
+  <%= f.label :detection_limit %>
+  <%= f.number_field :detection_limit, class: 'form-control' %>
+
+  <%= f.label :unit %>
+  <%= select_tag(:unit, options_for_select(@units)) %>
+
+  <%= f.submit "Submit", class: "btn btn-primary" %>
+<% end %>
