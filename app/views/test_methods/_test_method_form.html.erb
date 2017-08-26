@@ -1,50 +1,24 @@
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for @test_method do |f| %>
-      <div class="row">
-        <div class="col-md-12">
-          <%= f.label :name %>
-          <%= f.text_field :name, class: 'form-control' %>
-        </div>
-      </div>
+<%= form_for @test_method do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name, class: 'form-control' %>
 
-      <div class="row">
-        <div class="col-md-4">
-        <%= f.label :target_organism %>
-        <%= f.select :target_organism, @target_organisms %>
-        </div>
+  <%= f.label :target_organism %>
+  <%= f.select :target_organism, @target_organisms, class: 'form-control' %>
 
-        <div class="col-md-4">
-          <%= f.label :reference_method %>
-          <%= f.select :reference_method, @reference_methods %>
-        </div>
+  <%= f.label :reference_method %>
+  <%= f.select :reference_method, @reference_methods, class: 'form-control' %>
 
-        <div class="col-md-4">
-          <%= f.label :turn_around_time %>
-          <%= f.number_field :turn_around_time, class: 'form-control' %> Days
-        </div>
-      </div>
+  <%= f.label :turn_around_time %> (Days)
+  <%= f.number_field :turn_around_time, class: 'form-control' %>
 
-      <div class="row">
-        <div class="col-md-6">
-          <%= f.label :detection_limit %>
-          <%= f.number_field :detection_limit, class: 'form-control' %>
-        </div>
+  <%= f.label :detection_limit %>
+  <%= f.number_field :detection_limit, class: 'form-control' %>
 
-        <div class="col-md-6">
-          <%= f.label :unit %>
-          <%= f.select :unit, @units %>
-        </div>
-      </div>
+  <%= f.label :unit %>
+  <%= f.select :unit, @units, class: 'form-control' %>
 
-      <div class="row">
-        <div class="col-md-6">
-          <%= f.submit "Submit", class: 'btn btn-primary' %>
-        </div>
-        <div class="col-md-6">
-          <%= f.submit "Cancel", class: 'btn btn-danger' %>
-        </div>
-      </div>
-    <% end %>
+  <div class="form-buttons">
+    <%= f.submit "Submit", class: 'btn btn-primary form-button' %>
+    <%= f.submit "Cancel", class: 'btn btn-danger form-button' %>
   </div>
-</div>
+<% end %>
