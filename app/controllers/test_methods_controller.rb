@@ -1,4 +1,5 @@
 class TestMethodsController < ApplicationController
+  before_action :check_for_cancel, only: [:create, :update]
 
   def new
     @test_method = TestMethod.new
@@ -43,6 +44,9 @@ class TestMethodsController < ApplicationController
   end
 
   def destroy
+    TestMethod.find(params[:id]).destroy
+    flash[:success] = "Method Deleted"
+    redirect_to test_methods_path
   end
 
   private
@@ -50,5 +54,11 @@ class TestMethodsController < ApplicationController
   def test_method_params
     params.require(:test_method).permit(:name, :target_organism, :reference_method,
                                         :turn_around_time, :detection_limit, :unit)
+  end
+
+  def check_for_cancel
+    if params[:commit] == "Cancel"
+      redirect_to test_methods_path
+    end
   end
 end

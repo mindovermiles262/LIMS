@@ -1,6 +1,7 @@
 <h1>Test Methods</h1>
 
-<table>
+<div class="table-responsive">
+<table class="table table-striped">
   <tr>
     <th>Name</th>
     <th>Organism</th>
@@ -14,13 +15,17 @@
       <td><%= method.target_organism %></td>
       <td><%= method.reference_method %></td>
       <td><%= method.detection_limit %> <%= method.unit %></td>
-      <td><%= link_to "Edit", edit_test_method_path(method.id) %></td>
+      <td>
+        <%= link_to "Edit", edit_test_method_path(method.id) %> | 
+        <%= link_to "Delete", test_method_path(method.id), method: :delete, data: { confirm: "Are you sure?"} %>
+      </td>
     </tr>
   <% end %>
 </table>
+</div>
 
 <div class="row">
-  <div class="col-md-2 col-md-offset-1">
+  <div class="col-md-2">
     <%= button_to "Add New Method", new_test_method_path, class: 'btn btn-primary', method: :get %>
   </div>
 </div>
