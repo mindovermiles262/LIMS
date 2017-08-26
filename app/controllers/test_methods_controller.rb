@@ -1,16 +1,45 @@
 class TestMethodsController < ApplicationController
+
   def new
     @test_method = TestMethod.new
-    @target_organisms = ["APC", "Y&M"]
-    @reference_methods = ["AOAC", "FDA-BAM", "USP"]
-    @units = ["CFU/g", "CFU/mL"]
+    @target_organisms = [["APC", "APC"], ["Y&M", "Y&M"]]
+    @reference_methods = [["AOAC", "AOAC"], ["FDA-BAM", "FDA-BAM"], ["USP", "USP"]]
+    @units = [["CFU/g", "CFU/g"], ["CFU/mL", "CFU/mL"]]
   end
 
   def create
-    @test_method = TestMethod.create(test_method_params)
+    @test_method = TestMethod.new(test_method_params)
+    if @test_method.save
+      flash[:info] = "Method Created"
+      redirect_to test_methods_path
+    else
+      render 'new'
+    end
+  end
+
+  def show
+    @test_method = TestMethod.find(params[:id])
+  end
+
+  def index
+    @test_methods = TestMethod.all
   end
 
   def edit
+    @test_method = TestMethod.find(params[:id])
+    @target_organisms = [["APC", "APC"], ["Y&M", "Y&M"]]
+    @reference_methods = [["AOAC", "AOAC"], ["FDA-BAM", "FDA-BAM"], ["USP", "USP"]]
+    @units = [["CFU/g", "CFU/g"], ["CFU/mL", "CFU/mL"]]
+  end
+
+  def update
+    @test_method = TestMethod.find(params[:id])
+    if @test_method.update_attributes(test_method_params)
+      flash[:success] = "Test Method Updated!"
+      redirect_to test_methods_path
+    else
+      render 'edit'
+    end
   end
 
   def destroy

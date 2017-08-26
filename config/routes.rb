@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  resources :test_methods, only: [:new, :create, :index, :edit, :destory]
+  resources :test_methods, only: [:new, :create, :edit, :update, :index]
 end
