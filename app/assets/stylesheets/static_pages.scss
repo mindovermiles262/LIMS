@@ -1,3 +1,13 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* --- INDEX --- */
+.jumbotron{
+  // background-image: url( image-path('stock-photo-asian-scientist-in-the-laboratory-working-at-lab-with-test-tubes-572175364.jpg') );
+  width: 100%;
+  background-size: cover;
+}
+.thumbnail img {
+  height: 300px;
+}

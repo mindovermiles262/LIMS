@@ -1,7 +1,12 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+test_methods = [ ["APC PF", "APC", "AOAC", 2, 10, "CFU/g"], 
+                 ["RY&M PF", "Y&M", "AOAC", 2, 10, "CFU/g"] ]
+
+test_methods.each do |set|
+  TestMethod.create(
+    name: set[0],
+    target_organism: set[1],
+    reference_method: set[2],
+    turn_around_time: set[3],
+    detection_limit: set[4],
+    unit: set[5])
+end
