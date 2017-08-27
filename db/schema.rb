@@ -10,12 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170826210725) do
+ActiveRecord::Schema.define(version: 20170826211213) do
 
-  create_table "analysts", force: :cascade do |t|
+  create_table "test_methods", force: :cascade do |t|
+    t.string "name"
+    t.string "target_organism"
+    t.string "reference_method"
+    t.integer "turn_around_time"
+    t.integer "detection_limit"
+    t.string "unit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
+    t.string "company", default: "", null: false
     t.string "email", default: "", null: false
+    t.boolean "admin", default: false
+    t.boolean "analyst", default: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -27,19 +41,8 @@ ActiveRecord::Schema.define(version: 20170826210725) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_analysts_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_analysts_on_reset_password_token", unique: true
-  end
-
-  create_table "test_methods", force: :cascade do |t|
-    t.string "name"
-    t.string "target_organism"
-    t.string "reference_method"
-    t.integer "turn_around_time"
-    t.integer "detection_limit"
-    t.string "unit"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end

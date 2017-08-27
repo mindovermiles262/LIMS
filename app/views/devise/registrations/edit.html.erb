@@ -1,0 +1,72 @@
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= devise_error_messages! %>
+
+      <div class="form-group">
+        <%= f.label :first_name %><br />
+        <%= f.text_field :first_name, autofocus: true, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :last_name %><br />
+        <%= f.text_field :last_name, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, class: 'form-control' %>
+      </div>
+
+      <% if current_user && current_user.admin? %>
+        <div class="form-group">
+          <%= f.label :company %><br />
+          <%= f.text_field :company, class: 'form-control' %>
+        </div>
+      <% end %>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+
+      <div class="form-group">      
+        <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+        <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
+      </div>
+
+      <% if current_user && current_user.admin? %>
+        <div class="form-inline">
+          <div class="form-group">
+            <%= f.label :analyst, class: 'checkbox inline' %>
+            <%= f.check_box :analyst, class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :admin, class: 'checkbox inline' %>
+            <%= f.check_box :admin, class: 'form-control' %>
+          </div>
+        </div>
+      <% end %>
+
+      <br />
+      <h2>Change your password</h2>
+
+      <div class="form-group">
+        <%= f.label :password, "New Password" %><br />
+        <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation, "Confirmation" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+      </div>
+
+      <div class="form-buttons">
+        <%= f.submit "Update", class: 'btn btn-primary form-button' %>
+      </div>
+    <% end %>
+    <%= link_to "Back", :back %>
+  </div>
+</div>
