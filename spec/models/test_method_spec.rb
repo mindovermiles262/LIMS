@@ -7,8 +7,7 @@ RSpec.describe TestMethod, type: :model do
       reference_method: "RSpec",
       turn_around_time: 2,
       detection_limit:  10,
-      unit: "CFU/g"                          
-    )
+      unit: "CFU/g")
   end
 
   it "is valid with all fields" do

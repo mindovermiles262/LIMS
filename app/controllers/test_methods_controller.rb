@@ -1,5 +1,6 @@
 class TestMethodsController < ApplicationController
   before_action :check_for_cancel, only: [:create, :update]
+  before_action :admin
 
   def new
     @test_method = TestMethod.new
@@ -59,6 +60,13 @@ class TestMethodsController < ApplicationController
   def check_for_cancel
     if params[:commit] == "Cancel"
       redirect_to test_methods_path
+    end
+  end
+
+  def admin
+    unless current_user.admin?
+      flash[:danger] = "Unauthorized Access"
+      redirect_to root_path
     end
   end
 end
