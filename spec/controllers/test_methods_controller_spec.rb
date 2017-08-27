@@ -12,12 +12,9 @@ RSpec.describe TestMethodsController, type: :controller do
     )
   end
 
-  it "has valid creation" do
-    expect(@customer).to be_valid
-  end
-
-  it "can be changed by admins only" do
-    expect(get test_methods_path).to redirect_to(root_path)
+  describe TestMethodsController do
+    it "has valid creation"
+    it "can be changed by admins only"
   end
 
 end

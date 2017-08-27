@@ -1,6 +1,6 @@
 class TestMethodsController < ApplicationController
   before_action :check_for_cancel, only: [:create, :update]
-  before_action :admin
+  before_action :user_admin?
 
   def new
     @test_method = TestMethod.new
@@ -63,7 +63,7 @@ class TestMethodsController < ApplicationController
     end
   end
 
-  def admin
+  def user_admin?
     unless current_user.admin?
       flash[:danger] = "Unauthorized Access"
       redirect_to root_path
