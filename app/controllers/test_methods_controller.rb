@@ -19,10 +19,6 @@ class TestMethodsController < ApplicationController
     end
   end
 
-  def show
-    @test_method = TestMethod.find(params[:id])
-  end
-
   def index
     @test_methods = TestMethod.all
   end
@@ -64,7 +60,7 @@ class TestMethodsController < ApplicationController
   end
 
   def user_admin?
-    unless current_user.admin?
+    unless current_user && current_user.admin?
       flash[:danger] = "Unauthorized Access"
       redirect_to root_path
     end

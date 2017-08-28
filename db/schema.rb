@@ -10,20 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170827000953) do
-
-  create_table "companies", force: :cascade do |t|
-    t.string "name"
-    t.string "address"
-    t.string "city"
-    t.string "state"
-    t.integer "zip"
-    t.integer "phone"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_companies_on_user_id"
-  end
+ActiveRecord::Schema.define(version: 20170826211213) do
 
   create_table "test_methods", force: :cascade do |t|
     t.string "name"
@@ -39,7 +26,7 @@ ActiveRecord::Schema.define(version: 20170827000953) do
   create_table "users", force: :cascade do |t|
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
-    t.string "company", default: "", null: false
+    t.string "company", default: ""
     t.string "email", default: "", null: false
     t.boolean "admin", default: false
     t.boolean "analyst", default: false

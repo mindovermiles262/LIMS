@@ -1,3 +1,32 @@
+# Create Users
+User.delete_all if Rails.env.development?
+User.create(
+  first_name: "Admin",
+  last_name: "User",
+  email: "admin@example.com",
+  password: "foobar",
+  password_confirmation: "foobar",
+  admin: true,
+  analyst: true      
+)
+User.create(
+  first_name: "Analyst",
+  last_name: "User",
+  email: "analyst@example.com",
+  password: "foobar",
+  password_confirmation: "foobar",
+  analyst: true      
+)
+User.create(
+  first_name: "Customer",
+  last_name: "User",
+  email: "customer@example.com",
+  password: "foobar",
+  password_confirmation: "foobar"    
+)
+
+# Create Test Methods
+TestMethod.delete_all if Rails.env.development?
 test_methods = [ ["APC PF", "APC", "AOAC", 2, 10, "CFU/g"], 
                  ["RY&M PF", "Y&M", "AOAC", 2, 10, "CFU/g"] ]
 
