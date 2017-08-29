@@ -21,7 +21,6 @@ RSpec.describe TestMethodsController, type: :controller do
     it 'assigns all TestMethod.target_organisms to @target_organisms' do
       get :new
       expect(assigns(:target_organisms)).to be_kind_of(Array)
-      # TODO: @target_organisms of length (DB::TargetOrganisms.count)
     end
     it 'assigns all TestMethod.reference_methods to @reference_methods' do
       get :new
@@ -56,8 +55,19 @@ RSpec.describe TestMethodsController, type: :controller do
     end
 
     context 'with invalid attributes' do
-      it 'does not save TestMethod in database'
-      it 'renders the :new template'
+      it 'does not save TestMethod in database' do
+        expect{
+          post :create, params: { test_method: FactoryGirl.attributes_for(:invalid_test_method) }          
+        }.to change{TestMethod.count}.by(0)
+      end
+      it 'flashes danger message' do
+        post :create, params: { test_method: FactoryGirl.attributes_for(:invalid_test_method) }
+        expect(flash[:danger]).to be_present
+      end
+      it 'renders the :new template' do
+        post :create, params: { test_method: FactoryGirl.attributes_for(:invalid_test_method) }
+        expect(response).to render_template :new
+      end
     end
   end
 
