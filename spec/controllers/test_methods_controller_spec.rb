@@ -7,9 +7,11 @@ RSpec.describe TestMethodsController, type: :controller do
     sign_in FactoryGirl.create(:admin)
   end
 
+  
   it 'has a valid factory' do
     expect(FactoryGirl.build(:test_method)).to be_valid
   end
+
 
   describe 'GET #new' do
     it 'assigns new TestMethod to @test_method' do
@@ -25,25 +27,45 @@ RSpec.describe TestMethodsController, type: :controller do
     end
   end
 
+
   describe 'POST #create' do
     context 'with valid attributes' do
-      it 'saves TestMethod to database'
-      it 'flashes confirmation message'
-      it 'redirects to :index'
+      it 'saves TestMethod to database' do
+        expect{
+          post :create, params: { test_method: FactoryGirl.attributes_for(:test_method) }          
+        }.to change{TestMethod.count}.by(1)
+      end
+      it 'flashes confirmation message' do
+        post :create, params: { test_method: FactoryGirl.attributes_for(:test_method) }
+        expect(flash[:info]).to be_present
+      end
+      it 'redirects to :index' do
+        post :create, params: { test_method: FactoryGirl.attributes_for(:test_method) }
+        expect(response).to redirect_to test_methods_path
+      end
     end
+
     context 'with invalid attributes' do
       it 'does not save TestMethod in database'
       it 'renders the :new template'
     end
   end
 
+
   describe 'GET #index' do
     it 'lists all test methods'
-    it 'renders the :index view'
+    it 'renders the :index view' do
+      get :index
+      expect(response).to render_template :index
+    end
   end
 
   describe 'GET #edit' do
-    it 'assigns TestMethod to @test_method'
+    it 'assigns TestMethod to @test_method' do
+      method = FactoryGirl.create(:test_method)
+      get :edit, params: { id: method.id }
+      expect(assigns(:test_method)).to eq method
+    end
     it 'assigns target_organisms to @target_organisms'
     it 'assigns reference_methods to @reference_methods'
     it 'assigns units to @units'
