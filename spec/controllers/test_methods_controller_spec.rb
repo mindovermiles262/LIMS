@@ -16,10 +16,9 @@ RSpec.describe TestMethodsController, type: :controller do
       get :new
       expect(assigns(:test_method)).to be_a_new(TestMethod)
     end
-    # TODO :
-    # it 'assigns all TestMethod.target_organisms to @target_organisms'
-    # it 'assigns all TestMethod.reference_methods to @reference_methods'
-    # it 'assigns all TestMethod.units to @units'
+    # TODO: it 'assigns all TestMethod.target_organisms to @target_organisms'
+    # TODO: it 'assigns all TestMethod.reference_methods to @reference_methods'
+    # TODO: it 'assigns all TestMethod.units to @units'
     it 'renders the :new template' do
       get :new
       expect(response).to render_template :new
