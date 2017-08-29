@@ -8,6 +8,8 @@ Things you may want to cover:
 * Ruby version
 
 * System dependencies
+To Visualize Relationships with `rails-erd` gem, `graphviz` must be installed.
+  (`sudo apt-get install graphviz` or `brew install graphviz`)
 
 * Configuration
 

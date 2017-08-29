@@ -15,6 +15,7 @@ class TestMethodsController < ApplicationController
       flash[:info] = "Method Created"
       redirect_to test_methods_path
     else
+      flash[:danger] = "Invalid Parameters"
       render 'new'
     end
   end
