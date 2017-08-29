@@ -18,9 +18,19 @@ RSpec.describe TestMethodsController, type: :controller do
       get :new
       expect(assigns(:test_method)).to be_a_new(TestMethod)
     end
-    # TODO: it 'assigns all TestMethod.target_organisms to @target_organisms'
-    # TODO: it 'assigns all TestMethod.reference_methods to @reference_methods'
-    # TODO: it 'assigns all TestMethod.units to @units'
+    it 'assigns all TestMethod.target_organisms to @target_organisms' do
+      get :new
+      expect(assigns(:target_organisms)).to be_kind_of(Array)
+      # TODO: @target_organisms of length (DB::TargetOrganisms.count)
+    end
+    it 'assigns all TestMethod.reference_methods to @reference_methods' do
+      get :new
+      expect(assigns(:reference_methods)).to be_kind_of(Array)
+    end
+    it 'assigns all TestMethod.units to @units' do
+      get :new
+      expect(assigns(:units)).to be_kind_of(Array)
+    end
     it 'renders the :new template' do
       get :new
       expect(response).to render_template :new
