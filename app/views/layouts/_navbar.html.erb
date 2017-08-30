@@ -19,7 +19,7 @@
           <li><%= link_to "Methods", test_methods_path %></li>
         <% end %>
         <!-- Analyst Buttons -->
-        <% if (current_user && current_user.analyst?) || (current_admin && current_admin.admin?) %>
+        <% if (current_analyst && current_analyst.analyst?) || (current_admin && current_admin.admin?) %>
           <li><a href="#">Analyst Functions</a></li>
         <% end %>
         <!-- Customer Buttons -->
