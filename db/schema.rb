@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170826211213) do
+ActiveRecord::Schema.define(version: 20170830002838) do
 
   create_table "test_methods", force: :cascade do |t|
     t.string "name"
@@ -21,6 +21,24 @@ ActiveRecord::Schema.define(version: 20170826211213) do
     t.string "unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "tests", force: :cascade do |t|
+    t.integer "result"
+    t.boolean "received", default: false
+    t.boolean "started", default: false
+    t.boolean "completed", default: false
+    t.boolean "reported", default: false
+    t.boolean "invoiced", default: false
+    t.boolean "paid", default: false
+    t.integer "test_method_id"
+    t.integer "customer_id"
+    t.integer "analysts_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["analysts_id"], name: "index_tests_on_analysts_id"
+    t.index ["customer_id"], name: "index_tests_on_customer_id"
+    t.index ["test_method_id"], name: "index_tests_on_test_method_id"
   end
 
   create_table "users", force: :cascade do |t|

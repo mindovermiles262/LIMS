@@ -1,6 +1,8 @@
 class TestMethod < ApplicationRecord
   # Admin Only :new, :create, :edit, :destroy
   # Technician Only :index
+  has_many :tests
+  
 
   validates :name, :target_organism, :reference_method, 
             :turn_around_time, :detection_limit, :unit, 
