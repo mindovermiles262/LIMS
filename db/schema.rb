@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170830150723) do
+ActiveRecord::Schema.define(version: 20170830191721) do
 
   create_table "admins", force: :cascade do |t|
     t.string "first_name", default: "", null: false
@@ -52,6 +52,16 @@ ActiveRecord::Schema.define(version: 20170830150723) do
     t.index ["reset_password_token"], name: "index_analysts_on_reset_password_token", unique: true
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "tests_id"
+    t.boolean "complete", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tests_id"], name: "index_projects_on_tests_id"
+    t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
   create_table "test_methods", force: :cascade do |t|
     t.string "name"
     t.string "target_organism"
@@ -71,15 +81,17 @@ ActiveRecord::Schema.define(version: 20170830150723) do
     t.boolean "reported", default: false
     t.boolean "invoiced", default: false
     t.boolean "paid", default: false
-    t.boolean "PA"
+    t.boolean "PA", default: false
     t.integer "test_method_id"
-    t.integer "customer_id"
+    t.integer "project_id"
+    t.integer "user_id"
     t.integer "analysts_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["analysts_id"], name: "index_tests_on_analysts_id"
-    t.index ["customer_id"], name: "index_tests_on_customer_id"
+    t.index ["project_id"], name: "index_tests_on_project_id"
     t.index ["test_method_id"], name: "index_tests_on_test_method_id"
+    t.index ["user_id"], name: "index_tests_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

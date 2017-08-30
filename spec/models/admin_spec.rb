@@ -1,10 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe Admin, type: :model do
-  # context 'administrative rights' do
-  #   it 'is initially set to customer privileges' do
-  #     expect(@user.admin).to eql(false)
-  #     expect(@user.analyst).to eql(false)
-  #   end
-  # end
+  before(:each) do
+    @admin = FactoryGirl.build(:analyst)
+  end
+
+  it 'has a valid factory' do
+    expect(@admin).to be_valid
+  end
+
+  context 'validation for presence' do
+    it 'is invalid without an email' do
+      @admin.email = nil
+      expect(@admin).to_not be_valid
+    end
+    it 'is invalid without a password' do
+      @admin.password = nil
+      @admin.password_confirmation = nil
+      expect(@admin).to_not be_valid
+    end
+  end
 end

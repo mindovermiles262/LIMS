@@ -11,6 +11,18 @@ RSpec.describe User, type: :model do
     end
   end
 
+  context 'validation for presence' do
+    it 'is invalid without an email' do
+      @user.email = nil
+      expect(@user).to_not be_valid
+    end
+    it 'is invalid without a password' do
+      @user.password = nil
+      @user.password_confirmation = nil
+      expect(@user).to_not be_valid
+    end
+  end
+
   context 'method' do
     it 'returns valid initials' do
       @user.first_name = "Example"

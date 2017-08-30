@@ -1,4 +1,6 @@
-# Create Users
+# Create Admin, Analyst, User
+Admin.delete_all if Rails.env.development?
+Analyst.delete_all if Rails.env.development?
 User.delete_all if Rails.env.development?
 
 Admin.create!(
@@ -25,6 +27,7 @@ User.create!(
   password_confirmation: "foobar"
 )
 
+
 # Create Test Methods
 TestMethod.delete_all if Rails.env.development?
 test_methods = [ ["APC PF", "APC", "AOAC", 2, 10, "CFU/g"], 
@@ -39,3 +42,9 @@ test_methods.each do |set|
     detection_limit: set[4],
     unit: set[5])
 end
+
+# Create Project
+Project.delete_all if Rails.env.development?
+Project.create(
+    user: User.first
+)
