@@ -11,13 +11,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context 'administrative rights' do
-    it 'is initially set to customer privileges' do
-      expect(@user.admin).to eql(false)
-      expect(@user.analyst).to eql(false)
-    end
-  end
-
   context 'method' do
     it 'returns valid initials' do
       @user.first_name = "Example"

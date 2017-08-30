@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe TestMethodsController, type: :controller do
+
   # Sign in as Administator for all tests
   before(:each) do 
     request.env["devise.mapping"] = Devise.mappings[:user]
@@ -11,7 +12,6 @@ RSpec.describe TestMethodsController, type: :controller do
   it 'has a valid factory' do
     expect(FactoryGirl.build(:test_method)).to be_valid
   end
-
 
   describe 'GET #new' do
     it 'assigns new TestMethod to @test_method' do
@@ -35,7 +35,7 @@ RSpec.describe TestMethodsController, type: :controller do
       expect(response).to render_template :new
     end
   end
-
+  
 
   describe 'POST #create' do
     context 'with valid attributes' do
@@ -196,6 +196,8 @@ RSpec.describe TestMethodsController, type: :controller do
 
     describe 'admin user' do
       before(:each) do 
+        sign_out :admin
+        
         request.env["devise.mapping"] = Devise.mappings[:user]
         sign_in FactoryGirl.create(:analyst)
       end

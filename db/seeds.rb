@@ -1,14 +1,13 @@
 # Create Users
 User.delete_all if Rails.env.development?
 
-User.create!(
+Admin.create!(
   first_name: "Admin",
   last_name: "User",
   email: "admin@example.com",
   password: "foobar",
   password_confirmation: "foobar",
   admin: true,
-  analyst: true
 )
 User.create!(
   first_name: "Analyst",

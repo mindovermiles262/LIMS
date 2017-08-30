@@ -15,12 +15,14 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <!-- Administrator Buttons -->
-        <% if current_user && current_user.admin? %>
+        <% if current_admin && current_admin.admin? %>
           <li><%= link_to "Methods", test_methods_path %></li>
         <% end %>
-        <% if current_user && current_user.analyst? %>
+        <!-- Analyst Buttons -->
+        <% if (current_user && current_user.analyst?) || (current_admin && current_admin.admin?) %>
           <li><a href="#">Analyst Functions</a></li>
         <% end %>
+        <!-- Customer Buttons -->
         <% if current_user %>
           <li><a href="#">Customer Functions</a></li>
         <% else %>

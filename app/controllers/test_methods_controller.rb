@@ -61,7 +61,7 @@ class TestMethodsController < ApplicationController
   end
 
   def user_admin?
-    unless current_user && current_user.admin?
+    unless current_admin && current_admin.admin?
       flash[:danger] = "Unauthorized Access"
       redirect_to root_path
     end
