@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :analysts
   devise_for :admin
   devise_for :users, :controllers => { registrations: 'registrations' }
   root to: "static_pages#index"
