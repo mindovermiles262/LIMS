@@ -73,12 +73,17 @@ RSpec.describe TestMethodsController, type: :controller do
 
 
   describe 'GET #index' do
-    it 'lists all test methods'
     it 'renders the :index view' do
       get :index
       expect(response).to render_template :index
     end
+    it 'lists all created test methods' do
+      method = FactoryGirl.create(:test_method)
+      get :index
+      expect(assigns(:test_methods)).to match_array([method])
+    end
   end
+
 
   describe 'GET #edit' do
     it 'assigns TestMethod to @test_method' do
@@ -86,39 +91,123 @@ RSpec.describe TestMethodsController, type: :controller do
       get :edit, params: { id: method.id }
       expect(assigns(:test_method)).to eq method
     end
-    it 'assigns target_organisms to @target_organisms'
-    it 'assigns reference_methods to @reference_methods'
-    it 'assigns units to @units'
-    it 'renders the :edit template'
+    it 'assigns all TestMethod.target_organisms to @target_organisms' do
+      get :new
+      expect(assigns(:target_organisms)).to be_kind_of(Array)
+    end
+    it 'assigns all TestMethod.reference_methods to @reference_methods' do
+      get :new
+      expect(assigns(:reference_methods)).to be_kind_of(Array)
+    end
+    it 'assigns all TestMethod.units to @units' do
+      get :new
+      expect(assigns(:units)).to be_kind_of(Array)
+    end
+    it 'renders the :edit template' do
+      get :new
+      expect(response).to render_template :new
+    end
   end
+
 
   describe 'PUT #update' do
-    context 'with valid parameters' do
-      it 'updates Test Method in database'
-      it 'flashes success message'
-      it 'redirects to :index'
+    before(:each) do
+      @method = FactoryGirl.create( :test_method,
+        name: "Rspec Testing",
+        target_organism: "RSpec"
+      )
     end
+
+    it 'has a valid creation' do
+      expect(@method).to be_valid
+    end
+
+    context 'with valid parameters' do
+      it 'locates the correct Test Method' do
+        patch :update, params: { id: @method, test_method: FactoryGirl.attributes_for(:test_method) }
+        expect(assigns(:test_method)).to eql(@method)
+      end
+      it 'updates the Test Method' do
+        patch :update, params: { id: @method, test_method: FactoryGirl.attributes_for(:test_method,
+          name: "Should Update", target_organism: "Water") }
+        @method.reload
+        expect(@method.name).to eql("Should Update")
+        expect(@method.target_organism).to eql("Water")
+      end
+      it 'flashes success message' do
+        patch :update, params: { id: @method, test_method: FactoryGirl.attributes_for(:test_method) }
+        expect(flash[:success]).to be_present
+      end
+      it 'redirects to :index' do
+        patch :update, params: { id: @method, test_method: FactoryGirl.attributes_for(:test_method) }
+        expect(response).to redirect_to test_methods_path
+      end
+    end
+
     context 'with invalid parameters' do
-      it 'does not update Test method in database'
-      it 'renders the :edit template'
+      it 'does not update the Test method' do
+        patch :update, params: { id: @method, test_method: FactoryGirl.attributes_for(:test_method,
+          name: "", target_organism: "Earth" )}
+        @method.reload
+        expect(@method.name).to eql("Rspec Testing")
+        expect(@method.target_organism).to_not eql("Earth")
+      end
+      it 'renders the :edit template' do
+        patch :update, params: { id: @method, test_method: FactoryGirl.attributes_for(:test_method,
+          name: "", target_organism: "Earth") }
+        expect(response).to render_template :edit
+      end
     end
   end
 
+
   describe 'DELETE #destroy' do
-    it 'deletes Test Method'
-    it 'flashes success message'
-    it 'redirects to :index'
+    before(:each) do
+      @method = FactoryGirl.create(:test_method)
+    end
+
+    it 'has a valid @method' do
+      expect(@method).to be_valid
+    end
+    it 'deletes Test Method' do
+      expect { 
+        delete :destroy, params: { id: @method }
+      }.to change(TestMethod, :count).by(-1)
+    end
+    it 'flashes success message' do
+      delete :destroy, params: { id: @method }
+      expect(flash[:success]).to be_present
+    end
+    it 'redirects to :index' do
+      delete :destroy, params: { id: @method }
+      expect(response).to redirect_to test_methods_path
+    end
   end
+
 
   describe 'Private Methods' do
     describe 'check for cancel in params' do
-      it 'redirects to :index'
+      it 'redirects to :index on #create' do
+        post :create, params: { commit: "Cancel" }
+        expect(response).to redirect_to test_methods_path
+      end
+
     end
 
     describe 'admin user' do
+      before(:each) do 
+        request.env["devise.mapping"] = Devise.mappings[:user]
+        sign_in FactoryGirl.create(:analyst)
+      end
       context 'as non-administrator' do
-        it 'flashes danger message'
-        it 'redirects to :root path'
+        it 'flashes danger message' do
+          get :new
+          expect(flash[:danger]).to be_present
+        end
+        it 'redirects to :root path' do
+          get :new
+          expect(response).to redirect_to root_path
+        end
       end
     end
   end

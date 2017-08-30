@@ -1,5 +1,6 @@
 # Create Users
 User.delete_all if Rails.env.development?
+
 User.create(
   first_name: "Admin",
   last_name: "User",
@@ -7,7 +8,7 @@ User.create(
   password: "foobar",
   password_confirmation: "foobar",
   admin: true,
-  analyst: true      
+  analyst: true
 )
 User.create(
   first_name: "Analyst",
@@ -15,14 +16,14 @@ User.create(
   email: "analyst@example.com",
   password: "foobar",
   password_confirmation: "foobar",
-  analyst: true      
+  analyst: true
 )
 User.create(
   first_name: "Customer",
   last_name: "User",
   email: "customer@example.com",
   password: "foobar",
-  password_confirmation: "foobar"    
+  password_confirmation: "foobar"
 )
 
 # Create Test Methods
