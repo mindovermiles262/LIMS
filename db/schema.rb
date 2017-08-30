@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20170830150723) do
     t.boolean "reported", default: false
     t.boolean "invoiced", default: false
     t.boolean "paid", default: false
+    t.boolean "PA"
     t.integer "test_method_id"
     t.integer "customer_id"
     t.integer "analysts_id"

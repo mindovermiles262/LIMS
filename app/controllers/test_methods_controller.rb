@@ -1,6 +1,6 @@
 class TestMethodsController < ApplicationController
   before_action :check_for_cancel, only: [:create, :update]
-  before_action :user_admin?
+  before_action :authenticate_admin!
 
   def new
     @test_method = TestMethod.new

@@ -8,6 +8,7 @@ class CreateTests < ActiveRecord::Migration[5.1]
       t.boolean :reported, default: false
       t.boolean :invoiced, default: false
       t.boolean :paid, default: false
+      t.boolean :PA
       t.references :test_method
       t.references :customer
       t.references :analysts

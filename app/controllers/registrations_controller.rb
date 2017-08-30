@@ -8,7 +8,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def account_update_params
-    if current_user && current_user.admin?
+    if current_admin && current_admin.admin?
       params.require(:user).permit( :first_name, :last_name, :email, :company, 
                                     :admin, :analyst, :password, 
                                     :password_confirmation, :current_password )

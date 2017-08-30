@@ -9,7 +9,7 @@ Admin.create!(
   password_confirmation: "foobar",
   admin: true,
 )
-User.create!(
+Analyst.create!(
   first_name: "Analyst",
   last_name: "User",
   email: "analyst@example.com",
