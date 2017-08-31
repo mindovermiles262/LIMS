@@ -1,0 +1,22 @@
+<h1><%= @test_method.name %></h1>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <tr>
+      <th>Name</th>
+      <th>Target</th>
+      <th>Method</th>
+      <th>Turn Around Time</th>
+      <th>Detection Limit</th>
+      <th>Unit</th>
+    </tr>
+    <tr>
+      <th><%= @test_method.name %></th>
+      <th><%= @test_method.target_organism %></th>
+      <th><%= @test_method.reference_method %></th>
+      <th><%= @test_method.turn_around_time %></th>
+      <th><%= @test_method.detection_limit %></th>
+      <th><%= @test_method.unit %></th>
+    </tr>
+  </table>
+</div>

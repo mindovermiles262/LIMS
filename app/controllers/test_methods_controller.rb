@@ -24,6 +24,10 @@ class TestMethodsController < ApplicationController
     @test_methods = TestMethod.all
   end
 
+  def show
+    @test_method = TestMethod.find(params[:id])
+  end
+
   def edit
     @test_method = TestMethod.find(params[:id])
     @target_organisms = [["APC", "APC"], ["Y&M", "Y&M"]]

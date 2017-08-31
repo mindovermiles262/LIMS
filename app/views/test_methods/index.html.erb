@@ -8,15 +8,13 @@
     <th>Name</th>
     <th>Organism</th>
     <th>Method</th>
-    <th>Detection Limit</th>
     <th></th>
   </tr>
   <% @test_methods.each do |method| %>
     <tr>
-      <td><%= method.name %></td>
+      <td><%= link_to method.name, test_method_path(method) %></td>
       <td><%= method.target_organism %></td>
       <td><%= method.reference_method %></td>
-      <td><%= method.detection_limit %> <%= method.unit %></td>
       <td>
         <%= link_to "Edit", edit_test_method_path(method.id) %> | 
         <%= link_to "Delete", test_method_path(method.id), method: :delete, data: { confirm: "Are you sure?"} %>
