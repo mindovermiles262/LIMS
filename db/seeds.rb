@@ -27,6 +27,36 @@ User.create!(
   password_confirmation: "foobar"
 )
 
+# Seed fake data
+
+Admin.create!(
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  email: Faker::Internet.email,
+  password: "foobar",
+  password_confirmation: "foobar",
+  admin: true
+)
+10.times do
+  Analyst.create!(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: Faker::Internet.email,
+    password: "foobar",
+    password_confirmation: "foobar",
+    analyst: true
+  )
+end
+50.times do
+  User.create!(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: Faker::Internet.email,
+    password: "foobar",
+    password_confirmation: "foobar"
+  )
+end
+
 
 # Create Test Methods
 TestMethod.delete_all if Rails.env.development?
@@ -48,3 +78,5 @@ Project.delete_all if Rails.env.development?
 Project.create(
     user: User.first
 )
+
+Test.delete_all if Rails.env.development?
