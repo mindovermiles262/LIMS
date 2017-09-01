@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   root to: "static_pages#index"
   
   resources :test_methods
+  # TODO: Limit Projects
+  resources :projects 
 end
