@@ -1,0 +1,11 @@
+<%= form_for new_project_path do |project| %>
+  <%= project.fields_for :tests do |builder| %>
+    <p>
+      <%= builder.label :test_method, "Test Method" %><br />
+      <%= select_tag(:test_method, options_for_select(@methods)) %>
+    </p>
+  <% end %>
+
+  <%= project.hidden_field :user_id, value: current_user.id %>
+  <%= project.submit "Submit", class: 'btn btn-primary' %>
+<% end %>
