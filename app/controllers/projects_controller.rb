@@ -35,15 +35,3 @@ class ProjectsController < ApplicationController
   end
 
 end
-
-=begin
-Parameters: {
-  "utf8"=>"✓", "authenticity_token"=>"", "project"=>{
-    "test_method"=>{
-      "test_method"=>"#<TestMethod:0x007f841f4588c8>"
-    }, 
-    "user_id"=>"3"
-  }, 
-  "commit"=>"Submit"
-}
-=end

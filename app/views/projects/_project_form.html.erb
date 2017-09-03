@@ -2,13 +2,9 @@
 
   <%= project.fields_for :tests do |test| %>
       <%= test.label :test_method_id, "Test Method" %><br />
-      <%= test.select(:test_method_id, options_for_select(@methods)) %>
+      <%= test.select(:test_method_id, options_for_select(@methods), include_blank: true) %>
   <% end %>
-
-  <%#= project.fields_for :test do |test_method_forms| %>
-      <%#= test_method_forms.label :test_method, "Test Method" %><br />
-      <%#= test_method_forms.select(:test_method, options_for_select(@methods)) %>
-  <%# end %>
+  
   <%= project.hidden_field :user_id, value: current_user.id %>
   <%= project.submit "Submit", class: 'btn btn-primary' %>
 <% end %>
