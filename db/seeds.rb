@@ -73,10 +73,10 @@ test_methods.each do |set|
     unit: set[5])
 end
 
-# Create Project
-Project.delete_all if Rails.env.development?
-Project.create(
-    user: User.first
-)
+# # Create Project
+# Project.delete_all if Rails.env.development?
+# Project.create(
+#     user: User.first
+# )
 
-Test.delete_all if Rails.env.development?
+# Test.delete_all if Rails.env.development?

@@ -1,12 +1,33 @@
-<h1>Show</h1>
+<h1>Project <%= @project.id %></h1>
 
-<h2>Project <%= @project.id %></h2>
-<h2>Tests:</h2>
 <table class="table table-striped">
+  <tr>
+    <th>Test ID</th>
+    <th>Description</th>
+    <th>Lot</th>
+    <th>Test Method</th>
+    <th>Target</th>
+    <th>Reference Method</th>
+    <th></th>
+  </th>
   <% @project.tests.each do |test| %>
     <tr>
-    <td>Test ID: <%= test.id %></td>
-    <td>Test Method ID: <%= test.test_method_id %></td>
+      <td><%= test.id %></td>
+      <td><%= test.project.description %></td>
+      <td><%= test.project.lot %></td>
+      <td><%= test.test_method.name %></td>
+      <td><%= test.test_method.target_organism %></td>
+      <td><%= test.test_method.reference_method %></td>
+      <td><%= button_to "Remove Test", { controller: :tests, action: 'destroy', id: test.id }, method: :delete, class: 'btn btn-primary' %></td>
     </tr>
   <% end %>
 </table>
+<div class="row">
+  <div class="col-md-2">
+    <%# TODO: Fix this link so it works %>
+    <%= link_to "Edit Test", edit_project_path(@project), class: 'btn btn-primary' %>
+  </div>
+  <div class="col-md-2">
+    <%= button_to "Delete Project", @project, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+  </div>
+</div>
