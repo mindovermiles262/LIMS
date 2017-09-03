@@ -1,1 +1,12 @@
 <h1>Show</h1>
+
+<h2>Project <%= @project.id %></h2>
+<h2>Tests:</h2>
+<table class="table table-striped">
+  <% @project.tests.each do |test| %>
+    <tr>
+    <td>Test ID: <%= test.id %></td>
+    <td>Test Method ID: <%= test.test_method_id %></td>
+    </tr>
+  <% end %>
+</table>

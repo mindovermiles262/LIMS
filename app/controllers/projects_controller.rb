@@ -8,7 +8,7 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
-    @methods = TestMethod.all.map { |m| [m.name, m] }
+    @methods = TestMethod.all.map { |m| [m.name, m.id] }
     3.times { @project.tests.build }
   end
 
@@ -17,7 +17,7 @@ class ProjectsController < ApplicationController
     if @project.save!
       # raise
       flash[:success] = "Project Created"
-      redirect_to projects_path
+      redirect_to @project
     else
       flash[:danger] = "Unable to create Project"
       render :new
