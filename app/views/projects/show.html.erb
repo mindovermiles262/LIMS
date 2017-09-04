@@ -8,7 +8,7 @@
     <th>Test Method</th>
     <th>Target</th>
     <th>Reference Method</th>
-    <th></th>
+    
   </th>
   <% @project.tests.each do |test| %>
     <tr>
@@ -18,7 +18,7 @@
       <td><%= test.test_method.name %></td>
       <td><%= test.test_method.target_organism %></td>
       <td><%= test.test_method.reference_method %></td>
-      <td><%= button_to "Remove Test", { controller: :tests, action: 'destroy', id: test.id }, method: :delete, class: 'btn btn-primary' %></td>
+      
     </tr>
   <% end %>
 </table>
