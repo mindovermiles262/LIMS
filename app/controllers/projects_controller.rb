@@ -9,7 +9,7 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     @methods = TestMethod.all.map { |m| [m.name, m.id] }
-    2.times { @project.tests.build }
+    6.times { @project.tests.build }
   end
 
   def create
@@ -18,8 +18,7 @@ class ProjectsController < ApplicationController
       flash[:success] = "Project Created"
       redirect_to @project
     else
-      # flash[:danger] = "Unable to create Project"
-      @project.tests.build
+      (1 - @project.tests.count).times {@project.tests.build}
       render :new
     end
   end

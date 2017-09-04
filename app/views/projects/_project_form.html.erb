@@ -23,8 +23,12 @@
 
       <div class="form-group">
         <%= project.fields_for :tests do |test| %>
-          <%= test.label :test_method_id, "Test Method" %>
-          <%= test.select(:test_method_id, options_for_select( TestMethod.all.map { |m| [m.name, m.id] }, selected: test.object.test_method_id), include_blank: true) %>
+          <p class="form-fields">
+            <%= test.label :test_method_id, "Test Method" %>
+            <%= test.select(:test_method_id, options_for_select(@methods, selected: test.object.test_method_id), include_blank: true) %>
+            <%= test.hidden_field :_destroy %>
+            <%= link_to "Remove", "javascript:void(0);", class: "remove-link" %>
+          </p>
         <% end %>
       </div>  
       
