@@ -3,23 +3,23 @@ class ProjectsController < ApplicationController
 
   # TODO: Limit #index by User
   def index
-    @projects = Project.all
+    @projects = Project.where(user_id: current_user.id)
   end
 
   def new
     @project = Project.new
     @methods = TestMethod.all.map { |m| [m.name, m.id] }
-    3.times { @project.tests.build }
+    2.times { @project.tests.build }
   end
 
   def create
     @project = Project.new(project_params)
-    if @project.save!
-      # raise
+    if @project.save
       flash[:success] = "Project Created"
       redirect_to @project
     else
-      flash[:danger] = "Unable to create Project"
+      # flash[:danger] = "Unable to create Project"
+      @project.tests.build
       render :new
     end
   end

@@ -74,9 +74,10 @@ test_methods.each do |set|
 end
 
 # # Create Project
-# Project.delete_all if Rails.env.development?
-# Project.create(
-#     user: User.first
-# )
-
-# Test.delete_all if Rails.env.development?
+Project.delete_all if Rails.env.development?
+Project.create(
+    user: User.second,
+    description: "Second User Project Description",
+    lot: "123ABC",
+    tests: [Test.first, Test.second]
+)
