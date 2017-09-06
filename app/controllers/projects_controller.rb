@@ -48,6 +48,9 @@ class ProjectsController < ApplicationController
     redirect_to projects_path
   end
 
+  def add_form_field
+  end
+
   private
 
   def project_params

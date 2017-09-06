@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   
   resources :test_methods
   # TODO: Limit Projects, tests
-  resources :projects 
+  resources :projects do
+    collection do
+      get 'add_form_field'
+    end
+  end
   resources :tests
 end

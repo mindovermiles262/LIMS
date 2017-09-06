@@ -33,7 +33,10 @@
           <%= project.fields_for :tests do |test| %>
             <%= render 'test_fields', :f => test %>
           <% end %>
-        </div>  
+        </div>
+        
+        <%= link_to "Add Test", add_form_field_projects_path, remote: true, id: 'archway' %>
+
         <div class="form-group">
           <%= project.hidden_field :user_id, value: current_user.id %>
           <%= project.submit "Submit", class: 'btn btn-primary col-md-2 col-md-offset-3' %>
