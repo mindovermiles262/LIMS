@@ -1,7 +1,8 @@
-$(document).ready(function() { 
+$( document ).on('turbolinks:load', function() {
   $('form').on('click', '.remove-link', function(event) {
     $(this).prev('input[type=hidden]').val('1');
-    $(this).closest('.form-fields').hide();
+    $(this).prev('.select-menu').val('0')
+    // $(this).closest('.form-fields').hide();
     return event.preventDefault();
   });
 
@@ -14,3 +15,21 @@ $(document).ready(function() {
     return event.preventDefault();
   });
 });
+
+/*
+<div class="form-group fields">
+          
+<div class="form-fields">
+  <div class="row">
+    <label class="col-md-2" for="project_tests_attributes_0_test_method_id">Test Method</label>
+    <div class="col-md-6">
+      <select name="project[tests_attributes][0][test_method_id]" id="project_tests_attributes_0_test_method_id">
+      <option value=""></option>
+      <option value="1">APC PF</option>
+      <option value="2">RY&amp;M PF</option></select>
+    </div>
+    <a class="remove-link col-md-2" href="#">Delete</a>
+  </div>
+</div>
+</div>  
+*/

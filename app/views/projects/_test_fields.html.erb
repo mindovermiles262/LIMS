@@ -2,7 +2,7 @@
   <div class="row">
     <%= f.label :test_method_id, "Test Method", class: 'col-md-2' %>
     <div class="col-md-6">
-      <%= f.select(:test_method_id, options_for_select(@methods, selected: f.object.test_method_id), include_blank: true) %>
+      <%= f.select(:test_method_id, options_for_select(@methods, selected: f.object.test_method_id), { include_blank: true }, { class: 'select-menu' }) %>
     </div>
     <%= link_to 'Delete', '#', class: 'remove-link col-md-2' %>
   </div>
