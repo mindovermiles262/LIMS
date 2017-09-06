@@ -1,8 +1,7 @@
-$( document ).ready(function() {
-  $( ".remove-link" ).click(function() {
-    console.log("click start");
-    $(this).parent().find("input[type=hidden]").value = "1";
-    $(this).closest(".form-fields").hide();
-    console.log("click end");
+$(document).ready(function() { 
+  $('form').on('click', '.remove-link', function(event) {
+    $(this).prev('input[type=hidden]').val('1');
+    $(this).closest('.form-fields').hide();
+    return event.preventDefault();
   });
-})
+});
