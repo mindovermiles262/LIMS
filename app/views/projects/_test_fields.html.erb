@@ -1,4 +1,4 @@
+
 <%= f.label :test_method_id, "Test Method", class: '' %>
 <%= f.select(:test_method_id, options_for_select(@methods, selected: f.object.test_method_id), { include_blank: true }, { class: 'select-menu' }) %>
 <%= f.check_box :_destroy %>
-<%= f.label :_destroy, "Delete" %>
