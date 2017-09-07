@@ -18,16 +18,19 @@
       <td><%= test.test_method.name %></td>
       <td><%= test.test_method.target_organism %></td>
       <td><%= test.test_method.reference_method %></td>
-      
     </tr>
   <% end %>
 </table>
-<div class="row">
+<div class="container-fluid">
   <div class="col-md-2">
-    <%# TODO: Fix this link so it works %>
-    <%= link_to "Edit Test", edit_project_path(@project), class: 'btn btn-primary' %>
+    <%= button_to "Edit Test", edit_project_path(@project), method: :get, class: 'btn btn-primary' %>
+  </div>
+  <div class="col-md-8">
+    <%= button_to "All Projects", projects_path, method: :get, class: 'btn btn-success' %>
   </div>
   <div class="col-md-2">
     <%= button_to "Delete Project", @project, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
   </div>
+  
+  
 </div>

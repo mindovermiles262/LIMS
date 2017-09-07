@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-$(document).ready(function() {
-  $( ".remove-link" ).click(function() {
-    $(this).parent().find("input[type=hidden]").value = "1";
-    $(this).closest(".form-fields").hide();
-    $(this).find(".method-select").children().empty()
-  });
-});
-=======
 $( document ).on('turbolinks:load', function() {
   $('form').on('click', '.remove-link', function(event) {
     $(this).prev('input[type=hidden]').val('1');
@@ -42,4 +33,3 @@ $( document ).on('turbolinks:load', function() {
 </div>
 </div>  
 */
->>>>>>> e7b497f52b5b6815b1435b1ff783067c99781df8
