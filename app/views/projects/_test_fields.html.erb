@@ -1,9 +1,16 @@
 <div class="form-fields">
   <div class="row">
     <%= f.label :test_method_id, "Test Method", class: 'col-md-2' %>
+<<<<<<< HEAD
     <div class="col-md-6 method-select">
       <%= f.select(:test_method_id, options_for_select(@methods, selected: f.object.test_method_id), include_blank: true) %>
     </div>
     <%= link_to "Remove", 'javascript:void(0);',  class: "remove-link col-md-2" %>
+=======
+    <div class="col-md-6">
+      <%= f.select(:test_method_id, options_for_select(@methods, selected: f.object.test_method_id), { include_blank: true }, { class: 'select-menu' }) %>
+    </div>
+    <%= link_to 'Delete', '#', class: 'remove-link col-md-2' %>
+>>>>>>> e7b497f52b5b6815b1435b1ff783067c99781df8
   </div>
 </div>

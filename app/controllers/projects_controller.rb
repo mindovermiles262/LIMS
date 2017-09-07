@@ -9,7 +9,7 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     @methods = TestMethod.all.map { |m| [m.name, m.id] }
-    6.times { @project.tests.build }
+    @project.tests.build
   end
 
   def create
@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
       flash[:success] = "Project Created"
       redirect_to @project
     else
-      (1 - @project.tests.count).times {@project.tests.build}
+      flash[:warning] = "Unable to create project"
       render :new
     end
   end
@@ -30,7 +30,6 @@ class ProjectsController < ApplicationController
   def edit
     @project = Project.find(params[:id])
     @methods = TestMethod.all.map { |m| [m.name, m.id] }
-    (1 - @project.tests.count).times { @project.tests.build }
   end
 
   def update
@@ -39,6 +38,7 @@ class ProjectsController < ApplicationController
       flash[:success] = "Project updated"
       redirect_to @project
     else
+      flash[:warning] = "Unable to edit project"
       render :edit
     end
   end
