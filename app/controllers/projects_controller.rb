@@ -54,7 +54,7 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:user_id, :description, :lot, :tests_attributes => [:test_method_id, :id])
+    params.require(:project).permit(:user_id, :description, :lot, :tests_attributes => [:test_method_id, :id, :_destroy])
   end
 
 end

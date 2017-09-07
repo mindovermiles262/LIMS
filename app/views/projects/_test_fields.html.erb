@@ -1,9 +1,19 @@
-<div class="form-fields">
+<div class="form-group">
   <div class="row">
-    <%= f.label :test_method_id, "Test Method", class: 'col-md-2' %>
-    <div class="col-md-6">
+    <div class="col-xs-3 col-4">
+      <%= f.label :test_method_id, "Test Method", class: 'col-md-2' %>
+    </div>
+    <div class="col-xs-4 col-4">
       <%= f.select(:test_method_id, options_for_select(@methods, selected: f.object.test_method_id), { include_blank: true }, { class: 'select-menu' }) %>
-      <%= link_to 'Delete', '#', class: 'remove-link col-md-2' %>
+    </div>
+    <div class="col-xs-5 col-4">
+      <div class="checkbox-inline">
+        <%= f.check_box :_destroy %>
+      </div>
+      <div class="checkbox-inline">
+        <%= f.label :_destroy, "Delete" %>
+        <%#= link_to 'Delete', '#', class: 'remove-link col-md-2' %>
+      </div>
     </div>
   </div>
 </div>
