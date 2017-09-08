@@ -1,36 +1,44 @@
 <h1>Project <%= @project.id %></h1>
 
-<table class="table table-striped">
-  <tr>
-    <th>Test ID</th>
-    <th>Description</th>
-    <th>Lot</th>
-    <th>Test Method</th>
-    <th>Target</th>
-    <th>Reference Method</th>
-    
-  </th>
-  <% @project.tests.each do |test| %>
-    <tr>
-      <td><%= test.id %></td>
-      <td><%= test.project.description %></td>
-      <td><%= test.project.lot %></td>
-      <td><%= test.test_method.name %></td>
-      <td><%= test.test_method.target_organism %></td>
-      <td><%= test.test_method.reference_method %></td>
-    </tr>
-  <% end %>
-</table>
-<div class="container-fluid">
-  <div class="col-md-2">
-    <%= button_to "Edit Test", edit_project_path(@project), method: :get, class: 'btn btn-primary' %>
+<div class="columns">
+  <div class="column is-10 is-offset-1">
+    <div class="section is-centered">
+      <table class="table is-striped is-fullwidth">
+        <thead>  
+          <tr>
+            <th>Test ID</th>
+            <th>Description</th>
+            <th>Lot</th>
+            <th>Test Method</th>
+            <th>Target</th>
+            <th>Reference Method</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @project.tests.each do |test| %>
+            <tr>
+              <td><%= test.id %></td>
+              <td><%= test.project.description %></td>
+              <td><%= test.project.lot %></td>
+              <td><%= test.test_method.name %></td>
+              <td><%= test.test_method.target_organism %></td>
+              <td><%= test.test_method.reference_method %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div class="columns">
+        <div class="column is-4">
+          <%= button_to "Edit Test", edit_project_path(@project), method: :get, class: 'button is-primary' %>
+        </div>
+        <div class="column is-4 is-fullwidth">
+          <%= button_to "All Projects", projects_path, method: :get, class: 'button is-info' %>
+        </div>
+        <div class="column is-4">
+          <%= button_to "Delete Project", @project, method: :delete, data: { confirm: "Are you sure?" }, class: 'button is-danger' %>  
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="col-md-2">
-    <%= button_to "All Projects", projects_path, method: :get, class: 'btn btn-success' %>
-  </div>
-  <div class="col-md-2">
-    <%= button_to "Delete Project", @project, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
-  </div>
-  
-  
 </div>

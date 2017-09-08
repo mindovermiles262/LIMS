@@ -1,52 +1,56 @@
-<%= form_for @project do |project| %>
-  <% if @project.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:
-      </h2>
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+    <%= form_for @project do |project| %>
+      <% if @project.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:
+          </h2>
 
-      <ul>
-        <% @project.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <ul>
+            <% @project.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div class="field">
-    <div class="control">
-      <%= project.label :description, class: 'label' %>
-      <%= project.text_field :description, class: 'input' %>
-    </div>
-  </div>
-
-  <div class="field">
-    <div class="control">
-      <%= project.label :lot, class: 'label' %>
-      <%= project.text_field :lot, class: 'input' %>
-    </div>
-  </div>
-
-  <div class="fields"> <!-- Add More Fields Anchor (.fields) -->
-    <div class="field">
-      <div class="control">
-        <%= project.label :test_method_id, "Test Method", class: 'label' %>
-        <%= project.fields_for :tests, nil, {remote: true} do |test| %>
-            <%= render 'test_fields', :f => test %>
-        <% end %>
+      <div class="field">
+        <div class="control">
+          <%= project.label :description, class: 'label' %>
+          <%= project.text_field :description, class: 'input' %>
+        </div>
       </div>
-    </div>
+
+      <div class="field">
+        <div class="control">
+          <%= project.label :lot, class: 'label' %>
+          <%= project.text_field :lot, class: 'input' %>
+        </div>
+      </div>
+
+      <div class="fields"> <!-- Add More Fields Anchor (.fields) -->
+        <div class="field">
+          <div class="control">
+            <%= project.label :test_method_id, "Test Method", class: 'label' %>
+            <%= project.fields_for :tests, nil, {remote: true} do |test| %>
+                <%= render 'test_fields', :f => test %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+            
+      <div class="field">
+        <div class="control">
+          <%= link_to_add_test('Add Test', project, :tests, class: 'button is-link') %>
+        </div>
+      </div>
+            
+      <div class="field">
+        <div class="control">
+          <%= project.submit "Submit", class: 'button is-primary' %>
+        </div>
+      </div>
+    <% end %>
   </div>
-        
-  <div class="field">
-    <div class="control">
-      <%= link_to_add_test('Add Test', project, :tests, class: 'button is-link') %>
-    </div>
-  </div>
-        
-  <div class="field">
-    <div class="control">
-      <%= project.submit "Submit", class: 'button is-primary' %>
-    </div>
-  </div>
-<% end %>
+</div>
