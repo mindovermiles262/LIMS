@@ -13,28 +13,40 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= project.label :description, class: '' %>
-    <%= project.text_field :description, class: '' %>
+  <div class="field">
+    <div class="control">
+      <%= project.label :description, class: 'label' %>
+      <%= project.text_field :description, class: 'input' %>
+    </div>
   </div>
 
-  <div class="form-group">
-    <%= project.label :lot, class: '' %>
-    <%= project.text_field :lot, class: '' %>
+  <div class="field">
+    <div class="control">
+      <%= project.label :lot, class: 'label' %>
+      <%= project.text_field :lot, class: 'input' %>
+    </div>
   </div>
 
-  <div class="fields">
-    <%= project.fields_for :tests, nil, {remote: true, class: 'form-inline'} do |test| %>
-      <%= render 'test_fields', :f => test %>
-    <% end %>
-  </div>  
-        
-  <div class="form-group">
-    <%= link_to_add_test('Add Test', project, :tests, class: '') %>
+  <div class="fields"> <!-- Add More Fields Anchor (.fields) -->
+      <%= project.fields_for :tests, nil, {remote: true} do |test| %>
+        <div class="field">
+          <div class="control">
+            <%= test.label :test_method_id, "Test Method", class: 'label' %>
+            <%= render 'test_fields', :f => test %>
+          </div>
+        </div>
+      <% end %>
   </div>
         
-  <div class="form-group">
-    <%= project.hidden_field :user_id, value: current_user.id %>
-    <%= project.submit "Submit", class: 'btn btn-primary' %>
-  </div>   
+  <div class="field">
+    <div class="control">
+      <%= link_to_add_test('Add Test', project, :tests, class: 'button is-link') %>
+    </div>
+  </div>
+        
+  <div class="field">
+    <div class="control">
+      <%= project.submit "Submit", class: 'button is-primary' %>
+    </div>
+  </div>
 <% end %>

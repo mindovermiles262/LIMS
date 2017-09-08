@@ -14,6 +14,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
+    @project.user_id = current_user.id if current_user
     if @project.save
       flash[:success] = "Project Created"
       redirect_to @project
@@ -46,9 +47,6 @@ class ProjectsController < ApplicationController
   def destroy
     Project.find(params[:id]).destroy
     redirect_to projects_path
-  end
-
-  def add_form_field
   end
 
   private

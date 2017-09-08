@@ -1,16 +1,20 @@
 // Forms
 
-input, textarea, select, .uneditable-input {  
-  border: 1px solid #bbb;
-  width: 100%;
-  margin-bottom: 15px;
+.field > .field-label {
+  white-space: nowrap;
 }
-input {
-  height: auto !important;
+
+// Checkbox to delete tests
+.destroy {
+  white-space: nowrap;
+  padding-left: 20px;
 }
-.form-buttons {
-  text-align: center;
+input[type=checkbox] { display:none; } /* to hide the checkbox itself */
+input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
 }
-.form-button {
-  width: 25%;
-}
+input[type=checkbox] + label:before { content: "\f096"; } /* unchecked icon */
+input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between checkbox and label */
+input[type=checkbox]:checked + label:before { content: "\f046"; } /* checked icon */
+input[type=checkbox]:checked + label:before { letter-spacing: 5px; } /* allow space for check mark */
