@@ -15,7 +15,8 @@ gem 'devise',     '~> 4.3'
 gem 'coffee-rails',   '~> 4.2'
 gem 'turbolinks',     '~> 5'
 gem 'jbuilder',       '~> 2.5'
-gem 'bootstrap-sass', '~> 3.3.6'
+gem "bulma-rails", "~> 0.5.1"
+gem "font-awesome-rails"
 gem 'jquery-rails',   '~> 4.3', '>= 4.3.1'
 
 group :development, :test do
@@ -39,6 +40,8 @@ end
 group :test do
   gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
   gem 'launchy', '~> 2.4', '>= 2.4.3'
+  gem 'simplecov', :require => false
+  gem 'brakeman', '~> 3.7', '>= 3.7.2', :require => false
 end
 
 group :production do

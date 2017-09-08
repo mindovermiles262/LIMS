@@ -1,0 +1,9 @@
+<div class="field is-grouped">
+  <%= f.select(:test_method_id, options_for_select(@methods, selected: f.object.test_method_id), { include_blank: true }, { class: 'select is-fullwidth select-menu'}) %>
+  <div class="field is-grouped">
+    <%= f.check_box :_destroy, class: '' %>
+    <%= f.label :_destroy, class: "destroy" do %>
+      <i class="fa fa-trash-o" aria-hidden="true"></i>
+    <% end %>
+  </div>
+</div>

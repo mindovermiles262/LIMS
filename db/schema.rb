@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(version: 20170830191721) do
     t.integer "user_id"
     t.integer "tests_id"
     t.boolean "complete", default: false
+    t.string "description", default: ""
+    t.string "lot", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tests_id"], name: "index_projects_on_tests_id"

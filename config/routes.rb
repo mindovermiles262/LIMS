@@ -5,6 +5,11 @@ Rails.application.routes.draw do
   root to: "static_pages#index"
   
   resources :test_methods
-  # TODO: Limit Projects
-  resources :projects 
+  # TODO: Limit Projects, tests
+  resources :projects do
+    collection do
+      get 'add_form_field'
+    end
+  end
+  resources :tests
 end

@@ -37,7 +37,7 @@ Admin.create!(
   password_confirmation: "foobar",
   admin: true
 )
-10.times do
+5.times do
   Analyst.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -47,7 +47,7 @@ Admin.create!(
     analyst: true
   )
 end
-50.times do
+5.times do
   User.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -73,10 +73,11 @@ test_methods.each do |set|
     unit: set[5])
 end
 
-# Create Project
+# # Create Project
 Project.delete_all if Rails.env.development?
 Project.create(
-    user: User.first
+    user: User.first,
+    description: "Second User Project Description",
+    lot: "123ABC",
+    tests: [(Test.new(test_method: TestMethod.first))]
 )
-
-Test.delete_all if Rails.env.development?

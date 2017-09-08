@@ -1,11 +1,52 @@
-<%= form_for new_project_path do |project| %>
-  <%= project.fields_for :tests do |builder| %>
-    <p>
-      <%= builder.label :test_method, "Test Method" %><br />
-      <%= select_tag(:test_method, options_for_select(@methods)) %>
-    </p>
+<%= form_for @project do |project| %>
+  <% if @project.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:
+      </h2>
+
+      <ul>
+        <% @project.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
 
-  <%= project.hidden_field :user_id, value: current_user.id %>
-  <%= project.submit "Submit", class: 'btn btn-primary' %>
+  <div class="field">
+    <div class="control">
+      <%= project.label :description, class: 'label' %>
+      <%= project.text_field :description, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <%= project.label :lot, class: 'label' %>
+      <%= project.text_field :lot, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="fields"> <!-- Add More Fields Anchor (.fields) -->
+    <div class="field">
+      <div class="control">
+        <%= project.label :test_method_id, "Test Method", class: 'label' %>
+        <%= project.fields_for :tests, nil, {remote: true} do |test| %>
+            <%= render 'test_fields', :f => test %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+        
+  <div class="field">
+    <div class="control">
+      <%= link_to_add_test('Add Test', project, :tests, class: 'button is-link') %>
+    </div>
+  </div>
+        
+  <div class="field">
+    <div class="control">
+      <%= project.submit "Submit", class: 'button is-primary' %>
+    </div>
+  </div>
 <% end %>

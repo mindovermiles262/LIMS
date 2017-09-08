@@ -1,1 +1,36 @@
-<h1>Show</h1>
+<h1>Project <%= @project.id %></h1>
+
+<table class="table table-striped">
+  <tr>
+    <th>Test ID</th>
+    <th>Description</th>
+    <th>Lot</th>
+    <th>Test Method</th>
+    <th>Target</th>
+    <th>Reference Method</th>
+    
+  </th>
+  <% @project.tests.each do |test| %>
+    <tr>
+      <td><%= test.id %></td>
+      <td><%= test.project.description %></td>
+      <td><%= test.project.lot %></td>
+      <td><%= test.test_method.name %></td>
+      <td><%= test.test_method.target_organism %></td>
+      <td><%= test.test_method.reference_method %></td>
+    </tr>
+  <% end %>
+</table>
+<div class="container-fluid">
+  <div class="col-md-2">
+    <%= button_to "Edit Test", edit_project_path(@project), method: :get, class: 'btn btn-primary' %>
+  </div>
+  <div class="col-md-2">
+    <%= button_to "All Projects", projects_path, method: :get, class: 'btn btn-success' %>
+  </div>
+  <div class="col-md-2">
+    <%= button_to "Delete Project", @project, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+  </div>
+  
+  
+</div>

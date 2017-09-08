@@ -1,70 +1,182 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">LIMS</a>
+<nav class="navbar ">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="http://bulma.io">
+      <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+    </a>
+
+    <a class="navbar-item is-hidden-desktop" href="https://github.com/jgthms/bulma" target="_blank">
+      <span class="icon" style="color: #333;">
+        <i class="fa fa-github"></i>
+      </span>
+    </a>
+
+    <a class="navbar-item is-hidden-desktop" href="https://twitter.com/jgthms" target="_blank">
+      <span class="icon" style="color: #55acee;">
+        <i class="fa fa-twitter"></i>
+      </span>
+    </a>
+
+    <div class="navbar-burger burger" data-target="navMenubd-example">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div id="navMenubd-example" class="navbar-menu">
+    <div class="navbar-start">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <% if current_user %>
+        <%= link_to "Projects", projects_path, class: 'navbar-item' %>
+        <div class="navbar-dropdown ">
+          <%= link_to "All Projects", projects_path, class: 'navbar-item' %>
+          <%= link_to "New Project", new_project_path, class: 'navbar-item'  %>
+          <a class="navbar-item" href="#">
+            Something else
+          </a>
+
+          <hr class="navbar-divider">
+          
+          <div class="navbar-item">
+            <div>
+              <p class="is-size-6-desktop">
+                <strong class="has-text-info">
+                  <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+                </strong>
+              </p>              
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link " href="http://bulma.io/blog/">
+          Blog
+        </a>
+        <div id="blogDropdown" class="navbar-dropdown " data-style="width: 18rem;">
+          
+            <a class="navbar-item" href="/2017/08/03/list-of-tags/">
+              <div class="navbar-content">
+                <p>
+                  <small class="has-text-info">03 Aug 2017</small>
+                </p>
+                <p>New feature: list of tags</p>
+              </div>
+            </a>
+          
+            <a class="navbar-item" href="/2017/08/01/bulma-bootstrap-comparison/">
+              <div class="navbar-content">
+                <p>
+                  <small class="has-text-info">01 Aug 2017</small>
+                </p>
+                <p>Bulma / Bootstrap comparison</p>
+              </div>
+            </a>
+          
+            <a class="navbar-item" href="/2017/07/24/access-previous-bulma-versions/">
+              <div class="navbar-content">
+                <p>
+                  <small class="has-text-info">24 Jul 2017</small>
+                </p>
+                <p>Access previous Bulma versions</p>
+              </div>
+            </a>
+          
+          <a class="navbar-item" href="http://bulma.io/blog/">
+            More posts
+          </a>
+          <hr class="navbar-divider">
+          <div class="navbar-item">
+            <div class="navbar-content">
+              <div class="level is-mobile">
+                <div class="level-left">
+                  <div class="level-item">
+                    <strong>Stay up to date!</strong>
+                  </div>
+                </div>
+                <div class="level-right">
+                  <div class="level-item">
+                    <a class="button bd-is-rss is-small" href="http://bulma.io/atom.xml">
+                      <span class="icon is-small">
+                        <i class="fa fa-rss"></i>
+                      </span>
+                      <span>Subscribe</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <div class="navbar-link">
+          More
+        </div>
+        <div id="moreDropdown" class="navbar-dropdown ">
+          <a class="navbar-item " href="http://bulma.io/extensions/">
+            <div class="level is-mobile">
+              <div class="level-left">
+                <div class="level-item">
+                  <p>
+                    <strong>Extensions</strong>
+                    <br>
+                    <small>Side projects to enhance Bulma</small>
+                  </p>
+                </div>
+              </div>
+              <div class="level-right">
+                <div class="level-item">
+                  <span class="icon has-text-info">
+                    <i class="fa fa-plug"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <!-- Administrator Dropdown -->
-        <% if current_admin && current_admin.admin? %>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin Functions <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><%= link_to "Test Methods", test_methods_path %></li>
-              <li><a href="#">Action</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-            </ul>
-          </li>
+    <div class="navbar-end">
+      <a class="navbar-item is-hidden-desktop-only" href="https://github.com/jgthms/bulma" target="_blank">
+        <span class="icon" style="color: #333;">
+          <i class="fa fa-github"></i>
+        </span>
+      </a>
+      <a class="navbar-item is-hidden-desktop-only" href="https://twitter.com/jgthms" target="_blank">
+        <span class="icon" style="color: #55acee;">
+          <i class="fa fa-twitter"></i>
+        </span>
+      </a>
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <p class="control">
+            <a class="bd-tw-button button"
+  data-social-network="Twitter"
+  data-social-action="tweet"
+  data-social-target="http://bulma.io"
+  target="_blank"
+  href="https://twitter.com/intent/tweet?text=Bulma: a modern CSS framework based on Flexbox&hashtags=bulmaio&url=http://bulma.io&via=jgthms">
+  <span class="icon">
+    <i class="fa fa-twitter"></i>
+  </span>
+  <span>
+    Tweet
+  </span>
+</a>
 
-        <% end %>
-        <!-- Analyst Buttons -->
-        <% if (current_analyst && current_analyst.analyst?) || (current_admin && current_admin.admin?) %>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Analyst Functions <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">One more separated link</a></li>
-            </ul>
-          </li>
-        <% end %>
-        <!-- Customer Buttons -->
-        <% if current_user %>
-          <li><a href="#">Customer Functions</a></li>
-        <% else %>
-          <li><a href="#">More Information</a>
-        <% end %>
-      </ul>
-      <!-- Navbar Right -->
-      <ul class="nav navbar-nav navbar-right">
-      <% if admin_signed_in? %>
-        <li><%= link_to current_admin.email, root_path %></li>
-        <li><%= link_to "Log Out", destroy_admin_session_path, method: :delete %></li>
-      <% elsif analyst_signed_in? %>
-        <li><%= link_to current_analyst.email, root_path %></li>
-        <li><%= link_to "Log Out", destroy_analyst_session_path, method: :delete %></li>
-      <% elsif user_signed_in? %>
-        <li><%= link_to current_user.email, edit_user_registration_path %></li>
-        <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
-      <% else %>
-        <li><%= link_to "Sign Up", new_user_registration_path %></li>
-        <li><%= link_to "Log in", new_user_session_path %></li>
-      <% end %>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+          </p>
+          <p class="control">
+            <a class="button is-primary" href="https://github.com/jgthms/bulma/archive/0.5.1.zip">
+              <span class="icon">
+                <i class="fa fa-download"></i>
+              </span>
+              <span>Download</span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </nav>

@@ -24,3 +24,5 @@
 
 /.vscode
 .DS_Store
+coverage
+erd.pdf
