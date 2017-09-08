@@ -13,4 +13,6 @@ RSpec.describe Project, type: :model do
     @project.user = nil
     expect(@project).to_not be_valid
   end
+
+  it 'updates received with test received'
 end

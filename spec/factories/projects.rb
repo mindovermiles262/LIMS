@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :project do
     association :user do
-      build(:user)
+      FactoryGirl.build(:user)
     end
   end
 end

@@ -1,14 +1,19 @@
 FactoryGirl.define do
   factory :test do
-    result 10
-    received true
-    started true
-    completed true
-    reported true
-    PA false
-    association :test_method { FactoryGirl.build(:test_method) }
+    association :test_method {FactoryGirl.build(:test_method)}
     association :project { FactoryGirl.build(:project) }
-    # association :user { FactoryGirl.build(:user) }
-    # association :analysts { [FactoryGirl.build(:analyst)] }
+  
+    factory :received_test do
+      received true
+    end
+
+    factory :reported_test do
+      result 10
+      received true
+      started true
+      completed true
+      reported true
+      PA false
+    end
   end
 end

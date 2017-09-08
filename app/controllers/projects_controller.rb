@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
+  before_action :project_started?, only: [:edit, :update, :destroy]
 
   # TODO: Limit #index by User
   def index
@@ -53,6 +54,13 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:user_id, :description, :lot, :tests_attributes => [:test_method_id, :id, :_destroy])
+  end
+
+  def project_started?
+    if current_user && Project.find(params[:id]).received?
+      flash[:danger] = "Project has been started. Please contact the lab at (555) 510-5555 to change testing"
+      redirect_to projects_path
+    end
   end
 
 end

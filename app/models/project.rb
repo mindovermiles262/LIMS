@@ -6,4 +6,12 @@ class Project < ApplicationRecord
   
   belongs_to :user
 
+  def received?
+    self.tests.map do |t| 
+      if t.received == true
+        return true
+      end
+      return false
+    end
+  end
 end

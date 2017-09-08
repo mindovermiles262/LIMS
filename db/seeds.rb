@@ -77,7 +77,13 @@ end
 Project.delete_all if Rails.env.development?
 Project.create(
     user: User.first,
-    description: "Second User Project Description",
+    description: "Project Description",
     lot: "123ABC",
-    tests: [(Test.new(test_method: TestMethod.first))]
+    tests: [(Test.new(test_method: TestMethod.first)), (Test.new(test_method: TestMethod.first))],
+)
+Project.create(
+  user: User.first,
+  description: "Received Project",
+  lot: "123ABC",
+  tests: [(Test.new(test_method: TestMethod.first, received: true)), (Test.new(test_method: TestMethod.first))],
 )
