@@ -1,21 +1,29 @@
 <nav class="navbar ">
   <div class="navbar-brand">
-  <%= link_to root_path, class: 'navbar-item' do %>
-    
-      <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+    <%= link_to root_path, class: 'navbar-item' do %>
+      <span class="level-left" style="color: #000;">
+        <i class="fa fa-flask level-item" aria-hidden="true"></i><span class="is-size-4 level-item"> Appert</span>
+      </span>
     <% end %>
 
-    <a class="navbar-item is-hidden-desktop" href="https://github.com/jgthms/bulma" target="_blank">
-      <span class="icon" style="color: #333;">
-        <i class="fa fa-github"></i>
-      </span>
-    </a>
+    <!-- Log in and Sign Up Mobile Buttons -->
+    <div class="navbar-item is-hidden-desktop">
+      <%= button_to new_user_registration_path, method: :get, class: 'button is-primary' do%>
+        <span class="icon">
+          <i class="fa fa-user-circle-o"></i>
+        </span>
+        <span> Sign Up</span>
+      <% end %>
+    </div>
 
-    <a class="navbar-item is-hidden-desktop" href="https://twitter.com/jgthms" target="_blank">
-      <span class="icon" style="color: #55acee;">
-        <i class="fa fa-twitter"></i>
-      </span>
-    </a>
+    <div class="navbar-item is-hidden-desktop">
+      <%= button_to new_user_session_path, class: 'button' do %>
+        <span class="icon">
+          <i class="fa fa-sign-in"></i>
+        </span>
+        <span>Log In</span>
+      <% end %>
+    </div>
 
     <div class="navbar-burger burger" data-target="navMenubd-example">
       <span></span>
