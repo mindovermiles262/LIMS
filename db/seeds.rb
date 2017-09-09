@@ -1,24 +1,6 @@
 # Create Admin, Analyst, User
-Admin.delete_all if Rails.env.development?
-Analyst.delete_all if Rails.env.development?
 User.delete_all if Rails.env.development?
 
-Admin.create!(
-  first_name: "Admin",
-  last_name: "User",
-  email: "admin@example.com",
-  password: "foobar",
-  password_confirmation: "foobar",
-  admin: true,
-)
-Analyst.create!(
-  first_name: "Analyst",
-  last_name: "User",
-  email: "analyst@example.com",
-  password: "foobar",
-  password_confirmation: "foobar",
-  analyst: true
-)
 User.create!(
   first_name: "Customer",
   last_name: "User",
@@ -26,27 +8,26 @@ User.create!(
   password: "foobar",
   password_confirmation: "foobar"
 )
-
-# Seed fake data
-
-Admin.create!(
-  first_name: Faker::Name.first_name,
-  last_name: Faker::Name.last_name,
-  email: Faker::Internet.email,
+# Create Admin
+User.create!(
+  first_name: "Admin",
+  last_name: "User",
+  email: "admin@example.com",
   password: "foobar",
   password_confirmation: "foobar",
-  admin: true
+  admin: true,
 )
-5.times do
-  Analyst.create!(
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    email: Faker::Internet.email,
-    password: "foobar",
-    password_confirmation: "foobar",
-    analyst: true
-  )
-end
+# Create Analyst
+User.create!(
+  first_name: "Analyst",
+  last_name: "User",
+  email: "analyst@example.com",
+  password: "foobar",
+  password_confirmation: "foobar",
+  analyst: true
+)
+
+# Seed fake data
 5.times do
   User.create!(
     first_name: Faker::Name.first_name,
@@ -74,14 +55,15 @@ test_methods.each do |set|
 end
 
 # # Create Project
+
 Project.delete_all if Rails.env.development?
-Project.create(
+Project.create!(
     user: User.first,
     description: "Project Description",
     lot: "123ABC",
     tests: [(Test.new(test_method: TestMethod.first)), (Test.new(test_method: TestMethod.first))],
 )
-Project.create(
+Project.create!(
   user: User.first,
   description: "Received Project",
   lot: "123ABC",

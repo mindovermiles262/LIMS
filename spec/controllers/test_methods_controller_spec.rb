@@ -197,7 +197,6 @@ RSpec.describe TestMethodsController, type: :controller do
     describe 'admin user' do
       before(:each) do 
         sign_out :admin
-        
         request.env["devise.mapping"] = Devise.mappings[:user]
         sign_in FactoryGirl.create(:analyst)
       end
@@ -206,7 +205,7 @@ RSpec.describe TestMethodsController, type: :controller do
           get :new
           expect(flash[:danger]).to be_present
         end
-        it 'redirects to :root path' do
+        it 'redirects to root path' do
           get :new
           expect(response).to redirect_to root_path
         end

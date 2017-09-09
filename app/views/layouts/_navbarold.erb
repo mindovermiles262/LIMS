@@ -28,7 +28,7 @@
 
         <% end %>
         <!-- Analyst Buttons -->
-        <% if (current_analyst && current_analyst.analyst?) || (current_admin && current_admin.admin?) %>
+        <% if (current_user && current_user.analyst?) || (current_user && current_user.admin?) %>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Analyst Functions <span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -59,19 +59,13 @@
       </ul>
       <!-- Navbar Right -->
       <ul class="nav navbar-nav navbar-right">
-      <% if admin_signed_in? %>
-        <li><%= link_to current_admin.email, root_path %></li>
-        <li><%= link_to "Log Out", destroy_admin_session_path, method: :delete %></li>
-      <% elsif analyst_signed_in? %>
-        <li><%= link_to current_analyst.email, root_path %></li>
-        <li><%= link_to "Log Out", destroy_analyst_session_path, method: :delete %></li>
-      <% elsif user_signed_in? %>
-        <li><%= link_to current_user.email, edit_user_registration_path %></li>
-        <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
-      <% else %>
-        <li><%= link_to "Sign Up", new_user_registration_path %></li>
-        <li><%= link_to "Log in", new_user_session_path %></li>
-      <% end %>
+        <% if user_signed_in? %>
+          <li><%= link_to current_user.email, edit_user_registration_path %></li>
+          <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Sign Up", new_user_registration_path %></li>
+          <li><%= link_to "Log in", new_user_session_path %></li>
+        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
