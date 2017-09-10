@@ -4,7 +4,11 @@ class ProjectsController < ApplicationController
 
   # TODO: Limit #index by User
   def index
-    @projects = Project.where(user_id: current_user.id)
+    if current_user.admin? || current_user.analyst?
+      @projects = Project.all
+    elsif current_user
+      @projects = Project.where(user_id: current_user.id)
+    end
   end
 
   def new
@@ -57,9 +61,11 @@ class ProjectsController < ApplicationController
   end
 
   def project_started?
-    if current_user && Project.find(params[:id]).received?
-      flash[:danger] = "Project has been started. Please contact the lab at (555) 510-5555 to change testing"
-      redirect_to projects_path
+    if current_user && !(current_user.admin? || current_user.analyst?)
+      if Project.find(params[:id]).received?
+        flash[:danger] = "Project has been started. Please contact the lab at (555) 510-5555 to change testing"
+        redirect_to projects_path
+      end
     end
   end
 

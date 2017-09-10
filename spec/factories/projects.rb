@@ -7,13 +7,15 @@ FactoryGirl.define do
       after(:build) do |project|
         create(:test, project: project)
       end
+    end
 
     factory :project_with_received_test do
       after(:build) do |project|
         create(:test, project: project, received: true)
       end
     end
-
+    factory :invalid_project do
+      lot ""
     end
   end
 end
