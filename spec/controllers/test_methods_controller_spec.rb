@@ -84,6 +84,19 @@ RSpec.describe TestMethodsController, type: :controller do
     end
   end
 
+  describe 'GET #show' do
+    before :each do
+      @method = FactoryGirl.create(:test_method)
+    end
+    it 'finds test method' do
+      get :show, params: { id: @method }
+      expect(assigns(:test_method)).to eql(@method)
+    end
+    it 'renders the show template' do
+      get :show, params: { id: @method }
+      expect(response).to render_template :show
+    end
+  end
 
   describe 'GET #edit' do
     it 'assigns TestMethod to @test_method' do
