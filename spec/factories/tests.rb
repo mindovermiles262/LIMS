@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :test do
-    association :test_method {FactoryGirl.build(:test_method)}
-    association :project { FactoryGirl.build(:project) }
+    association :test_method, factory: :test_method
+    association :project, factory: :project
   
     factory :received_test do
       received true

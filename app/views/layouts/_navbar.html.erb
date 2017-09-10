@@ -35,27 +35,39 @@
   <div id="navMenubd-example" class="navbar-menu">
     <div class="navbar-start">
       <div class="navbar-item has-dropdown is-hoverable">
+        <% if current_user && current_user.admin? %>
+          <%= link_to "Test Methods", test_methods_path, class: 'navbar-item navbar-link' %>
+          <div class="navbar-dropdown">
+            <%= link_to "All Test Methods", test_methods_path, class: 'navbar-item' %>
+            <%= link_to "New Test Method", new_test_method_path, class: 'navbar-item' %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <% if current_user && current_user.analyst? %>
+          <%= link_to "Analyst Methods", test_methods_path, class: 'navbar-item navbar-link' %>
+          <div class="navbar-dropdown">
+            <%= link_to "All Test Methods", test_methods_path, class: 'navbar-item' %>
+            <%= link_to "New Test Method", new_test_method_path, class: 'navbar-item' %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="navbar-item has-dropdown is-hoverable">
         <% if current_user %>
-        <%= link_to "Projects", projects_path, class: 'navbar-item' %>
+        <%= link_to "Projects", projects_path, class: 'navbar-item navbar-link' %>
         <div class="navbar-dropdown ">
           <%= link_to "All Projects", projects_path, class: 'navbar-item' %>
           <%= link_to "New Project", new_project_path, class: 'navbar-item'  %>
           <a class="navbar-item" href="#">
             Something else
           </a>
-
-          <hr class="navbar-divider">
-          
-          <div class="navbar-item">
-            <div>
-              <p class="is-size-6-desktop">
-                <strong class="has-text-info">
-                  <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
-                </strong>
-              </p>              
-            </div>
-          </div>
         </div>
+        <% else %>
+          <div class="navbar-item is-hoverable">
+            <%= link_to "More Information", root_path, class: 'navbar-item' %>
+          </div>
         <% end %>
       </div>
       <div class="navbar-item has-dropdown is-hoverable">
@@ -148,19 +160,14 @@
     </div>
 
     <div class="navbar-end">
-      <a class="navbar-item is-hidden-desktop-only" href="https://github.com/jgthms/bulma" target="_blank">
-        <span class="icon" style="color: #333;">
-          <i class="fa fa-github"></i>
-        </span>
-      </a>
-      <a class="navbar-item is-hidden-desktop-only" href="https://twitter.com/jgthms" target="_blank">
-        <span class="icon" style="color: #55acee;">
-          <i class="fa fa-twitter"></i>
-        </span>
-      </a>
+      <% if current_user %>
+        <p class="control navbar-item">
+          <%= link_to "#{current_user.first_name}", edit_user_registration_path, class: 'is-hidden-desktop-only navbar-item'%>
+        </p>
+      <% end %>
+
       <div class="navbar-item">
-        <div class="field is-grouped">
-          
+        <div class="field is-grouped"> 
           <% if current_user %> 
             <p class="control">
               <%= button_to destroy_user_session_path, method: :delete, class: 'button' do %>
