@@ -8,11 +8,19 @@ RSpec.describe ProjectsController, type: :controller do
     3.times { @projects << FactoryGirl.create(:project_with_tests) }
   end
 
-  it 'has a valid facotory' do
-    expect(FactoryGirl.build(:project)).to be_valid
-    expect(FactoryGirl.build(:project_with_tests)).to be_valid
-    expect(FactoryGirl.build(:project_with_received_test)).to be_valid
-    expect(FactoryGirl.build(:invalid_project)).to_not be_valid
+  context 'factories' do
+    it 'has a valid facotory' do
+      expect(FactoryGirl.build(:project)).to be_valid
+    end
+    it 'has valid factory with tests' do
+      expect(FactoryGirl.build(:project_with_tests)).to be_valid
+    end
+    it 'has valid factory with recieved project' do
+      expect(FactoryGirl.build(:project_with_received_test)).to be_valid
+    end
+    it 'has an invalid factory' do
+      expect(FactoryGirl.build(:invalid_project)).to_not be_valid
+    end
   end
 
   describe 'GET #index' do

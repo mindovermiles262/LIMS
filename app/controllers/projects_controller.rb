@@ -41,8 +41,13 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
     if @project.update_attributes(project_params)
-      flash[:success] = "Project updated"
-      redirect_to @project
+      respond_to do |format|
+        format.js
+        format.html{
+          flash[:success] = "Project updated"
+          redirect_to @project
+        }
+      end
     else
       flash[:warning] = "Unable to edit project"
       render :edit
@@ -57,7 +62,7 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:user_id, :description, :lot, :tests_attributes => [:test_method_id, :id, :_destroy])
+    params.require(:project).permit(:user_id, :received, :description, :lot, :tests_attributes => [:test_method_id, :id, :_destroy])
   end
 
   def project_started?

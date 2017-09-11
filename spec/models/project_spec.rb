@@ -15,10 +15,4 @@ RSpec.describe Project, type: :model do
     @project.user = nil
     expect(@project).to_not be_valid
   end
-
-  it 'updates received with test received' do
-    expect(@project_with_tests.received?).to eql(false)
-    @project_with_tests.tests.first.received = true
-    expect(@project_with_tests.received?).to eql(true)
-  end
 end

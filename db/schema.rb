@@ -13,6 +13,12 @@
 ActiveRecord::Schema.define(version: 20170830191721) do
 
   create_table "projects", force: :cascade do |t|
+    t.boolean "received", default: false
+    t.boolean "started", default: false
+    t.boolean "completed", default: false
+    t.boolean "reported", default: false
+    t.boolean "invoiced", default: false
+    t.boolean "paid", default: false
     t.integer "user_id"
     t.integer "tests_id"
     t.boolean "complete", default: false
@@ -37,12 +43,6 @@ ActiveRecord::Schema.define(version: 20170830191721) do
 
   create_table "tests", force: :cascade do |t|
     t.integer "result"
-    t.boolean "received", default: false
-    t.boolean "started", default: false
-    t.boolean "completed", default: false
-    t.boolean "reported", default: false
-    t.boolean "invoiced", default: false
-    t.boolean "paid", default: false
     t.boolean "PA", default: false
     t.integer "test_method_id"
     t.integer "project_id"

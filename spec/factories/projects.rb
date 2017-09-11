@@ -10,8 +10,9 @@ FactoryGirl.define do
     end
 
     factory :project_with_received_test do
+      received true
       after(:build) do |project|
-        create(:test, project: project, received: true)
+        create(:test, project: project)
       end
     end
     factory :invalid_project do
