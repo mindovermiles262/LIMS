@@ -94,7 +94,7 @@
             </p>
           <% else %>          
             <p class="control">
-              <%= button_to new_user_session_path, class: 'button' do %>
+              <%= button_to new_user_session_path, method: :get, class: 'button' do %>
                   <span class="icon">
                     <i class="fa fa-sign-in"></i>
                 </span>
