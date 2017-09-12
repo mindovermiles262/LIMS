@@ -8,7 +8,7 @@ class CreateProjects < ActiveRecord::Migration[5.1]
       t.boolean :invoiced, default: false
       t.boolean :paid, default: false
       t.references :user
-      t.references :tests
+      t.references :samples
       t.boolean :complete, default: false
       t.string :description, default: ""
       t.string :lot, default: ""

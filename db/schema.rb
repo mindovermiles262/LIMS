@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170830191721) do
+ActiveRecord::Schema.define(version: 20170912211706) do
 
   create_table "projects", force: :cascade do |t|
     t.boolean "received", default: false
@@ -20,14 +20,26 @@ ActiveRecord::Schema.define(version: 20170830191721) do
     t.boolean "invoiced", default: false
     t.boolean "paid", default: false
     t.integer "user_id"
-    t.integer "tests_id"
+    t.integer "samples_id"
     t.boolean "complete", default: false
     t.string "description", default: ""
     t.string "lot", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["tests_id"], name: "index_projects_on_tests_id"
+    t.index ["samples_id"], name: "index_projects_on_samples_id"
     t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
+  create_table "samples", force: :cascade do |t|
+    t.string "description"
+    t.integer "user_id"
+    t.integer "project_id"
+    t.integer "tests_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_samples_on_project_id"
+    t.index ["tests_id"], name: "index_samples_on_tests_id"
+    t.index ["user_id"], name: "index_samples_on_user_id"
   end
 
   create_table "test_methods", force: :cascade do |t|
@@ -45,14 +57,14 @@ ActiveRecord::Schema.define(version: 20170830191721) do
     t.integer "result"
     t.boolean "PA", default: false
     t.integer "test_method_id"
-    t.integer "project_id"
+    t.integer "sample_id"
     t.integer "user_id"
     t.integer "analysts_id"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["analysts_id"], name: "index_tests_on_analysts_id"
-    t.index ["project_id"], name: "index_tests_on_project_id"
+    t.index ["sample_id"], name: "index_tests_on_sample_id"
     t.index ["test_method_id"], name: "index_tests_on_test_method_id"
     t.index ["user_id"], name: "index_tests_on_user_id"
   end

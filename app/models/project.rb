@@ -3,8 +3,8 @@ class Project < ApplicationRecord
   validates :lot, presence: true
   validates :description, presence: true
   
-  has_many :tests
-  accepts_nested_attributes_for :tests, allow_destroy: true, :reject_if => lambda { |a| a[:test_method_id].blank? }
+  has_many :samples
+  accepts_nested_attributes_for :samples, allow_destroy: true, :reject_if => lambda { |a| a[:test_method_id].blank? }
   
   belongs_to :user
 end
