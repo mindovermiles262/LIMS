@@ -7,6 +7,7 @@ class CreateTests < ActiveRecord::Migration[5.1]
       t.references :project
       t.references :user
       t.references :analysts
+      t.string :description
 
       t.timestamps
     end

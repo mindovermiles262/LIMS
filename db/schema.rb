@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20170830191721) do
     t.integer "project_id"
     t.integer "user_id"
     t.integer "analysts_id"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["analysts_id"], name: "index_tests_on_analysts_id"

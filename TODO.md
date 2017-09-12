@@ -6,3 +6,4 @@
 * Add descriptions for tests
 * Add test batch functionality
 * Add equpment model
+* Add Media Model
