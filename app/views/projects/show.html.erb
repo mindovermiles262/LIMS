@@ -6,25 +6,21 @@
       <table class="table is-striped is-fullwidth">
         <thead>  
           <tr>
-            <th>Test ID</th>
+            <th>Project ID</th>
             <th>Description</th>
             <th>Lot</th>
-            <th>Test Method</th>
+            <th>Samples</th>
             <th>Target</th>
             <th>Reference Method</th>
           </tr>
         </thead>
         <tbody>
-          <% @project.tests.each do |test| %>
             <tr>
-              <td><%= test.id %></td>
-              <td><%= test.project.description %></td>
-              <td><%= test.project.lot %></td>
-              <td><%= test.test_method.name %></td>
-              <td><%= test.test_method.target_organism %></td>
-              <td><%= test.test_method.reference_method %></td>
+              <td><%= @project.id %></td>
+              <td><%= @project.description %></td>
+              <td><%= @project.lot %></td>
+              <td><%= @project.samples.count %></td>
             </tr>
-          <% end %>
         </tbody>
       </table>
 

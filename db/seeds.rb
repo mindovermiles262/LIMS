@@ -54,19 +54,23 @@ test_methods.each do |set|
     unit: set[5])
 end
 
-# # Create Project
+# p = {"contents_attributes"=>[{"sort_item_attributes"=>{"position"=>"1"}}]}
 
 Project.delete_all if Rails.env.development?
-Project.create!(
+params = {
+  project: {
     user: User.first,
-    description: "Project Description",
-    lot: "123ABC",
-    tests: [(Test.new(test_method: TestMethod.first)), (Test.new(test_method: TestMethod.first))],
-)
-Project.create!(
-  user: User.first,
-  description: "Received Project",
-  lot: "123ABC",
-  tests: [(Test.new(test_method: TestMethod.first)), (Test.new(test_method: TestMethod.first))],
-  received: true
-)
+    lot: "ABC",
+    description: "Seed Project 1",
+    samples_attributes: [
+      { description: "Test Sample Description",
+        tests_attributes: [
+          { test_method: TestMethod.first }
+        ]
+      }
+    ]
+  }  
+}
+project = Project.create!(params[:project])
+
+# Received Test

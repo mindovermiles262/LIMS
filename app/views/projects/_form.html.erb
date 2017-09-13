@@ -32,9 +32,8 @@
       <div class="fields"> <!-- Add More Fields Button Anchor (.fields) -->
         <div class="field">
           <div class="control">
-            <%= project.label :test_method_id, "Test Method", class: 'label' %>
-            <%= project.fields_for :tests, nil, {remote: true} do |test| %>
-                <%= render 'test_fields', :f => test %>
+            <%= project.fields_for :samples, nil, {remote: true} do |sample| %>
+                <%= render 'sample_fields', :f => sample %>
             <% end %>
           </div>
         </div>
@@ -42,7 +41,7 @@
             
       <div class="field">
         <div class="control">
-          <%= link_to_add_test('Add Test', project, :tests, class: 'button is-link') %>
+          <%#= link_to_add_test('Add Test', project, :tests, class: 'button is-link') %>
         </div>
       </div>
             

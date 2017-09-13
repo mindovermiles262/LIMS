@@ -7,10 +7,10 @@
         <tr>
           <th>Project</th>
           <th>Description</th>
-          <th>Created at</th>
-          <th>Tests</th>
+          <th>Lot</th>
+          <th>Samples</th>
           <th>Customer</th>
-          <th>Company</th>
+          <th>View</th>
           <% if current_user && (current_user.analyst? || current_user.admin?) %>
             <th>Received?</th>
           <% end %>
@@ -18,25 +18,16 @@
         </tr>
         </thead>
         <tbody>
-        <% @projects.each do |project| %>
-          <tr id="table_row_<%= project.id %>">
-            <td><%= link_to project.id, project_path(project) %></td>
-            <td><%= link_to project.description, project_path(project) %></td>
-            <td><%= link_to project.created_at.in_time_zone('America/Los_Angeles'), project_path(project) %></td>
-            <td><%=  project.tests.count %></td>
-            <td><%= project.user.first_name %> <%= project.user.last_name %></td>
-            <td><%= project.user.company %></td>
-            <% if current_user && (current_user.analyst? || current_user.admin?) %>
-              <td id="received">
-                <%= form_for project, remote: true do |f| %>
-                  <%= f.check_box :received? %>
-                <%= button_to "Update", project_path(project), method: :patch %>
-                <% end %>
-              </td>
-            <% end %>
-            <td><%= button_to "Delete Project", project, method: :delete, data: { confirm: "Are you sure?" }, class: 'button is-danger is-small' %></td>
-          </tr>
-        <% end %>
+          <% @projects.each do |project| %>
+            <tr>
+              <th><%= project.id %></th>
+              <th><%= project.description %></th>
+              <th><%= project.lot %></th>
+              <th><%= project.samples.count %></th>
+              <th><%= project.user.first_name %> <%= project.user.last_name %></th>
+              <th><%= button_to "View", project_path(project), method: :get, class: 'button'  %></th>
+            </tr>
+          <% end %>
         </tbody>
       </table>
 
