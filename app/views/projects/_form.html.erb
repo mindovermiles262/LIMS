@@ -29,15 +29,9 @@
         </div>
       </div>
 
-      <div class="fields"> <!-- Add More Fields Button Anchor (.fields) -->
-        <div class="field">
-          <div class="control">
-            <%= project.fields_for :samples, nil, {remote: true} do |sample| %>
-                <%= render 'sample_fields', :f => sample %>
-            <% end %>
-          </div>
-        </div>
-      </div>
+      <%= project.fields_for :samples, nil, {remote: true} do |sample| %>
+          <%= render 'sample_fields', :f => sample %>
+      <% end %>
             
       <div class="field">
         <div class="control">

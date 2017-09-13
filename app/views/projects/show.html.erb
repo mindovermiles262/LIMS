@@ -1,4 +1,43 @@
-<h1>Project <%= @project.id %></h1>
+<div class="columns">
+  <div class="column has-text-centered">
+    <h1>Project <%= @project.id %></h1>
+    <h2>Description: <%= @project.description %></h2>
+    <h2>Lot: <%= @project.lot %></h2>
+  </div>
+</div>
+
+
+    <div class="section has-text-centered">
+      <table class="table is-striped is-fullwidth">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Company</th>
+            <th>Samples</th>
+            <th>Received?</th>
+            <th>Started?</th>
+            <th>Completed?</th>
+            <th>Reported?</th>
+            <th>Invoiced?</th>
+            <th>Paid?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <td><%= @project.id %></td>
+          <td><%= @project.user.first_name %></td>
+          <td><%= @project.user.company %></td>
+          <td><%= @project.samples.count %></td>
+          <td><%= @project.received %></td>
+          <td><%= @project.started %></td>
+          <td><%= @project.completed %></td>
+          <td><%= @project.reported %></td>
+          <td><%= @project.invoiced %></td>
+          <td><%= @project.paid %></td>
+        </tbody>
+      </table>
+    </div>
+
 
 <div class="columns">
   <div class="column is-10 is-offset-1">
@@ -6,21 +45,19 @@
       <table class="table is-striped is-fullwidth">
         <thead>  
           <tr>
-            <th>Project ID</th>
+            <th>Sample ID</th>
             <th>Description</th>
-            <th>Lot</th>
-            <th>Samples</th>
-            <th>Target</th>
-            <th>Reference Method</th>
+            <th>Tests</th>
           </tr>
         </thead>
         <tbody>
+          <% @project.samples.each do |sample| %>
             <tr>
-              <td><%= @project.id %></td>
-              <td><%= @project.description %></td>
-              <td><%= @project.lot %></td>
-              <td><%= @project.samples.count %></td>
+              <td><%= sample.id %></td>
+              <td><%= sample.description %></td>
+              <td><%= sample.tests.count %></td>
             </tr>
+          <% end %>
         </tbody>
       </table>
 

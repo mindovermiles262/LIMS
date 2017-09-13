@@ -5,11 +5,11 @@
       <table class="table is-striped is-fullwidth">
         <thead>
         <tr>
-          <th>Project</th>
+          <th>Project ID</th>
           <th>Description</th>
+          <th>Customer</th>
           <th>Lot</th>
           <th>Samples</th>
-          <th>Customer</th>
           <th>View</th>
           <% if current_user && (current_user.analyst? || current_user.admin?) %>
             <th>Received?</th>
@@ -22,9 +22,9 @@
             <tr>
               <th><%= project.id %></th>
               <th><%= project.description %></th>
+              <th><%= project.user.first_name %> <%= project.user.last_name %></th>
               <th><%= project.lot %></th>
               <th><%= project.samples.count %></th>
-              <th><%= project.user.first_name %> <%= project.user.last_name %></th>
               <th><%= button_to "View", project_path(project), method: :get, class: 'button'  %></th>
             </tr>
           <% end %>

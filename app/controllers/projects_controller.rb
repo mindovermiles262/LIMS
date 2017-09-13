@@ -13,7 +13,8 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
-    @project.samples.build
+    @sample = @project.samples.build
+    @sample.tests.build
     @methods = TestMethod.all.map { |m| [m.name, m.id] }
   end
 
@@ -21,7 +22,6 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     @project.user_id = current_user.id if current_user
     if @project.save
-      # raise
       flash[:success] = "Project Created"
       redirect_to @project
     else
@@ -63,7 +63,10 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:description, :lot, :samples_attributes => [:description, :samples_id, :_destroy])
+    params.require(:project).permit(:description, :lot, 
+    :samples_attributes => [ :description, :id, :_destroy, 
+      :tests_attributes => [:test_method_id, :id, :_destroy] 
+    ])
   end
 
   def project_started?

@@ -9,7 +9,6 @@ class CreateProjects < ActiveRecord::Migration[5.1]
       t.boolean :paid, default: false
       t.references :user
       t.references :samples
-      t.boolean :complete, default: false
       t.string :description, default: ""
       t.string :lot, default: ""
 
