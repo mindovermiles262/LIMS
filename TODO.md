@@ -8,3 +8,4 @@
 * Add equpment model
 * Add Media Model
 * Style edit user form
+* `Unpermitted parameters: :company, :analyst, :admin` when updating user

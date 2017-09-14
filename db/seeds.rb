@@ -2,8 +2,8 @@
 User.delete_all if Rails.env.development?
 
 User.create!(
-  first_name: "Customer",
-  last_name: "User",
+  first_name: Faker::Name.first_name,
+  last_name: "Customer",
   email: "customer@example.com",
   company: "Pine Inc.",
   password: "foobar",
