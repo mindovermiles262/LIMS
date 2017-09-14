@@ -1,22 +1,29 @@
-<h1><%= @test_method.name %></h1>
+<h2><%= @test_method.name %></h2>
 
-<div class="table-responsive">
-  <table class="table table-striped">
-    <tr>
-      <th>Name</th>
-      <th>Target</th>
-      <th>Method</th>
-      <th>Turn Around Time</th>
-      <th>Detection Limit</th>
-      <th>Unit</th>
-    </tr>
-    <tr>
-      <th><%= @test_method.name %></th>
-      <th><%= @test_method.target_organism %></th>
-      <th><%= @test_method.reference_method %></th>
-      <th><%= @test_method.turn_around_time %></th>
-      <th><%= @test_method.detection_limit %></th>
-      <th><%= @test_method.unit %></th>
-    </tr>
-  </table>
+<div class="columns">
+  <div class="column is-10 is-offset-1">
+    <table class="table table-striped">
+      <tr>
+        <th>Name</th>
+        <th>Target</th>
+        <th>Method</th>
+        <th>Turn Around Time</th>
+        <th>Detection Limit</th>
+        <th>Unit</th>
+      </tr>
+      <tr>
+        <td><%= @test_method.name %></td>
+        <td><%= @test_method.target_organism %></td>
+        <td><%= @test_method.reference_method %></td>
+        <td><%= @test_method.turn_around_time %> Days</td>
+        <td><%= @test_method.detection_limit %></td>
+        <td><%= @test_method.unit %></td>
+      </tr>
+    </table>
+
+    <%= button_to "Back", test_methods_path, method: :get, class: 'button is-primary' %>
+
+  </div>
 </div>
+
+<%# TODO: Recent Projects using method %>

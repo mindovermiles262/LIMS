@@ -1,31 +1,29 @@
-<div class="page-header">
-  <h2>Test Methods</h2>
-</div>
+<h2>Test Methods</h2>
 
-<div class="table-responsive">
-<table class="table table-striped">
-  <tr>
-    <th>Name</th>
-    <th>Organism</th>
-    <th>Method</th>
-    <th></th>
-  </tr>
-  <% @test_methods.each do |method| %>
-    <tr>
-      <td><%= link_to method.name, test_method_path(method) %></td>
-      <td><%= method.target_organism %></td>
-      <td><%= method.reference_method %></td>
-      <td>
-        <%= link_to "Edit", edit_test_method_path(method.id) %> | 
-        <%= link_to "Delete", test_method_path(method.id), method: :delete, data: { confirm: "Are you sure?"} %>
-      </td>
-    </tr>
-  <% end %>
-</table>
-</div>
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+    <table class="table table-striped">
+      <tr>
+        <th>Name</th>
+        <th>Organism</th>
+        <th>Method</th>
+        <th></th>
+      </tr>
+      <% @test_methods.each do |method| %>
+        <tr>
+          <td><%= link_to method.name, test_method_path(method) %></td>
+          <td><%= method.target_organism %></td>
+          <td><%= method.reference_method %></td>
+          <td>
+            <%= link_to "Edit", edit_test_method_path(method.id) %> | 
+            <%= link_to "Delete", test_method_path(method.id), 
+              method: :delete, data: { confirm: "Are you sure?"} %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
 
-<div class="row">
-  <div class="col-md-2">
-    <%= button_to "Add New Method", new_test_method_path, class: 'btn btn-primary col-md-12', method: :get %>
+    <%= button_to "Add New Method", new_test_method_path, method: :get, class: 'button is-primary' %>
+
   </div>
 </div>

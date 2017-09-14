@@ -1,36 +1,60 @@
-<%= form_for @test_method do |f| %>
-  <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name, class: 'form-control' %>
-  </div>
+<div class="columns">
+  <div class="column is-4 is-offset-4">
+    <%= form_for @test_method do |f| %>
+      <div class="field">
+        <div class="control">
+          <%= f.label :name, "Method Name", class: 'label' %>
+          <%= f.text_field :name, class: 'input' %>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <%= f.label :target_organism %>
-    <%= f.select :target_organism, @target_organisms, class: 'form-control' %>
-  </div>
+      <div class="field">
+        <div class="control">
+          <%= f.label :target_organism, class: 'label' %>
+          <div class="select">
+            <%= f.select :target_organism, @target_organisms %>
+          </div>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <%= f.label :reference_method %>
-    <%= f.select :reference_method, @reference_methods, class: 'form-control' %>
-  </div>
+      <div class="field">
+      <div class="control">
+          <%= f.label :reference_method, class: 'label' %>
+          <div class="select">
+            <%= f.select :reference_method, @reference_methods %>
+          </div>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <%= f.label :turn_around_time %> (Days)
-    <%= f.number_field :turn_around_time, class: 'form-control' %>
-  </div>
+      <div class="field">
+        <div class="control">
+          <%= f.label :turn_around_time, "Turn Around Time (Days)", class: 'label' %>
+          <%= f.number_field :turn_around_time, class: 'input' %>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <%= f.label :detection_limit %>
-    <%= f.number_field :detection_limit, class: 'form-control' %>
-  </div>
+      <div class="field">
+        <div class="control">
+          <%= f.label :detection_limit, class: 'label' %>
+          <%= f.number_field :detection_limit, class: 'input' %>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <%= f.label :unit %>
-    <%= f.select :unit, @units, class: 'form-control' %>
-  </div>
+      <div class="field">
+        <div class="control">
+          <%= f.label :unit, class: 'label' %>
+          <div class="select">
+            <%= f.select :unit, @units %>
+          </div>
+        </div>
+      </div>
 
-  <div class="form-group form-buttons">
-    <%= f.submit "Submit", class: 'btn btn-primary form-button' %>
-    <%= f.submit "Cancel", class: 'btn btn-danger form-button' %>
+      <div class="field">
+        <div class="control">
+          <%= f.submit "Submit", class: 'button is-primary' %>
+          <%= f.submit "Cancel", class: 'button is-danger' %>
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
