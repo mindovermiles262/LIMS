@@ -42,13 +42,9 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
     if @project.update_attributes(project_params)
-      respond_to do |format|
-        format.js
-        format.html{
-          flash[:success] = "Project updated"
-          redirect_to @project
-        }
-      end
+      # raise
+      flash[:success] = "Project updated"
+      redirect_to @project
     else
       flash[:warning] = "Unable to edit project"
       render :edit

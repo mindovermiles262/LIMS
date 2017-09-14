@@ -18,4 +18,9 @@
   input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between checkbox and label */
   input[type=checkbox]:checked + label:before { content: "\f046"; } /* checked icon */
   input[type=checkbox]:checked + label:before { letter-spacing: 5px; } /* allow space for check mark */
+
+  .destroy_fields {
+    margin-top: 6px;
+    margin-left: 5px;
+  }
 }

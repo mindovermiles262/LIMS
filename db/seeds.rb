@@ -26,8 +26,7 @@ User.create!(
   password_confirmation: "foobar",
   analyst: true
 )
-
-# Seed fake data
+# Seed fake users
 5.times do
   User.create!(
     first_name: Faker::Name.first_name,
@@ -54,23 +53,27 @@ test_methods.each do |set|
     unit: set[5])
 end
 
-# p = {"contents_attributes"=>[{"sort_item_attributes"=>{"position"=>"1"}}]}
 
+# Create Projects
 Project.delete_all if Rails.env.development?
 params = {
   project: {
     user: User.first,
     lot: "ABC",
-    description: "Seed Project 1",
+    description: "Seed Project",
     samples_attributes: [
       { description: "Test Sample Description",
         tests_attributes: [
-          { test_method: TestMethod.first }
+          { test_method_id: TestMethod.first.id },
+          { test_method_id: TestMethod.second.id }
         ]
       }
     ]
   }  
 }
-project = Project.create!(params[:project])
+
+5.times do
+  Project.create!(params[:project])
+end
 
 # Received Test

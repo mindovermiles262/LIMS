@@ -1,14 +1,23 @@
-<div class="field">
+<div class="field fieldset">
   <div class="control">
-    <%= f.label :description, "Sample Description", class: 'label' %>
-    <%= f.text_field :description, class: 'input' %>
-    <%= f.hidden_field :_destroy %>
-    <%= link_to 'remove', '#', class: "destroy_fields" %>
-  </div>
-</div>
+    <div class="column">
+      <%= f.label :description, "Sample Description", class: 'label' %>
+      <div class="field is-grouped">
+        <%= f.text_field :description, class: 'input' %>
+        <%= f.hidden_field :_destroy %>
+        <%= link_to('#', class: "destroy_fields") do %>
+          <i class="fa fa-trash-o" aria-hidden="true"></i>
+        <% end %>
+      </div>
+    </div>
 
-<div class="fields"> <!-- Add More Fields Button Anchor (.fields) -->
-  <%= f.fields_for :tests, nil, {remote: true} do |test| %>
-    <%= render 'test_fields', :f => test %>
-  <% end %>
+    <div class="column">
+      <div class="fields"> <!-- Add More Fields Button Anchor (.fields) -->
+        <%= f.fields_for :tests, nil, {remote: true} do |test| %>
+          <%= render 'test_fields', :f => test %>
+        <% end %>
+        <%= helper_to_add_test "Add Test", f, :tests %>
+      </div>
+    </div>
+  </div>
 </div>
