@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 20170912211706) do
     t.boolean "paid", default: false
     t.integer "user_id"
     t.integer "samples_id"
-    t.boolean "complete", default: false
     t.string "description", default: ""
     t.string "lot", default: ""
     t.datetime "created_at", null: false
