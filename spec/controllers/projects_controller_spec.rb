@@ -5,18 +5,18 @@ RSpec.describe ProjectsController, type: :controller do
     request.env["devise.mapping"] = Devise.mappings[:user]
     sign_in FactoryGirl.create(:admin)
     @projects = Array.new
-    3.times { @projects << FactoryGirl.create(:project_with_tests) }
+    3.times { @projects << FactoryGirl.create(:project_with_samples) }
   end
 
   context 'factories' do
-    it 'has a valid facotory' do
+    it 'has a valid factory' do
       expect(FactoryGirl.build(:project)).to be_valid
     end
     it 'has valid factory with tests' do
-      expect(FactoryGirl.build(:project_with_tests)).to be_valid
+      expect(FactoryGirl.build(:project_with_samples)).to be_valid
     end
     it 'has valid factory with recieved project' do
-      expect(FactoryGirl.build(:project_with_received_test)).to be_valid
+      expect(FactoryGirl.build(:project_with_received_sample)).to be_valid
     end
     it 'has an invalid factory' do
       expect(FactoryGirl.build(:invalid_project)).to_not be_valid
@@ -55,11 +55,10 @@ RSpec.describe ProjectsController, type: :controller do
       get :new
       expect(assigns(:methods)).to be_kind_of(Array)
     end
-    it 'builds new tests' do
+    it 'builds new samples' do
       get :new
-      project = FactoryGirl.create(:project)
-      project.tests = [FactoryGirl.create(:test)]
-      expect(project.tests.count).to eql(1)
+      project = FactoryGirl.create(:project_with_samples)
+      expect(project.samples.count).to eql(1)
     end
   end
 
@@ -68,17 +67,17 @@ RSpec.describe ProjectsController, type: :controller do
       it 'saves Project to DB' do
         expect{
           post :create, params: { 
-            project: FactoryGirl.attributes_for(:project_with_tests)
+            project: FactoryGirl.attributes_for(:project_with_samples)
           }          
         }.to change{Project.count}.by(1)
       end
       it 'flashes success' do
-        post :create, params: {project: FactoryGirl.attributes_for(:project_with_tests)}
+        post :create, params: {project: FactoryGirl.attributes_for(:project_with_samples)}
         expect(flash[:success]).to be_present
       end
       it 'redirects to project' do
        post :create, params: {
-          project: FactoryGirl.attributes_for(:project_with_tests)
+          project: FactoryGirl.attributes_for(:project_with_samples)
         }
         expect(response).to redirect_to project_path(assigns(:project))
       end
@@ -103,7 +102,7 @@ RSpec.describe ProjectsController, type: :controller do
 
   describe 'GET #show' do
     it 'finds project' do
-      project = FactoryGirl.create(:project_with_tests)
+      project = FactoryGirl.create(:project_with_samples)
       get :show, params: { id: project }
       expect(assigns(:project)).to eql(project)
     end
@@ -116,7 +115,7 @@ RSpec.describe ProjectsController, type: :controller do
 
   describe 'GET #edit' do
     it 'finds project' do
-      project = FactoryGirl.create(:project_with_tests)
+      project = FactoryGirl.create(:project_with_samples)
       get :edit, params: { id: project }
       expect(assigns(:project)).to eql(project)
     end
@@ -135,7 +134,7 @@ RSpec.describe ProjectsController, type: :controller do
   describe 'PATCH #update' do
     context 'with valid attributes' do
       before :each do
-        @project = FactoryGirl.create(:project_with_tests)
+        @project = FactoryGirl.create(:project_with_samples)
       end
       it 'updates project in database' do
         get :update, params: { id: @project, project: FactoryGirl.attributes_for(:project, lot: "Changed"), description: "changed" }
@@ -155,7 +154,7 @@ RSpec.describe ProjectsController, type: :controller do
 
     context 'with invalid attributes' do
       before do
-        @project = FactoryGirl.create(:project_with_tests)
+        @project = FactoryGirl.create(:project_with_samples)
       end
       it 'does not save changes to database' do 
         get :update, params: { id: @project, project: FactoryGirl.attributes_for(:project, lot: ""), description: "" }
@@ -176,7 +175,7 @@ RSpec.describe ProjectsController, type: :controller do
 
   describe 'DELETE #destroy' do
     before :each do
-      @project = FactoryGirl.create(:project_with_tests)
+      @project = FactoryGirl.create(:project_with_samples)
     end
     it 'destroys project' do
       expect {
@@ -192,7 +191,7 @@ RSpec.describe ProjectsController, type: :controller do
   describe 'private methods' do
     context 'project_started?' do
       before :each do
-        @project = FactoryGirl.create(:project_with_received_test)
+        @project = FactoryGirl.create(:project_with_received_sample)
       end
       it 'flashes danger if project started' do
         sign_out :admin

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Project, type: :model do
   before(:each) do
     @project = FactoryGirl.create(:project)
-    @project_with_tests = FactoryGirl.create(:project_with_tests)
+    @project_with_tests = FactoryGirl.create(:project_with_samples)
   end
 
   it 'has a valid factory' do

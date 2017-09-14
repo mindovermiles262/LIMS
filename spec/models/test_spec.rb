@@ -14,8 +14,8 @@ RSpec.describe Test, type: :model do
     expect(@test).to_not be_valid
   end
 
-  it 'is invalid without Project' do
-    @test.project = nil
+  it 'is invalid without Sample' do
+    @test.sample = nil
     expect(@test).to_not be_valid
   end
 
