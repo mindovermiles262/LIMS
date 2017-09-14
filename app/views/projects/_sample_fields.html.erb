@@ -16,7 +16,7 @@
         <%= f.fields_for :tests, nil, {remote: true} do |test| %>
           <%= render 'test_fields', :f => test %>
         <% end %>
-        <%= helper_to_add_test "Add Test", f, :tests %>
+        <%= link_to_add_field "Add Test", f, :tests %>
       </div>
     </div>
   </div>

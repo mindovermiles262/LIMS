@@ -32,16 +32,12 @@
       <%= project.fields_for :samples, nil, {remote: true} do |sample| %>
           <%= render 'sample_fields', :f => sample %>
       <% end %>
-            
+
+
       <div class="field">
         <div class="control">
-          <%#= link_to_add_test('Add Test', project, :tests, class: 'button is-link') %>
-        </div>
-      </div>
-            
-      <div class="field">
-        <div class="control">
-          <%= project.submit "Submit", class: 'button is-primary' %>
+          <%= button_to_add_field('Add Additional Sample', project, :samples) %>
+          <%= project.submit "Submit", class: 'button is-success' %>
         </div>
       </div>
     <% end %>
