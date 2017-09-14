@@ -26,6 +26,9 @@
               <th><%= project.lot %></th>
               <th><%= project.samples.count %></th>
               <th><%= button_to "View", project_path(project), method: :get, class: 'button'  %></th>
+              <% if current_user && (current_user.analyst? || current_user.admin?) %>
+                <th><%= project.received? %></th>
+              <% end %>
             </tr>
           <% end %>
         </tbody>

@@ -5,6 +5,7 @@ User.create!(
   first_name: "Customer",
   last_name: "User",
   email: "customer@example.com",
+  company: "Pine Inc.",
   password: "foobar",
   password_confirmation: "foobar"
 )
@@ -13,6 +14,7 @@ User.create!(
   first_name: "Admin",
   last_name: "User",
   email: "admin@example.com",
+  company: "Sequoia Inc.",
   password: "foobar",
   password_confirmation: "foobar",
   admin: true,
@@ -22,16 +24,18 @@ User.create!(
   first_name: "Analyst",
   last_name: "User",
   email: "analyst@example.com",
+  company: "Sequoia Inc.",
   password: "foobar",
   password_confirmation: "foobar",
   analyst: true
 )
 # Seed fake users
-5.times do
+25.times do
   User.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
+    company: Faker::Company.name,
     password: "foobar",
     password_confirmation: "foobar"
   )
@@ -56,24 +60,56 @@ end
 
 # Create Projects
 Project.delete_all if Rails.env.development?
-params = {
-  project: {
-    user: User.first,
-    lot: "ABC",
-    description: "Seed Project",
+5.times do
+  Project.create!(
+    user: User.find(rand(User.first.id..User.last.id)),
+    lot: Faker::Code.isbn,
+    description: Faker::Coffee.blend_name,
     samples_attributes: [
-      { description: "Test Sample Description",
+      { description: Faker::Coffee.notes.capitalize,
         tests_attributes: [
           { test_method_id: TestMethod.first.id },
           { test_method_id: TestMethod.second.id }
         ]
-      }
+      },
+      { description: Faker::Coffee.notes.capitalize,
+        tests_attributes: [
+          { test_method_id: TestMethod.first.id },
+          { test_method_id: TestMethod.second.id }
+        ]
+      },
+      { description: Faker::Coffee.notes.capitalize,
+        tests_attributes: [
+          { test_method_id: TestMethod.first.id },
+          { test_method_id: TestMethod.second.id }
+        ]
+      },
     ]
-  }  
-}
-
-5.times do
-  Project.create!(params[:project])
+  )
 end
-
+Project.create!(
+  user: User.first,
+  lot: Faker::Code.isbn,
+  description: Faker::Coffee.blend_name,
+  samples_attributes: [
+    { description: Faker::Coffee.notes.capitalize,
+      tests_attributes: [
+        { test_method_id: TestMethod.first.id },
+        { test_method_id: TestMethod.second.id }
+      ]
+    },
+    { description: Faker::Coffee.notes.capitalize,
+      tests_attributes: [
+        { test_method_id: TestMethod.first.id },
+        { test_method_id: TestMethod.second.id }
+      ]
+    },
+    { description: Faker::Coffee.notes.capitalize,
+      tests_attributes: [
+        { test_method_id: TestMethod.first.id },
+        { test_method_id: TestMethod.second.id }
+      ]
+    },
+  ]
+)
 # Received Test
