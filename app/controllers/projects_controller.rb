@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
+  before_action :correct_user, except: [:index, :new, :create]
   before_action :project_started?, only: [:edit, :update, :destroy]
 
   # TODO: Limit #index by User
@@ -66,10 +67,19 @@ class ProjectsController < ApplicationController
   end
 
   def project_started?
-    if current_user && !(current_user.admin? || current_user.analyst?)
+    if !(current_user.admin? || current_user.analyst?)
       if Project.find(params[:id]).received?
         flash[:danger] = "Project has been started. Please contact the lab at (555) 510-5555 to change testing"
         redirect_to projects_path
+      end
+    end
+  end
+
+  def correct_user
+    unless current_user && (current_user.admin? || current_user.analyst?)
+      unless current_user == Project.find(params[:id]).user
+        flash[:danger] = "Unauthorized"
+        redirect_to root_path
       end
     end
   end
