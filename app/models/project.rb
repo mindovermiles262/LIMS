@@ -8,4 +8,14 @@ class Project < ApplicationRecord
   validates :description, presence: true, length: { maximum: 200 }
   validates :lot, presence: true, length: { maximum: 100 }
 
+  def started?
+    self.samples.each do |sample|
+      sample.tests.each do |test|
+        if test.batched?
+          return true
+        end
+      end
+    end
+    return "ERRORRR"
+  end
 end

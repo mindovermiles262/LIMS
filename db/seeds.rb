@@ -112,4 +112,15 @@ Project.create!(
     },
   ]
 )
-# Received Test
+
+
+# Seed Batches
+Batch.delete_all if Rails.env.development?
+# Batch.create!(
+#   test_method: TestMethod.first, 
+#   tests: Test.where(test_method: TestMethod.first)
+# )
+# Batch.create!(
+#   test_method: TestMethod.second, 
+#   tests: Test.where(test_method: TestMethod.second)
+# )

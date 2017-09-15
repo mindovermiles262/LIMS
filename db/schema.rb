@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 20170915013826) do
 
   create_table "projects", force: :cascade do |t|
     t.boolean "received", default: false
-    t.boolean "started", default: false
     t.boolean "completed", default: false
     t.boolean "reported", default: false
     t.boolean "invoiced", default: false
