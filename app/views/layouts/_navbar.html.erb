@@ -16,6 +16,7 @@
   <div id="navMenubd-example" class="navbar-menu">
     <div class="navbar-start">
       <div class="navbar-item has-dropdown is-hoverable">
+                <!-- ADMIN FUNCTIONS -->
         <% if current_user && current_user.admin? %>
           <%= link_to "Test Methods", test_methods_path, class: 'navbar-item navbar-link' %>
           <div class="navbar-dropdown">
@@ -24,7 +25,7 @@
           </div>
         <% end %>
       </div>
-
+              <!-- ANALYST FUNCTIONS -->
       <div class="navbar-item has-dropdown is-hoverable">
         <% if current_user && current_user.analyst? %>
           <%= link_to "Analyst Methods", test_methods_path, class: 'navbar-item navbar-link' %>
@@ -32,9 +33,15 @@
             <%= link_to "All Test Methods", test_methods_path, class: 'navbar-item' %>
             <%= link_to "New Test Method", new_test_method_path, class: 'navbar-item' %>
           </div>
+        <%= link_to "Batches", batches_path, class: 'navbar-item navbar-link' %>
+          <div class="navbar-dropdown">
+            <%= link_to "All Batches", batches_path, class: 'navbar-item' %>
+            <%= link_to "New Batch", new_batch_path, class: 'navbar-item' %>
+          </div>
         <% end %>
       </div>
 
+            <!-- USER FUNCTIONS -->
       <div class="navbar-item has-dropdown is-hoverable">
         <% if current_user %>
         <%= link_to "Projects", projects_path, class: 'navbar-item navbar-link' %>

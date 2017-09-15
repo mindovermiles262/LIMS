@@ -1,7 +1,7 @@
 class Test < ApplicationRecord
   belongs_to :sample
   belongs_to :test_method
-  has_one :batch
+  has_many :batches
 
   def Test.methods_not_batched
     select(:test_method_id).distinct.where(batched: false)
@@ -9,9 +9,9 @@ class Test < ApplicationRecord
   
   def Test.available_for_batching(*method_id)
     if method_id.present?
-      where(batched: false, :test_method_id => method_id)
+      where(batch_id: nil, :test_method_id => method_id)
     else
-      where(batched: false)
+      where(batch_id: nil)
     end
   end
 end

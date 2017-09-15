@@ -2,6 +2,10 @@ class BatchesController < ApplicationController
   before_action :authenticate_user!
   before_action :check_user_privledges
 
+  def index
+    @batches = Batch.all
+  end
+
   def new
     @available_methods = Test.methods_not_batched
     @batch = Batch.new
@@ -16,6 +20,10 @@ class BatchesController < ApplicationController
       flash[:danger] = "Unable to create Batch"
       render :new
     end
+  end
+
+  def show
+    @batch = Batch.find(params[:id])
   end
 
   private
