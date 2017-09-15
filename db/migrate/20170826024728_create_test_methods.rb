@@ -6,6 +6,7 @@ class CreateTestMethods < ActiveRecord::Migration[5.1]
       t.string :reference_method
       t.integer :turn_around_time
       t.integer :detection_limit
+      t.integer :batch_id
       t.string :unit
 
       t.timestamps

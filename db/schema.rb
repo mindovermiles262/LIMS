@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912211706) do
+ActiveRecord::Schema.define(version: 20170915013826) do
+
+  create_table "batches", force: :cascade do |t|
+    t.integer "test_method_id"
+    t.integer "test_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "projects", force: :cascade do |t|
     t.boolean "received", default: false
@@ -45,6 +52,7 @@ ActiveRecord::Schema.define(version: 20170912211706) do
     t.string "reference_method"
     t.integer "turn_around_time"
     t.integer "detection_limit"
+    t.integer "batch_id"
     t.string "unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -57,10 +65,13 @@ ActiveRecord::Schema.define(version: 20170912211706) do
     t.integer "sample_id"
     t.integer "user_id"
     t.integer "analysts_id"
+    t.integer "batch_id"
     t.string "description"
+    t.boolean "batched", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["analysts_id"], name: "index_tests_on_analysts_id"
+    t.index ["batch_id"], name: "index_tests_on_batch_id"
     t.index ["sample_id"], name: "index_tests_on_sample_id"
     t.index ["test_method_id"], name: "index_tests_on_test_method_id"
     t.index ["user_id"], name: "index_tests_on_user_id"

@@ -12,4 +12,5 @@ Rails.application.routes.draw do
     end
   end
   resources :tests
+  resources :batches
 end
