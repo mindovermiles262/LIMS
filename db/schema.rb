@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(version: 20170915013826) do
 
   create_table "batches", force: :cascade do |t|
+    t.string "sample_field"
     t.integer "test_method_id"
     t.integer "test_id"
     t.datetime "created_at", null: false

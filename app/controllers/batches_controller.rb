@@ -7,7 +7,8 @@ class BatchesController < ApplicationController
   end
 
   def new
-    @available_methods = Test.methods_not_batched
+    @available_methods = Batch.available_methods
+    @tests = Test.where(test_method_id: params[:test_method])
     @batch = Batch.new
   end
   
@@ -15,6 +16,7 @@ class BatchesController < ApplicationController
     @batch = Batch.new(batch_params)
     if @batch.save
       flash[:success] = "Batch created"
+      # TODO: update batched status
       redirect_to @batch
     else
       flash[:danger] = "Unable to create Batch"
@@ -29,7 +31,7 @@ class BatchesController < ApplicationController
   private
 
   def batch_params
-    params.require(:batch).permit(:tests, :test_method)
+    params.require(:batch).permit(:tests_attributes => [:sample_id, :test_method_id])
   end
   
   def check_user_privledges

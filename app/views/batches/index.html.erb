@@ -4,15 +4,14 @@
   <div class="column is-half is-offset-one-quarter">
     <table class="table is-striped">
       <tr>
-        <th>Project ID</th>
-        <th>Test Method</th>
+        <th>Batch ID</th>
+        
         <th>Tests</th>
         <th>View</th>
       </tr>
       <% @batches.each do |b| %>
         <tr>
           <td><%= b.id %></td>
-          <td><%= b.test_method.name %></td>
           <td><%= b.tests.count %></td>
           <td><%= button_to "View", batch_path(b), method: :get, class: 'button is-link'  %></td>
         </tr>

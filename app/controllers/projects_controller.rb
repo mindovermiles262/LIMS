@@ -15,7 +15,6 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     @sample = @project.samples.build
-    @sample.tests.build
     @methods = TestMethod.all.map { |m| [m.name, m.id] }
   end
 

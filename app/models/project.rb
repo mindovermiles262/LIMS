@@ -16,6 +16,6 @@ class Project < ApplicationRecord
         end
       end
     end
-    return "ERRORRR"
+    return false
   end
 end

@@ -13,4 +13,11 @@ $(document).ready(function() {
     $(this).before($(this).data('fields').replace(regex, time))
     event.preventDefault()
   })
+
+  $('table').on('click', '.destroy_row', function() {
+    console.log("click");
+    $(this).prev('input[type=hidden]').val('1')
+    $(this).closest('tr').hide()
+    event.preventDefault()
+  })
 });
