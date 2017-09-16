@@ -2,7 +2,7 @@
 
 <div class="columns">
   <div class="column is-10 is-offset-1">
-    <% if not params[:test_method] %>
+    <% unless params[:test_method] %>
       <div class="field is-horizontal">
         <%= form_tag( new_batch_path, method: :get) do %>
           <%= label_tag(:test_method, "Method", class: 'field-label is-normal') %>
@@ -27,7 +27,11 @@
             <% @tests.each do |test| %>
               <tr>
                 <%= batch.fields_for :tests do |builder| %>
-                  <td><%= label_tag(test.sample.project.user.company) %></td>
+                  <td>
+                    <%= label_tag(test.sample.project.user.company) %>
+                    <%= builder.hidden_field :id, value: test.id %>
+                  </td>
+
                   <td>
                     <%= builder.label :sample_id, value: test.sample.description %>
                     <%= builder.hidden_field :sample_id, value: test.sample_id %>
@@ -47,6 +51,7 @@
             <% end %>
           </tbody>
         </table>
+        <%= batch.hidden_field :id %>
         <%= batch.submit "Submit", class: 'button is-primary' %>
         <% end %>
     <% end %>
