@@ -2,9 +2,6 @@ class BatchesController < ApplicationController
   before_action :authenticate_user!
   before_action :check_user_privledges
 
-  after_create :update_batched_attribute
-  after_update :update_batched_attribute
-
   def index
     @batches = Batch.all
   end
@@ -31,17 +28,8 @@ class BatchesController < ApplicationController
 
   private
 
-  def put_test
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-  end
-
   def batch_params
     params.require(:batch).permit(:tests, :test_method)
-  end
-
-  def update_batched_attribute
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-    tests.update_all(batched: true)
   end
   
   def check_user_privledges
