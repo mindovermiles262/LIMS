@@ -14,6 +14,7 @@ $(document).ready(function() {
     event.preventDefault()
   })
 
+  // Remove Table Rows from Batch
   $('table').on('click', '.destroy_row', function() {
     console.log("click");
     $(this).prev('input[type=hidden]').val('1')

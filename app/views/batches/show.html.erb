@@ -1,34 +1,30 @@
-<h2>Batch <%= @batch.id %></h2>
+<h2>Batch <%= @batch.id %> - <%= @batch.test_method.name.upcase %></h2>
 
 <div class="columns">
   <div class="column is-10 is-offset-1">    
     <table class="table is-striped">
       <tr>
-        <th>Company</th>
-        <th>Test ID</th>
-        <th>Project ID</th>
-        <th>Result</th>
+        <th class="has-text-centered">Company</th>
+        <th class="has-text-centered">Test ID</th>
+        <th class="has-text-centered">Project ID</th>
+        <th class="has-text-centered" colspan="3">Result</th>
       </tr>
       <% @batch.tests.each do |test| %>
         <tr>
           <td><%= test.sample.project.user.company %></td>
-          <td><%= test.id %></td>
-          <td><%= test.sample.project.id %></td>
+          <td class="has-text-centered"><%= test.id %></td>
+          <td class="has-text-centered"><%= test.sample.project.id %></td>
           <td>
             <%= form_for test do |tt| %>
               <%= tt.number_field :result %> <%= test.test_method.unit %>
               <%= tt.hidden_field :id %>
+            </td>
+            <td>
               <%= button_to "submit", test_path, method: :patch %>
             <% end %>
           </td>
         </tr>
       <% end %>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
     </table>
   </div>
 </div>
