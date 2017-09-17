@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(version: 20170915013826) do
     t.integer "test_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["test_id"], name: "index_batches_on_test_id"
+    t.index ["test_method_id"], name: "index_batches_on_test_method_id"
   end
 
   create_table "projects", force: :cascade do |t|

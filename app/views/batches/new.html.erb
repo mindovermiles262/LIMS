@@ -1,59 +1,16 @@
 <h2>New Batch</h2>
-
+<%= @available_methods.inspect %>
 <div class="columns">
   <div class="column is-10 is-offset-1">
-    <% unless params[:test_method] %>
       <div class="field is-horizontal">
-        <%= form_tag( new_batch_path, method: :get) do %>
-          <%= label_tag(:test_method, "Method", class: 'field-label is-normal') %>
-          <%= select_tag(:test_method, options_for_select(@available_methods), class: 'select') %>
-          <%= submit_tag "Find Samples", name: nil, class: 'button is-primary is-small' %>
+        <%= form_for @batch do |f| %>
+          <%= f.label :test_method_id, "Method", class: 'field-label' %>
+          <%= f.select :test_method_id, @available_methods %>
+          <%= f.submit class: 'button is-primary is-small' %>
         <% end %>
       </div>
-    <% end %>
-
-    <% if params[:test_method] %>
-      <%= form_for @batch do |batch| %>
-        <table class="table is-striped is-fullwidth">
-          <thead>
-            <tr>
-              <th>Customer</th>
-              <th>Sample Description</th>
-              <th>Test Method</th>
-              <th>Remove</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @tests.each do |test| %>
-              <tr>
-                <%= batch.fields_for :tests do |builder| %>
-                  <td>
-                    <%= label_tag(test.sample.project.user.company) %>
-                    <%= builder.hidden_field :id, value: test.id %>
-                  </td>
-
-                  <td>
-                    <%= builder.label :sample_id, value: test.sample.description %>
-                    <%= builder.hidden_field :sample_id, value: test.sample_id %>
-                  </td>
-                  <td>
-                    <%= builder.label :test_method_id, value: test.test_method.name %>
-                    <%= builder.hidden_field :test_method_id, value: test.test_method_id %>
-                  </td>
-                  <td>
-                    <%= builder.hidden_field :_destroy %>
-                    <%= link_to('#', class: "destroy_row") do %>
-                      <i class="fa fa-trash-o" aria-hidden="true"></i>
-                    <% end %>
-                  </td>
-                <% end %>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <%= batch.hidden_field :id %>
-        <%= batch.submit "Submit", class: 'button is-primary' %>
-        <% end %>
-    <% end %>
   </div>
 </div>
+
+
+

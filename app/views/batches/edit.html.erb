@@ -1,1 +1,24 @@
 <h2>Edit Batches</h2>
+
+<div class="columns">
+  <div class="column is-10 is-offset-1">
+    <% if params[:test_method] %>
+      <%= form_for @batch do |batch| %>
+        <table class="table is-striped is-fullwidth">
+          <thead>
+            <tr>
+              <th>Test ID</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= batch.fields_for :tests do |test| %>
+
+            <% end %>
+          </tbody>
+        </table>
+        <%= batch.submit "Submit", class: 'button is-primary' %>
+        <% end %>
+    <% end %>
+  </div>
+</div>
