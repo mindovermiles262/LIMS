@@ -16,7 +16,6 @@ class BatchesController < ApplicationController
   def create
     @batch = Batch.new(batch_params)
     if @batch.save
-      raise
       flash[:success] = "Batch created"
       # TODO: update batched status
       redirect_to @batch

@@ -15,50 +15,57 @@
 
   <div id="navMenubd-example" class="navbar-menu">
     <div class="navbar-start">
-      <div class="navbar-item has-dropdown is-hoverable">
-                <!-- ADMIN FUNCTIONS -->
-        <% if current_user && current_user.admin? %>
+      <!-- ADMIN FUNCTIONS -->
+      <% if current_user && current_user.admin? %>
+        <div class="navbar-item has-dropdown is-hoverable">
           <%= link_to "Test Methods", test_methods_path, class: 'navbar-item navbar-link' %>
           <div class="navbar-dropdown">
             <%= link_to "All Test Methods", test_methods_path, class: 'navbar-item' %>
             <%= link_to "New Test Method", new_test_method_path, class: 'navbar-item' %>
           </div>
-        <% end %>
-      </div>
-              <!-- ANALYST FUNCTIONS -->
-      <div class="navbar-item has-dropdown is-hoverable">
-        <% if current_user && current_user.analyst? %>
-          <%= link_to "Analyst Methods", test_methods_path, class: 'navbar-item navbar-link' %>
-          <div class="navbar-dropdown">
-            <%= link_to "All Test Methods", test_methods_path, class: 'navbar-item' %>
-            <%= link_to "New Test Method", new_test_method_path, class: 'navbar-item' %>
-          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
         <%= link_to "Batches", batches_path, class: 'navbar-item navbar-link' %>
           <div class="navbar-dropdown">
             <%= link_to "All Batches", batches_path, class: 'navbar-item' %>
             <%= link_to "New Batch", new_batch_path, class: 'navbar-item' %>
           </div>
-        <% end %>
-      </div>
-
-            <!-- USER FUNCTIONS -->
-      <div class="navbar-item has-dropdown is-hoverable">
-        <% if current_user %>
-        <%= link_to "Projects", projects_path, class: 'navbar-item navbar-link' %>
-        <div class="navbar-dropdown ">
-          <%= link_to "All Projects", projects_path, class: 'navbar-item' %>
-          <%= link_to "New Project", new_project_path, class: 'navbar-item'  %>
-          <a class="navbar-item" href="#">
-            Something else
-          </a>
         </div>
-        <% else %>
-          <div class="navbar-item is-hoverable">
-            <%= link_to "More Information", root_path, class: 'navbar-item' %>
+      <% end %>
+      <!-- ANALYST FUNCTIONS -->
+      <% if current_user && current_user.analyst? %>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <%= link_to "Analyst Methods", test_methods_path, class: 'navbar-item navbar-link' %>
+          <div class="navbar-dropdown">
+            <%= link_to "All Test Methods", test_methods_path, class: 'navbar-item' %>
+            <%= link_to "New Test Method", new_test_method_path, class: 'navbar-item' %>
           </div>
-        <% end %>
-      </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+        <%= link_to "Batches", batches_path, class: 'navbar-item navbar-link' %>
+          <div class="navbar-dropdown">
+            <%= link_to "All Batches", batches_path, class: 'navbar-item' %>
+            <%= link_to "New Batch", new_batch_path, class: 'navbar-item' %>
+          </div>
+        </div>
+      <% end %>
+
+      <!-- USER FUNCTIONS -->
+      <% if current_user %>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <%= link_to "Projects", projects_path, class: 'navbar-item navbar-link' %>
+          <div class="navbar-dropdown ">
+            <%= link_to "All Projects", projects_path, class: 'navbar-item' %>
+            <%= link_to "New Project", new_project_path, class: 'navbar-item'  %>
+          </div>
+        </div>
+      <% else %>
+        <div class="navbar-item is-hoverable">
+          <%= link_to "More Information", root_path, class: 'navbar-item' %>
+        </div>
+      <% end %>
     </div>
+  </div>
 
     <div class="navbar-end">
       <% if current_user %>
@@ -82,6 +89,14 @@
             </p>
           <% else %>          
             <p class="control">
+              <%= button_to new_user_registration_path, method: :get, class: 'button is-primary' do%>
+                <span class="icon">
+                  <i class="fa fa-user-circle-o"></i>
+                </span>
+                <span>Sign Up</span>
+              <% end %>
+            </p>
+            <p class="control">
               <%= button_to new_user_session_path, method: :get, class: 'button' do %>
                   <span class="icon">
                     <i class="fa fa-sign-in"></i>
@@ -89,14 +104,6 @@
                 <span>
                   Log In
                 </span>
-              <% end %>
-            </p>
-            <p class="control">
-              <%= button_to new_user_registration_path, method: :get, class: 'button is-primary' do%>
-                <span class="icon">
-                  <i class="fa fa-user-circle-o"></i>
-                </span>
-                <span>Sign Up</span>
               <% end %>
             </p>
           <% end %>
