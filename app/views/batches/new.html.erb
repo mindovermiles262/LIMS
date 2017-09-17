@@ -2,13 +2,21 @@
 
 <div class="columns">
   <div class="column is-10 is-offset-1">
-      <div class="field is-horizontal">
-        <%= form_for @batch do |f| %>
-          <%= f.label :test_method_id, "Method", class: 'field-label' %>
+    <%= form_for @batch do |f| %>
+      <div class="field">
+        <%= f.label :test_method_id, "Method", class: 'label' %>
+        <div class="select">
           <%= f.select :test_method_id, @available_methods %>
-          <%= f.submit class: 'button is-primary is-small' %>
-        <% end %>
+        </div>
       </div>
+
+      <div class="field">
+        <div class="control">
+          <%= f.submit class: 'button is-primary is-small' %>
+        </div>
+      </div>
+        
+    <% end %>
   </div>
 </div>
 

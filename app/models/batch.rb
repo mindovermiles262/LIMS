@@ -3,9 +3,12 @@ class Batch < ApplicationRecord
   belongs_to :test_method
   accepts_nested_attributes_for :tests, :allow_destroy => true
 
-  after_create :update_batched_status
+  after_update { self.tests.update_all(batched: true) }
+  after_update { self.destroy if self.tests.count < 1 }
 
-  private
+  after_destroy { |record| record.tests.update_all(batched: false)}
+
+  
 
   def Batch.available_methods
     available = Array.new
@@ -15,8 +18,11 @@ class Batch < ApplicationRecord
     available
   end
 
-  def update_batched_status
-    tests.update_all(batched: true)
+  def completed?
+    self.tests.each do |test|
+      test.result == nil ? (return false) : next
+    end
+    return true
   end
 
 end

@@ -19,7 +19,7 @@
                 <td><%= test.object.sample.project.user.company %></td>
                 <td><%= test.object.sample.project.description %></td>
                 <td><%= test.object.sample.description %></td>
-                <td><%= test.text_field :id %></td>
+                <td><%= test.hidden_field :id %><%= test.object.id %></td>
                 <td>
                   <%= test.hidden_field :_destroy %>
                   <%= link_to('#', class: "destroy_row") do %>

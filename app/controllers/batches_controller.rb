@@ -25,7 +25,8 @@ class BatchesController < ApplicationController
 
   def edit
     @batch = Batch.find(params[:id])
-    @batch.tests << Test.where(test_method_id: @batch.test_method_id)
+    @batch.tests << Test.where(test_method_id: @batch.test_method_id,
+                               batched: false)
   end
 
   def update
@@ -38,6 +39,12 @@ class BatchesController < ApplicationController
 
   def show
     @batch = Batch.find(params[:id])
+  end
+
+  def destroy
+    Batch.find(params[:id]).destroy
+    flash[:success] = "Batch Deleted"
+    redirect_to batches_path
   end
 
   private

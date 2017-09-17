@@ -1,19 +1,30 @@
 <h2>Index</h2>
 
 <div class="columns">
-  <div class="column is-half is-offset-one-quarter">
+  <div class="column is-10 is-offset-1">
     <table class="table is-striped">
       <tr>
         <th>Batch ID</th>
-        
+        <th>Method</th>
         <th>Tests</th>
-        <th>View</th>
+        <th>Batch Date</th>
+        <th>Completed?</th>
+        <th colspan="3"></th>
       </tr>
       <% @batches.each do |b| %>
         <tr>
           <td><%= b.id %></td>
+          <td><%= b.test_method.name %></td>
           <td><%= b.tests.count %></td>
-          <td><%= button_to "View", batch_path(b), method: :get, class: 'button is-link'  %></td>
+          <td><%= b.created_at.strftime("%d %b %Y") %></td>
+          <td><%= b.completed? %></td>
+          <td><%= link_to "View", batch_path(b) %></td>
+          <td><%= link_to "Edit", edit_batch_path(b) %></td>
+          <td>
+            <%= link_to batch_path(b), method: :delete, data: { confirm: "Are you sure?"} do %>
+              <i class="fa fa-trash-o" aria-hidden="true"></i>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </table>

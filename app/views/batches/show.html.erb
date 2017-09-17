@@ -7,7 +7,7 @@
         <th class="has-text-centered">Company</th>
         <th class="has-text-centered">Test ID</th>
         <th class="has-text-centered">Project ID</th>
-        <th class="has-text-centered" colspan="3">Result</th>
+        <th class="has-text-centered" colspan="2">Result</th>
       </tr>
       <% @batch.tests.each do |test| %>
         <tr>
@@ -20,7 +20,7 @@
               <%= tt.hidden_field :id %>
             </td>
             <td>
-              <%= button_to "submit", test_path, method: :patch %>
+              <%= tt.submit %>
             <% end %>
           </td>
         </tr>
