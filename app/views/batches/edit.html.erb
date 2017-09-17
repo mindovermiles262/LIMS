@@ -2,23 +2,35 @@
 
 <div class="columns">
   <div class="column is-10 is-offset-1">
-    <% if params[:test_method] %>
       <%= form_for @batch do |batch| %>
         <table class="table is-striped is-fullwidth">
           <thead>
             <tr>
+              <th>Company</th>
+              <th>Project</th>
+              <th>Description</th>
               <th>Test ID</th>
               <th>Remove</th>
             </tr>
           </thead>
           <tbody>
             <%= batch.fields_for :tests do |test| %>
-
+              <tr>
+                <td><%= test.object.sample.project.user.company %></td>
+                <td><%= test.object.sample.project.description %></td>
+                <td><%= test.object.sample.description %></td>
+                <td><%= test.text_field :id %></td>
+                <td>
+                  <%= test.hidden_field :_destroy %>
+                  <%= link_to('#', class: "destroy_row") do %>
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                  <% end %>
+                </td>
+              </tr>
             <% end %>
           </tbody>
         </table>
         <%= batch.submit "Submit", class: 'button is-primary' %>
         <% end %>
-    <% end %>
   </div>
 </div>

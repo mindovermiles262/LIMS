@@ -1,8 +1,7 @@
 class Batch < ApplicationRecord
   has_many :tests
-  has_one :test_method
-  accepts_nested_attributes_for :tests
-  accepts_nested_attributes_for :test_method
+  belongs_to :test_method
+  accepts_nested_attributes_for :tests, :allow_destroy => true
 
   after_create :update_batched_status
 

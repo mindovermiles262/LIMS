@@ -24,11 +24,15 @@ class BatchesController < ApplicationController
 
   def edit
     @batch = Batch.find(params[:id])
-    @batch.tests << Test.where(test_method_id: params[:test_method])
+    @batch.tests << Test.where(test_method_id: @batch.test_method_id)
   end
 
   def update
-
+    @batch = Batch.find(params[:id])
+    if @batch.update_attributes(new_batch_params)
+      flash[:success] = "Batch Updated"
+      redirect_to @batch
+    end
   end
 
   def show
@@ -38,7 +42,7 @@ class BatchesController < ApplicationController
   private
 
   def new_batch_params
-    params.require(:batch).permit(:test_method)
+    params.require(:batch).permit(:test_method_id)
   end
   
   def check_user_privledges
