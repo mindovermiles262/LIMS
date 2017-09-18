@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$( document ).on('turbolinks:load', function() {
   // Removes Sample fields from Projects Form
   $('form').on('click', '.destroy_fields', function() {
     $(this).prev('input[type=hidden]').val('1')
