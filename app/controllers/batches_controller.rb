@@ -34,8 +34,8 @@ class BatchesController < ApplicationController
       @tests_available_to_add = Test.where( 'test_method_id=? AND batched=? OR batch_id=?', 
                                             @batch.test_method_id, false, '0')
     else
-      @batch.tests << Test.where( test_method_id: @batch.test_method_id,
-                                  batched: false)
+      @batch.tests << Test.where( 'test_method_id=? AND batched=? OR batch_id=?', 
+                                  @batch.test_method_id, false, '0')
     end
   end
 

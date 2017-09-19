@@ -31,28 +31,37 @@
           </tbody>
         </table>
 
-        <table class="table is-striped">
-          <thead>
-            <tr>
-              <th>Company</th>
-              <th>Project</th>
-              <th>Description</th>
-              <th>Test ID</th>
-              <th>Add</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @tests_available_to_add.each do |add| %>
+        <br /><br />
+        <h1>Available to Add to Batch</h1>
+        <% if @tests_available_to_add.present? %>
+          <table class="table is-striped is-fullwidth">
+            <thead>
               <tr>
-                <td><%= add.sample.project.user.company %></td>
-                <td><%= add.sample.project.description %></td>
-                <td><%= add.sample.description %></td>
-                <td><%= add.id %></td>
-                <td>Add</td>
+                <th>Company</th>
+                <th>Project</th>
+                <th>Description</th>
+                <th>Test ID</th>
+                <th>Add</th>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <% @tests_available_to_add.each do |add| %>
+                <tr>
+                  <td><%= add.sample.project.user.company %></td>
+                  <td><%= add.sample.project.description %></td>
+                  <td><%= add.sample.description %></td>
+                  <td><%= add.id %></td>
+                  <td>
+                    <%= hidden_field :tests, :batch_id %>
+                    <%= link_to('#', class: 'add_test_to_batch') do  %>
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
 
         <%= batch.submit "Submit", class: 'button is-primary' %>
         <% end %>
