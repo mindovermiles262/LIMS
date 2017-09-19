@@ -1,9 +1,13 @@
 class BatchesController < ApplicationController
   before_action :authenticate_user!
   before_action :check_user_privledges
-
+  
   def index
     @batches = Batch.all
+  end
+  
+  def show
+    @batch = Batch.find(params[:id])
   end
 
   def new
@@ -35,10 +39,6 @@ class BatchesController < ApplicationController
       flash[:success] = "Batch Updated"
       redirect_to @batch
     end
-  end
-
-  def show
-    @batch = Batch.find(params[:id])
   end
 
   def destroy

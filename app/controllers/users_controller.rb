@@ -13,12 +13,20 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def destroy
+    user = User.find(params[:id]).destroy
+    flash[:success] = "User Deleted"
+    redirect_to users_index_path
+  end
+
   private
 
   def correct_user?
-    unless current_user == User.find(params[:id])
-      flash[:danger] = "Unauthroized"
-      redirect_to root_path
+    if !(current_user && current_user.admin?)
+      unless current_user == User.find(params[:id])
+        flash[:danger] = "Unauthroized"
+        redirect_to root_path
+      end
     end
   end
 

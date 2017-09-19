@@ -1,1 +1,26 @@
 <h1>Admin Only Index</h1>
+
+<table class="table is-striped">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Company</th>
+      <th>Email</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.full_name %></td>
+        <td><%= user.company %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to "View", users_show_path(user) %></td>
+        <td>
+          <%= link_to "Delete", users_destroy_path(user), 
+               method: :delete, data: { confirm: "Are you sure?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

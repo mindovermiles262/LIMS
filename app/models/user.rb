@@ -11,6 +11,10 @@ class User < ApplicationRecord
     self.first_name[0].to_s + self.last_name[0].to_s
   end
 
+  def full_name
+    self.first_name + " " + self.last_name
+  end
+
   def all_tests
     tests = Array.new
     self.projects.each do |proj|
