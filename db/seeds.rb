@@ -1,5 +1,5 @@
 # Create Admin, Analyst, User
-User.delete_all if Rails.env.development?
+User.delete_all# if Rails.env.development?
 
 User.create!(
   first_name: Faker::Name.first_name,
@@ -43,7 +43,7 @@ end
 
 
 # Create Test Methods
-TestMethod.delete_all if Rails.env.development?
+TestMethod.delete_all# if Rails.env.development?
 test_methods = [ ["APC PF", "APC", "AOAC", 2, 10, "CFU/g"], 
                  ["RY&M PF", "Y&M", "AOAC", 2, 10, "CFU/g"] ]
 
@@ -59,7 +59,7 @@ end
 
 
 # Create Projects
-Project.delete_all if Rails.env.development?
+Project.delete_all# if Rails.env.development?
 5.times do
   Project.create!(
     user: User.find(rand(User.first.id..User.last.id)),
@@ -115,7 +115,7 @@ Project.create!(
 
 
 # Seed Batches
-Batch.delete_all if Rails.env.development?
+Batch.delete_all# if Rails.env.development?
 # Batch.create!(
 #   test_method: TestMethod.first, 
 #   tests: Test.where(test_method: TestMethod.first)
