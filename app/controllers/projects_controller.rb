@@ -70,7 +70,7 @@ class ProjectsController < ApplicationController
 
   def project_started?
     if !(current_user.admin? || current_user.analyst?)
-      if Project.find(params[:id]).received?
+      if Project.find(params[:id]).received? || Project.find(params[:id]).batched?
         flash[:danger] = "Project has been started. Please contact the lab at (555) 510-5555 to change testing"
         redirect_to projects_path
       end

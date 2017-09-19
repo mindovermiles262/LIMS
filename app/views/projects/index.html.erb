@@ -10,10 +10,7 @@
           <th>Customer</th>
           <th>Lot</th>
           <th>Samples</th>
-          <th>View</th>
-          <% if current_user && (current_user.analyst? || current_user.admin?) %>
-            <th>Received?</th>
-          <% end %>
+          <th>Status</th>
           <th></th>
         </tr>
         </thead>
@@ -25,10 +22,8 @@
               <th><%= project.user.first_name %> <%= project.user.last_name %></th>
               <th><%= project.lot %></th>
               <th><%= project.samples.count %></th>
-              <th><%= button_to "View", project_path(project), method: :get, class: 'button'  %></th>
-              <% if current_user && (current_user.analyst? || current_user.admin?) %>
-                <th><%= project.received? %></th>
-              <% end %>
+              <th><%= project.status %></th>
+              <th><%= link_to "View", project_path(project)  %></th>
             </tr>
           <% end %>
         </tbody>

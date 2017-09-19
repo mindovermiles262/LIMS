@@ -8,7 +8,7 @@ class Project < ApplicationRecord
   validates :description, presence: true, length: { maximum: 200 }
   validates :lot, presence: true, length: { maximum: 100 }
 
-  def started?
+  def batched?
     self.samples.each do |sample|
       sample.tests.each do |test|
         if test.batched?
@@ -18,4 +18,17 @@ class Project < ApplicationRecord
     end
     return false
   end
+
+  def status
+    if self.received? || self.batched?
+      "Started"
+    elsif self.completed?
+      "Completed"
+    elsif self.reported?
+      "Reported"
+    else
+      "Awaiting Receipt"
+    end
+  end
+
 end

@@ -10,5 +10,6 @@
 * Add Media Model
 * ~~Style edit user form~~
 * Remove tests from batches
-* Limit user delete project if project has been started(batched)
+* ~~Limit user delete project if project has been started(batched)~~
 * ~~Fix User Show path button in navbar~~
+* Fix update batch (enter results) redirect back to batch#show
