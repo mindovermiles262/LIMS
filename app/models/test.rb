@@ -1,6 +1,7 @@
 class Test < ApplicationRecord
   
   belongs_to :sample
+  has_one :project, through: :sample
   belongs_to :test_method
   belongs_to :batch, optional: true
   

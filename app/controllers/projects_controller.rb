@@ -1,4 +1,7 @@
 class ProjectsController < ApplicationController
+  # crush ActionController::InvalidAuthenticityToken error
+  skip_before_action :verify_authenticity_token, :only => :create 
+  
   before_action :authenticate_user!
   before_action :correct_user, except: [:index, :new, :create]
   before_action :project_started?, only: [:edit, :update, :destroy]

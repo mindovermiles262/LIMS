@@ -10,3 +10,5 @@
 * Add Media Model
 * ~~Style edit user form~~
 * Remove tests from batches
+* Limit user delete project if project has been started(batched)
+* Fix User Show path button in navbar

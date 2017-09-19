@@ -1,0 +1,23 @@
+<h1><%= @user.first_name %> <%= @user.last_name %></h1>
+<p><%= link_to '(edit profile)', edit_user_registration_path %></p>
+
+<div class="columns">
+  <div class="column is-4 is-offset-4">
+    <table class="table is-striped">
+      <thead>
+        <tr>
+          <th>Project ID</th>
+          <th>Project Description</th>
+          <th>Started?</th>
+        </tr>
+      </thead>
+      <% @projects.each do |proj| %>
+        <tr>
+          <td><%= proj.id %></td>
+          <td><%= proj.description %></td>
+          <td><%= proj.started? %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
