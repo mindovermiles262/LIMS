@@ -17,7 +17,7 @@ $( document ).on('turbolinks:load', function() {
   // Remove Table Rows from Batch
   $('table').on('click', '.destroy_row', function() {
     console.log("click");
-    $(this).prev('input[type=hidden]').val('1')
+    $(this).prev('input[type=hidden]').val('nil')
     $(this).closest('tr').hide()
     event.preventDefault()
   })

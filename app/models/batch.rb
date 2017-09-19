@@ -9,10 +9,9 @@ class Batch < ApplicationRecord
   after_destroy { |record| record.tests.update_all(batched: false)}
 
   
-
   def Batch.available_methods
     available = Array.new
-    Test.select(:test_method_id).distinct.where(batched: false).map do |method|
+    Test.select(:test_method_id).distinct.where('batched=?', false).map do |method|
       available << [TestMethod.find_by(id: method.test_method_id).name, method.test_method_id]
     end
     available

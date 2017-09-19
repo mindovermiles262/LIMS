@@ -14,14 +14,14 @@
             </tr>
           </thead>
           <tbody>
-            <%= batch.fields_for :tests do |test| %>
+            <%= batch.fields_for :tests, remote: true do |test| %>
               <tr>
                 <td><%= test.object.sample.project.user.company %></td>
                 <td><%= test.object.sample.project.description %></td>
                 <td><%= test.object.sample.description %></td>
                 <td><%= test.hidden_field :id %><%= test.object.id %></td>
                 <td>
-                  <%= test.hidden_field :_destroy %>
+                  <%= test.hidden_field :batch_id %>
                   <%= link_to('#', class: "destroy_row") do %>
                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                   <% end %>
@@ -30,6 +30,30 @@
             <% end %>
           </tbody>
         </table>
+
+        <table class="table is-striped">
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Project</th>
+              <th>Description</th>
+              <th>Test ID</th>
+              <th>Add</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @tests_available_to_add.each do |add| %>
+              <tr>
+                <td><%= add.sample.project.user.company %></td>
+                <td><%= add.sample.project.description %></td>
+                <td><%= add.sample.description %></td>
+                <td><%= add.id %></td>
+                <td>Add</td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
         <%= batch.submit "Submit", class: 'button is-primary' %>
         <% end %>
   </div>

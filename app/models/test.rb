@@ -12,4 +12,8 @@ class Test < ApplicationRecord
       where(batch_id: nil)
     end
   end
+
+  def remove
+    self.update_attributes(batch_id: nil)
+  end
 end
