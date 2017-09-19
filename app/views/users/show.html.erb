@@ -2,13 +2,14 @@
 <p><%= link_to '(edit profile)', edit_user_registration_path %></p>
 
 <div class="columns">
-  <div class="column is-4 is-offset-4">
+  <div class="column is-half is-offset-one-quarter">
     <table class="table is-striped">
       <thead>
         <tr>
           <th>Project ID</th>
           <th>Project Description</th>
           <th>Started?</th>
+          <th></th>
         </tr>
       </thead>
       <% @projects.each do |proj| %>
@@ -16,8 +17,14 @@
           <td><%= proj.id %></td>
           <td><%= proj.description %></td>
           <td><%= proj.started? %></td>
+          <td>
+            <%= button_to "Edit", edit_project_path(proj.id), 
+                    method: :get, class: 'button is-info' %>
+          </td>
         </tr>
       <% end %>
     </table>
+    <%= button_to "New Project", new_project_path, method: :get, 
+        class: 'button is-primary' %>
   </div>
 </div>
