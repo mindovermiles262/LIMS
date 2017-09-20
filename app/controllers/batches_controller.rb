@@ -31,8 +31,9 @@ class BatchesController < ApplicationController
     @batch = Batch.find(params[:id])
     if @batch.tests.count > 0
       @batch.tests
-      @tests_available_to_add = Test.where( 'test_method_id=? AND batched=? OR batch_id=?', 
-                                            @batch.test_method_id, false, '0')
+      @tests_available_to_add = Test.where('batched=?', false)
+                              .or(Test.where('batch_id=?', 0))
+                              .where('test_method_id=?', @batch.test_method_id)
     else
       @batch.tests << Test.where( 'test_method_id=? AND batched=? OR batch_id=?', 
                                   @batch.test_method_id, false, '0')

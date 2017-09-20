@@ -44,7 +44,7 @@
                 <th>Add</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="append_tests">
               <% @tests_available_to_add.each do |add| %>
                 <tr>
                   <td><%= add.sample.project.user.company %></td>

@@ -16,9 +16,12 @@ $( document ).on('turbolinks:load', function() {
 
   // Remove Table Rows from Batch
   $('table').on('click', '.destroy_row', function() {
-    console.log("click");
+    var row = $(this).parents('tr:first');
     $(this).prev('input[type=hidden]').val('nil')
-    $(this).closest('tr').hide()
+    $('#append_tests').append(row)
+    $(row).find('a').attr('class', 'add_test_to_batch')
+    $(row).find('i').attr("aria-hidden", "true")
+    $(row).find('i').attr("class", "fa fa-plus")
     event.preventDefault()
   })
 });
