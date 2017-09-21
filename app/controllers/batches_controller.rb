@@ -31,9 +31,7 @@ class BatchesController < ApplicationController
     @batch = Batch.find(params[:id])
     if @batch.tests.count > 0
       @batch.tests
-      @tests_available_to_add = Test.where('batched=?', false)
-                              .or(Test.where('batch_id=?', 0))
-                              .where('test_method_id=?', @batch.test_method_id)
+      @tests_available_to_add = Test.unbatched(@batch.test_method_id)
     else
       @batch.tests << Test.where( 'test_method_id=? AND batched=? OR batch_id=?', 
                                   @batch.test_method_id, false, '0')
@@ -43,7 +41,6 @@ class BatchesController < ApplicationController
   def update
     @batch = Batch.find(params[:id])
     if @batch.update_attributes(new_batch_params)
-      raise
       flash[:success] = "Batch Updated"
       redirect_to @batch
     end
