@@ -14,8 +14,16 @@ $( document ).on('turbolinks:load', function() {
     event.preventDefault()
   })
 
+  // Hides Available Tests Table if none available
+  $('#available_tests_section').each(function() {
+    if($(this).find('tr').children('td').length < 1) {
+      $(this).hide()
+    }
+  })
+
   // Remove Table Rows from Batch
   $('table').on('click', '.destroy_row', function() {
+    $('#available_tests_section').show()
     var row = $(this).parents('tr:first');
     $(this).prev('input[type=hidden]').val('nil')
     $('#append_tests').append(row)

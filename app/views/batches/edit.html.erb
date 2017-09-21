@@ -32,8 +32,8 @@
         </table>
 
         <br /><br />
-        <h1>Available to Add to Batch</h1>
-        <% if @tests_available_to_add.present? %>
+        <div id="available_tests_section">
+          <h1>Available to Add to Batch</h1>
           <table class="table is-striped is-fullwidth">
             <thead>
               <tr>
@@ -45,6 +45,7 @@
               </tr>
             </thead>
             <tbody id="append_tests">
+            <% if @tests_available_to_add.present? %>
               <% @tests_available_to_add.each do |add| %>
                 <tr>
                   <td><%= add.sample.project.user.company %></td>
@@ -59,9 +60,10 @@
                   </td>
                 </tr>
               <% end %>
+            <% end %>
             </tbody>
           </table>
-        <% end %>
+        </div>
 
         <%= batch.submit "Submit", class: 'button is-primary' %>
         <% end %>
