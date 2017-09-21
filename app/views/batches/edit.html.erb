@@ -13,7 +13,7 @@
               <th>Remove</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id='append_to_batch'>
             <%= batch.fields_for :tests, remote: true do |test| %>
               <tr>
                 <td><%= test.object.sample.project.user.company %></td>
@@ -31,7 +31,7 @@
           </tbody>
         </table>
 
-        <br /><br />
+        <br />
         <div id="available_tests_section">
           <h2 class='is-size-2 has-text-centered'>Available Tests to Add</h2>
           <table class="table is-striped is-fullwidth">
@@ -44,7 +44,7 @@
                 <th>Add</th>
               </tr>
             </thead>
-            <tbody id="append_unbatched_tests">
+            <tbody id="append_to_unbatched">
             <% if @tests_available_to_add.present? %>
               <% @tests_available_to_add.each do |add| %>
                 <tr>

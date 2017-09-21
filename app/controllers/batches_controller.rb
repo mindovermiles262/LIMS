@@ -43,7 +43,7 @@ class BatchesController < ApplicationController
   def update
     @batch = Batch.find(params[:id])
     if @batch.update_attributes(new_batch_params)
-      # raise
+      raise
       flash[:success] = "Batch Updated"
       redirect_to @batch
     end
