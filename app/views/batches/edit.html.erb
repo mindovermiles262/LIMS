@@ -1,4 +1,4 @@
-<h2>Edit Batches</h2>
+<h2 class='is-size-2 has-text-centered'>Edit Batch</h2>
 
 <div class="columns">
   <div class="column is-10 is-offset-1">
@@ -33,7 +33,7 @@
 
         <br /><br />
         <div id="available_tests_section">
-          <h1>Available to Add to Batch</h1>
+          <h2 class='is-size-2 has-text-centered'>Available Tests to Add</h2>
           <table class="table is-striped is-fullwidth">
             <thead>
               <tr>
@@ -44,7 +44,7 @@
                 <th>Add</th>
               </tr>
             </thead>
-            <tbody id="append_tests">
+            <tbody id="append_unbatched_tests">
             <% if @tests_available_to_add.present? %>
               <% @tests_available_to_add.each do |add| %>
                 <tr>

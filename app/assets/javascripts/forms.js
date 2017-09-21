@@ -26,7 +26,7 @@ $( document ).on('turbolinks:load', function() {
     $('#available_tests_section').show()
     var row = $(this).parents('tr:first');
     $(this).prev('input[type=hidden]').val('nil')
-    $('#append_tests').append(row)
+    $('#append_unbatched_tests').append(row)
     $(row).find('a').attr('class', 'add_test_to_batch')
     $(row).find('i').attr("aria-hidden", "true")
     $(row).find('i').attr("class", "fa fa-plus")
