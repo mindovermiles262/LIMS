@@ -6,7 +6,7 @@
       <th>User</th>
       <th>Company</th>
       <th>Email</th>
-      <th colspan="2"></th>
+      <th colspan="3"></th>
     </tr>
   </thead>
   <tbody>
@@ -20,6 +20,7 @@
           <%= link_to "Delete", users_destroy_path(user), 
                method: :delete, data: { confirm: "Are you sure?" } %>
         </td>
+        <td><%= link_to "Edit", edit_user_path(user) %></td>
       </tr>
     <% end %>
   </tbody>
