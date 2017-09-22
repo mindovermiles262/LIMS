@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="navbar-item has-dropdown is-hoverable">
-          <%= link_to "Users", users_index_path, class: 'navbar-item' %>
+          <%= link_to "Users", users_path, class: 'navbar-item' %>
         </div>
         <!-- "Projects" tab under 'current_user' -->
       <% end %>
@@ -67,7 +67,7 @@
     <div class="navbar-end">
       <% if current_user %>
         <div class="navbar-item is-hoverable has-dropdown">
-          <%= link_to "#{current_user.first_name}", users_show_path(current_user.id), class: 'navbar-item'%>
+          <%= link_to "#{current_user.first_name}", user_path(current_user.id), class: 'navbar-item'%>
         </div>
       <% end %>
 

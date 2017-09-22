@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = "User Updated"
-      redirect_to users_index_path
+      redirect_to edit_user_path
     else
       flash[:warning] = "Unable to update User"
       render :edit
@@ -29,9 +29,9 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    user = User.find(params[:id]).destroy
+    User.find(params[:id]).destroy
     flash[:success] = "User Deleted"
-    redirect_to users_index_path
+    redirect_to users_path
   end
 
   private

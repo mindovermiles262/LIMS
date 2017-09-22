@@ -15,9 +15,9 @@
         <td><%= user.full_name %></td>
         <td><%= user.company %></td>
         <td><%= user.email %></td>
-        <td><%= link_to "View", users_show_path(user) %></td>
+        <td><%= link_to "View", user_path(user) %></td>
         <td>
-          <%= link_to "Delete", users_destroy_path(user), 
+          <%= link_to "Delete", user_path(user), 
                method: :delete, data: { confirm: "Are you sure?" } %>
         </td>
         <td><%= link_to "Edit", edit_user_path(user) %></td>

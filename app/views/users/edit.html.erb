@@ -1,1 +1,54 @@
 <h2 class="is-size-2 has-text-centered">Edit User</h2>
+
+<div class="columns">
+  <div class="column is-one-third is-offset-one-third">
+    <%= form_for @user do |user| %>
+      <div class="field">
+        <div class="control">
+          <%= user.label :first_name, class: 'label' %>
+          <%= user.text_field :first_name, class: 'input' %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <%= user.label :last_name, class: 'label' %>
+          <%= user.text_field :last_name, class: 'input' %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <%= user.label :email, class: 'label' %>
+          <%= user.text_field :email, class: 'input' %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <%= user.label :company, class: 'label' %>
+          <%= user.text_field :company, class: 'input' %>
+        </div>
+      </div>
+
+      <div class="field is-horizontal">
+        <div class="control">
+          <%= user.check_box :analyst, class: 'field-body' %>
+          <%= user.label :analyst, class: 'field-label' %>
+        </div>
+      </div>
+      <div class="field is-horizontal">
+        <div class="control">
+          <%= user.check_box :admin, class: 'field-body' %>
+          <%= user.label :admin, class: 'field-body' %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <%= user.submit "Submit", class: 'button is-primary' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
