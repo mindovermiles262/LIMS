@@ -17,4 +17,4 @@
 * ~~Users index - extend table headers by 1 column~~
 * ~~Analyst & Admin Projects link Broken:~~
 * Admin User able to edit User Profile
-* Order Batch by Test ID
+* ~~Order Batch by Test ID~~

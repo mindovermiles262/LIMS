@@ -39,13 +39,6 @@
       <!-- ANALYST FUNCTIONS -->
       <% if current_user && current_user.analyst? %>
         <div class="navbar-item has-dropdown is-hoverable">
-          <%= link_to "Analyst Methods", test_methods_path, class: 'navbar-item navbar-link' %>
-          <div class="navbar-dropdown">
-            <%= link_to "All Test Methods", test_methods_path, class: 'navbar-item' %>
-            <%= link_to "New Test Method", new_test_method_path, class: 'navbar-item' %>
-          </div>
-        </div>
-        <div class="navbar-item has-dropdown is-hoverable">
         <%= link_to "Batches", batches_path, class: 'navbar-item navbar-link' %>
           <div class="navbar-dropdown">
             <%= link_to "All Batches", batches_path, class: 'navbar-item' %>

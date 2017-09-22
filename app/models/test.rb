@@ -14,8 +14,10 @@ class Test < ApplicationRecord
   end
 
   def Test.unbatched(test_method_id)
-    Test.where('batched=?', false).or(Test.where('batch_id=?', 0))
-    .where('test_method_id=?', test_method_id)
+    Test.where('batched=?', false)
+      .or(Test.where('batch_id=?', 0))
+      .where('test_method_id=?', test_method_id)
+      .sort{ |a,b| a.id <=> b.id }
   end
 
   def remove
