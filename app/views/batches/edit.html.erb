@@ -54,7 +54,7 @@
                   <td><%= add.id %></td>
                   <td>
                     <%= hidden_field :tests, :batch_id %>
-                    <%= link_to('#', class: 'add_test_to_batch') do  %>
+                    <%= link_to(batch_add_test_path(@batch.id, add.id), id: "add_test", remote: true) do %>
                       <i class="fa fa-plus" aria-hidden="true"></i>
                     <% end %>
                   </td>

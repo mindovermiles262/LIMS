@@ -11,5 +11,7 @@ Rails.application.routes.draw do
   resources :test_methods
   resources :projects
   resources :tests, only: [:update, :destroy]
-  resources :batches
+  resources :batches do
+    get '/add/:id', to: 'batches#add', as: 'add_test'
+  end
 end

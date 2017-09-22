@@ -33,14 +33,13 @@ $( document ).on('turbolinks:load', function() {
     event.preventDefault()
   })
 
-    // Add Table Rows to Batch
-    $('table').on('click', '.add_test_to_batch', function() {
-      var row = $(this).parents('tr:first');
-      $('#append_to_batch').append(row)
-      $(this).prev('input[type=hidden]').val('13')
-      $(row).find('a').attr('class', 'destroy_row')
-      $(row).find('i').attr("aria-hidden", "true")
-      $(row).find('i').attr("class", "fa fa-trash-o")
-      event.preventDefault()
-    })
+  // Add Table Rows to Batch
+  $('table').on('click', '#add_test', function() {
+    var row = $(this).parents('tr:first');
+    $('#append_to_batch').append(row)
+    $(row).find('a').attr('class', 'destroy_row')
+    $(row).find('i').attr("aria-hidden", "true")
+    $(row).find('i').attr("class", "fa fa-trash-o")
+    event.preventDefault()
+  })
 });

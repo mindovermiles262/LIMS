@@ -27,6 +27,17 @@ class BatchesController < ApplicationController
     end
   end
 
+  def add
+    @test = Test.find(params[:id])
+    @batch = Batch.find(params[:batch_id])
+    if @test.test_method_id == @batch.test_method_id
+      @batch.tests << @test
+    else
+      flash[:danger] = "Test method and Batch method do not match"
+      redirect_to edit_batch_path(@batch)
+    end
+  end
+
   def edit
     @batch = Batch.find(params[:id])
     if @batch.tests.count > 0
