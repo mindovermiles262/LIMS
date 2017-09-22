@@ -30,11 +30,12 @@ class BatchesController < ApplicationController
   def edit
     @batch = Batch.find(params[:id])
     if @batch.tests.count > 0
+      # Batch has been made, populate Unbatched table
       @batch.tests
       @tests_available_to_add = Test.unbatched(@batch.test_method_id)
     else
-      @batch.tests << Test.where( 'test_method_id=? AND batched=? OR batch_id=?', 
-                                  @batch.test_method_id, false, '0')
+      # New Batch, fill with all unbatched tests with same test_method_id
+      @batch.tests << Test.unbatched(@batch.test_method_id)
     end
   end
 
