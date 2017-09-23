@@ -1,4 +1,4 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2 class="is-size-2 has-text-centered">Edit <%= resource_name.to_s.humanize %></h2>
 
 <div class="columns">
   <div class="column is-4 is-offset-4">
@@ -26,15 +26,6 @@
         </div>
       </div>
 
-      <% if current_user && current_user.admin? %>
-        <div class="field">
-          <div class="control">
-            <%= f.label :company, class: 'label' %>
-            <%= f.text_field :company, class: 'input' %>
-          </div>
-        </div>
-      <% end %>
-
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
@@ -45,21 +36,6 @@
           <%= f.password_field :current_password, autocomplete: "off", class: 'input' %>
         </div>
       </div>
-
-      <% if current_user && current_user.admin? %>
-        <div class="field is-horizontal">
-          <div class="control">
-            <%= f.check_box :analyst, class: 'field-body' %>
-            <%= f.label :analyst, class: 'field-label' %>
-          </div>
-        </div>
-        <div class="field is-horizontal">
-          <div class="control">
-            <%= f.check_box :admin, class: 'field-body' %>
-            <%= f.label :admin, class: 'field-body' %>
-          </div>
-        </div>
-      <% end %>
 
       <br />
 
