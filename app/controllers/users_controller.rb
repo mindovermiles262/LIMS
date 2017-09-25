@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :correct_user?, except: [:index]
+  before_action :correct_user?
   before_action :admin_user?, except: [:show]
 
   def show
     @user = User.find(params[:id])
     @projects = @user.projects
-    @tests = @user.all_tests
+    # @tests = @user.all_tests # Unused variable (?) 09/25/17 AD
   end
 
   def index

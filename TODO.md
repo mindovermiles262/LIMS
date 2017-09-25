@@ -5,6 +5,7 @@
 * Add Media Model
 * Fix update batch (enter results) redirect back to batch#show
 * Add Cancel Buttons to views
+* Remove `initials` method in devise registrations controller
 
 ## Completed
 * ~~Fix login form display~~
