@@ -39,7 +39,7 @@ RSpec.describe User, type: :model do
     end
     it 'returns valid #full_name' do
       @user.first_name = "hank"
-      @user.last_name = "Aaron"
+      @user.last_name = "aAron"
       expect(@user.full_name).to eql("Hank Aaron")
     end
   end
