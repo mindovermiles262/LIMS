@@ -37,5 +37,10 @@ RSpec.describe User, type: :model do
       @user.last_name = "User"
       expect(@user.initials).to eql("EU")
     end
+    it 'returns valid #full_name' do
+      @user.first_name = "hank"
+      @user.last_name = "Aaron"
+      expect(@user.full_name).to eql("Hank Aaron")
+    end
   end
 end
