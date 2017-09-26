@@ -5,7 +5,6 @@
 * Add Media Model
 * Fix update batch (enter results) redirect back to batch#show
 * Add Cancel Buttons to views
-* Remove `initials` method in devise registrations controller
 * Factor out `correct_user?` from projects and users controller
 
 ## Completed
@@ -29,3 +28,4 @@
 * ~~New Test Method form centered and full width~~
 * ~~Center all users table~~
 * ~~New Project UI -> Where to put "Add Sample" button?~~
+* ~~Remove `initials` method in devise registrations controller~~

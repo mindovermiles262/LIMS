@@ -17,8 +17,4 @@ module DeviseHelper
 
     html.html_safe
   end
-  
-  def initials
-    self.first_name[0].to_s + self.last_name[0].to_s
-  end
 end
