@@ -2,43 +2,52 @@ require 'rails_helper'
 
 RSpec.describe ProjectsController, type: :controller do
   before :each do
-    sign_in FactoryGirl.create(:admin)
+    @admin = FactoryGirl.create(:admin)
+    sign_in(@admin)
     @projects = Array.new
     3.times { @projects << FactoryGirl.create(:project_with_samples) }
   end
 
-  context 'factories' do
+  describe 'factories' do
     it 'has a valid factory' do
       expect(FactoryGirl.build(:project)).to be_valid
-    end
-    it 'has valid factory with tests' do
       expect(FactoryGirl.build(:project_with_samples)).to be_valid
-    end
-    it 'has valid factory with recieved project' do
       expect(FactoryGirl.build(:project_with_received_sample)).to be_valid
-    end
-    it 'has an invalid factory' do
       expect(FactoryGirl.build(:invalid_project)).to_not be_valid
     end
   end
 
   describe "#before_action methods" do
-    it 'authenticates users' do
-      sign_out :admin
-      sign_out :user
-      get :index
-      expect(response).to redirect_to new_user_session_path
+    context 'authenticate_user!' do
+      it 'authenticates users' do
+        sign_out :admin
+        sign_out :user
+        get :index
+        expect(response).to redirect_to new_user_session_path
+      end
     end
-    context "current_user matches project user" do
-      it 'shows index'
-      it 'shows new'
-      it 'shows create'
+    context '#correct_user' do
+      it 'checks for correct user' do
+        @project = FactoryGirl.create(:project)
+        @second_project = FactoryGirl.create(:project)
+        sign_out :admin
+        sign_in(@project.user)
+        get :show, :params => { id: @second_project.id }
+        expect(flash[:danger]).to be_present
+        expect(response).to redirect_to root_path
+      end
     end
-    context "current_user does not match" do
-      it 'flashes danger'
-      it 'redirects to root'
+    context '#project_started?' do
+      it 'disallows project after testing started' do
+        sign_out :admin
+        @user = FactoryGirl.create(:user)
+        @project = FactoryGirl.create(:project_with_received_sample, :user => @user)
+        sign_in(@user)
+        get :edit, :params => { id: @project.id }
+        expect(flash[:danger]).to be_present
+        expect(response).to redirect_to projects_path
+      end
     end
-    it 'disallows project after testing started'
   end
 
   describe 'GET #index' do

@@ -6,6 +6,7 @@
 * Fix update batch (enter results) redirect back to batch#show
 * Add Cancel Buttons to views
 * Remove `initials` method in devise registrations controller
+* Factor out `correct_user?` from projects and users controller
 
 ## Completed
 * ~~Fix login form display~~
