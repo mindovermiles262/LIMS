@@ -12,6 +12,14 @@ RSpec.describe User, type: :model do
   end
 
   context 'validation for presence' do
+    it 'is invalid without a first name' do
+      @user.first_name = nil
+      expect(@user).to_not be_valid
+    end
+    it 'is invalid without a last name' do
+      @user.last_name = nil
+      expect(@user).to_not be_valid
+    end
     it 'is invalid without an email' do
       @user.email = nil
       expect(@user).to_not be_valid
@@ -28,6 +36,11 @@ RSpec.describe User, type: :model do
       @user.first_name = "Example"
       @user.last_name = "User"
       expect(@user.initials).to eql("EU")
+    end
+    it 'returns valid #full_name' do
+      @user.first_name = "hank"
+      @user.last_name = "aAron"
+      expect(@user.full_name).to eql("Hank Aaron")
     end
   end
 end
