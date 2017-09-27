@@ -77,6 +77,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe '#index' do
     it 'lists all users' do
+      User.delete_all if Rails.env.test?
       @admin = FactoryGirl.create(:admin)
       6.times { FactoryGirl.create(:user) }
       sign_in(@admin)
@@ -126,6 +127,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe '#destroy' do
     before :each do
+      User.delete_all if Rails.env.test?
       @admin = FactoryGirl.create(:admin)
       @user = FactoryGirl.create(:user)
       sign_in(@admin)
