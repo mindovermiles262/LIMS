@@ -15,6 +15,13 @@ class PipetsController < ApplicationController
 
   def create
     @pipet = Pipet.create(pipet_params)
+    if @pipet.save
+      flash[:success] = "Pipet Created"
+      redirect_to pipets_path
+    else
+      flash[:warning] = "Unable to create new pipet"
+      render :new
+    end
   end
 
   def edit

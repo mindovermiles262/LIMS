@@ -42,4 +42,12 @@ $( document ).on('turbolinks:load', function() {
     $(row).find('i').attr("class", "fa fa-trash-o")
     event.preventDefault()
   })
+
+  // Add jQuery Datepicker to forms
+  $('#pipet_calibration_date').datepicker({
+    dateFormat: 'yy-mm-dd' 
+  });
+  $('#pipet_calibration_due').datepicker({
+    dateFormat: 'yy-mm-dd'
+  });
 });
