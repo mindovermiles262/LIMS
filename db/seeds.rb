@@ -125,6 +125,13 @@ Pipet.create!(
   max_volume: 1000,
   adjustable: true
 )
+Pipet.create!(
+  calibration_date: Date.today, 
+  calibration_due: Date.today + 90,
+  min_volume: 1000,
+  max_volume: 1000,
+  adjustable: false
+)
 
 # Seed Batches
 Batch.create!(

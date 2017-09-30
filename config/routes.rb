@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   resources :batches do
     get '/add/:id', to: 'batches#add', as: 'add_test'
   end
+  resources :pipets
 end
