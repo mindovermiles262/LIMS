@@ -1,3 +1,3 @@
 class Pipet < ApplicationRecord
-  belongs_to :batch
+  has_and_belongs_to_many :batches
 end

@@ -1,0 +1,20 @@
+<h1>Pipets Index</h1>
+
+<table class="table is-striped">
+  <tr>
+    <th>Pipet ID</th>
+    <th>Calibration Due</th>
+    <th>Max Volume (μL)</th>
+    <th>Min Volume (μL)</th>
+    <th>Last Calibration Date</th>
+  </tr>
+  <%= @pipets.each do |pipet| %>
+    <tr>
+      <th><%= pipet.id %></th>
+      <th><%= pipet.calibration_due %></th>
+      <th><%= pipet.max_volume %></th>
+      <th><%= pipet.min_volume %></th>
+      <th><%= pipet.calibration_date %></th>
+    </tr>
+  <% end %>
+</table>
