@@ -8,6 +8,7 @@ class BatchesController < ApplicationController
   
   def show
     @batch = Batch.find(params[:id])
+    @pipets = Pipet.all.collect{ |p| [p.id, p.id] }
   end
 
   def new

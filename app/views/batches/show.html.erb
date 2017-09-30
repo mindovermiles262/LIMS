@@ -1,8 +1,63 @@
 <h2 class='is-size-2 has-text-centered'>Batch <%= @batch.id %> - <%= @batch.test_method.name.upcase %></h2>
 
 <div class="columns">
+
+    <div class="column"></div> <!-- Spacing -->
+    <div class="column">
+      <div class="field is-horizontal">
+        <%= form_for :pipet do |f| %>
+          <div class="field-body">
+            <%= f.label :pipet, class: 'field-label is-normal' %>
+            <div class="field">
+              <div class="select">
+                <%= f.select(:pipet, Pipet.all.collect{ |p| [p.id, p.id] }, class: 'field select') %>
+              </div>
+            </div>
+            <div class="select">
+              <%= f.submit %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+<!-- 
+    <div class="column">
+      <div class="field is-horizontal">
+        <%= form_for :pipet do |f| %>
+          <div class="field-body">
+            <%= f.label :media, class: 'field-label is-normal' %>
+            <div class="field">
+              <div class="select">
+                <%= f.select(:pipet, @pipets, class: 'field select') %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="column">
+      <div class="field is-horizontal">
+        <%= form_for :pipet do |f| %>
+          <div class="field-body">
+            <%= f.label :incubator, class: 'field-label is-normal' %>
+            <div class="field">
+              <div class="select">
+                <%= f.select(:pipet, Pipet.all.collect{ |p| [p.id, p.id] }, class: 'field select') %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="column"></div>
+-->
+
+</div>
+
+<div class="columns">
   <div class="column is-10 is-offset-1">    
-    <table class="table is-striped">
+    <table class="table is-striped is-fullwidth">
       <tr>
         <th class="has-text-centered">Company</th>
         <th class="has-text-centered">Project ID</th>

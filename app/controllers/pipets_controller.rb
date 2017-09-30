@@ -1,4 +1,5 @@
 class PipetsController < ApplicationController
+  before_action :authenticate_user!
   before_action :admin_only
   
   def index
@@ -29,7 +30,11 @@ class PipetsController < ApplicationController
   end
 
   def update
-    @pipet = Pipet.update_attributes(pipet_params)
+    @pipet = Pipet.find(params[:id])
+    if @pipet.update_attributes(pipet_params)
+      flash[:success] = "Pipet Updated"
+      redirect_to pipets_path
+    end
   end
 
   def destroy

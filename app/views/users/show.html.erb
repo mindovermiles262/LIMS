@@ -1,8 +1,17 @@
-<h2 class="is-size-2 has-text-centered"><%= @user.first_name %> <%= @user.last_name %></h2>
-<p class='has-text-centered'><%= link_to '(edit profile)', edit_user_registration_path %></p>
+<h2 class="is-size-2 has-text-centered">
+  <%= @user.first_name %> <%= @user.last_name %>
+</h2>
+<p class="is-size-6 has-text-centered"><%= @user.email %></p>
+<h4 class="is-size-4 has-text-centered"><%= @user.company %></h4>
+<% if current_user == @user %>
+  <p class='has-text-centered'><%= link_to '(edit profile)', edit_user_registration_path %></p>
+<% end %>
+
+<hr>
 
 <div class="columns">
   <div class="column is-10 is-offset-1">
+    <h3 class="is-size-3 has-text-centered">Your Projects</h3>
     <table class="table is-striped is-fullwidth">
       <thead>
         <tr>
@@ -19,12 +28,10 @@
           <td><%= proj.status %></td>
           <td>
             <%= button_to "Edit", edit_project_path(proj.id), 
-                    method: :get, class: 'button is-info' %>
+                    method: :get, class: 'button is-info is-small' %>
           </td>
         </tr>
       <% end %>
     </table>
-    <%= button_to "New Project", new_project_path, method: :get, 
-        class: 'button is-primary' %>
   </div>
 </div>

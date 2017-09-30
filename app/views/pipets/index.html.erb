@@ -18,19 +18,12 @@
           <th><%= pipet.max_volume %></th>
           <th>
             <% if pipet.max_volume == pipet.min_volume %>
-              Fixed Volume
+              Fixed Vol.
             <% else %>
               <%= pipet.min_volume %>
             <% end %>
           </th>
           <th><%= pipet.calibration_date.strftime('%Y-%m-%d') %></th>
-          <th>
-            <%= 
-              button_to "Show", pipet_path(pipet), 
-              method: :get,
-              class: 'button is-primary is-small' 
-            %>
-          </th>
           <th>
             <%= 
               button_to "Edit", edit_pipet_path(pipet), 
