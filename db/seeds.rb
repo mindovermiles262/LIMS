@@ -2,6 +2,7 @@ User.delete_all# if Rails.env.development?
 TestMethod.delete_all# if Rails.env.development?
 Project.delete_all# if Rails.env.development?
 Test.delete_all# if Rails.env.development?
+Pipet.delete_all
 Batch.delete_all# if Rails.env.development?
 
 # Create Admin, Analyst, User
@@ -116,6 +117,14 @@ Project.create!(
   ]
 )
 
+# Seed Pipets
+Pipet.create!(
+  calibration_date: Date.today, 
+  calibration_due: Date.today + 90,
+  min_volume: 100,
+  max_volume: 1000,
+  adjustable: true
+)
 
 # Seed Batches
 Batch.create!(
@@ -123,7 +132,3 @@ Batch.create!(
   tests: Test.where(test_method: TestMethod.first),
   pipets: [Pipet.first]
 )
-# Batch.create!(
-#   test_method: TestMethod.second, 
-#   tests: Test.where(test_method: TestMethod.second)
-# )
