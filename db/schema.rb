@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170915013826) do
+ActiveRecord::Schema.define(version: 20170930154123) do
 
   create_table "batches", force: :cascade do |t|
     t.integer "test_method_id"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 20170915013826) do
     t.datetime "updated_at", null: false
     t.index ["test_id"], name: "index_batches_on_test_id"
     t.index ["test_method_id"], name: "index_batches_on_test_method_id"
+  end
+
+  create_table "pipets", force: :cascade do |t|
+    t.datetime "calibration_date"
+    t.datetime "calibration_due"
+    t.integer "min_volume"
+    t.integer "max_volume"
+    t.boolean "adjustable"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "projects", force: :cascade do |t|
