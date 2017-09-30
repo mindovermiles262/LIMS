@@ -69,6 +69,22 @@ RSpec.describe TestMethodsController, type: :controller do
         expect(response).to render_template :new
       end
     end
+    it 'passing params' do
+      @parameters = {
+        name: "Aerobic Plate Count",
+        target_organism: "APC",
+        reference_method: "AOAC",
+        turn_around_time: 2,
+        detection_limit: 10,
+        unit: 'CFU/g'
+      }
+      expect{
+        post :create, params: { test_method: @parameters }
+      }.to change{ TestMethod.count }.by(1)
+      @parameters[:name] = "HARRY"
+      post :create, params: { test_method: @parameters }
+      expect(TestMethod.last.name).to eql("HARRY")            
+    end
   end
 
 
