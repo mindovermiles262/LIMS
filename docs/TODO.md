@@ -9,6 +9,7 @@
 * Add PM to equipment
 * Fix Projects form to submit without jQuery
     * Get "Cancel" button to work
+* Factor out `check_for_cancel`
 
 ## Completed
 * ~~Factor out `correct_user?` from projects and users controller~~
