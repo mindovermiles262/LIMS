@@ -6,8 +6,8 @@
       <tr>
         <th>Pipet ID</th>
         <th>Calibration Due</th>
-        <th>Max Volume (μL)</th>
         <th>Min Volume (μL)</th>
+        <th>Max Volume (μL)</th>
         <th>Last Calibration Date</th>
         <th colspan="3"></th>
       </tr>
@@ -15,12 +15,12 @@
         <tr>
           <th><%= pipet.id %></th>
           <th><%= pipet.calibration_due.strftime('%Y-%m-%d') %></th>
-          <th><%= pipet.max_volume %></th>
+          <th><%= pipet.min_volume %></th>
           <th>
             <% if pipet.max_volume == pipet.min_volume %>
               Fixed Vol.
             <% else %>
-              <%= pipet.min_volume %>
+              <%= pipet.max_volume %>
             <% end %>
           </th>
           <th><%= pipet.calibration_date.strftime('%Y-%m-%d') %></th>
