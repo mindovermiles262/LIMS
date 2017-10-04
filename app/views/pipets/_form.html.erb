@@ -27,7 +27,12 @@
       <%= f.label :adjustable, 'Adjustable Volume?', class: 'field-label' %>
     </div>
   </div>
-  <div class="control">
-    <%= button_to "Submit", new_pipet_path, method: :post, class: 'button is-primary' %>
+  <div class="field is-grouped">
+    <div class="control">
+      <%= f.submit "Submit", class: 'button is-primary' %>
+    </div>
+    <div class="control">
+      <%= f.submit "Cancel", class: 'button is-danger' %>
+    </div>
   </div>
 <% end %>

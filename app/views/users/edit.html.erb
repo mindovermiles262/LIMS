@@ -31,22 +31,27 @@
         </div>
       </div>
 
-      <div class="field is-horizontal">
-        <div class="control">
-          <%= user.check_box :analyst, class: 'field-body' %>
-          <%= user.label :analyst, class: 'field-label' %>
+      <div class="field is-grouped">
+        <div class="field is-horizontal">
+          <div class="control">
+            <%= user.check_box :analyst, class: 'field-body' %>
+            <%= user.label :analyst, class: 'field-label' %>
+          </div>
         </div>
-      </div>
-      <div class="field is-horizontal">
-        <div class="control">
-          <%= user.check_box :admin, class: 'field-body' %>
-          <%= user.label :admin, class: 'field-body' %>
+        <div class="field is-horizontal">
+          <div class="control">
+            <%= user.check_box :admin, class: 'field-body' %>
+            <%= user.label :admin, class: 'field-body' %>
+          </div>
         </div>
       </div>
 
-      <div class="field">
+      <div class="field is-grouped">
         <div class="control">
           <%= user.submit "Submit", class: 'button is-primary' %>
+        </div>
+        <div class="control">
+          <%= user.submit "Cancel", class: 'button is-danger' %>
         </div>
       </div>
     <% end %>

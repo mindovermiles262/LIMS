@@ -5,6 +5,7 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :correct_user, except: [:index, :new, :create]
   before_action :project_started?, only: [:edit, :update, :destroy]
+  before_action :check_for_cancel, only: [:create, :update]
 
   # TODO: Limit #index by User
   def index
@@ -83,6 +84,12 @@ class ProjectsController < ApplicationController
         flash[:danger] = "Unauthorized"
         redirect_to root_path
       end
+    end
+  end
+
+  def check_for_cancel
+    if params[:commit] == "Cancel"
+      redirect_to projects_path
     end
   end
 

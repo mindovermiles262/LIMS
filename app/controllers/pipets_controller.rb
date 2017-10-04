@@ -1,6 +1,7 @@
 class PipetsController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_only
+  before_action :check_for_cancel, only: [:update, :create]
   
   def index
     @pipets = Pipet.all
@@ -48,5 +49,11 @@ class PipetsController < ApplicationController
   def pipet_params
     params.require(:pipet).permit(:calibration_date, :calibration_due,
                                   :min_volume, :max_volume, :adjustable)
+  end
+
+  def check_for_cancel
+    if params[:commit] == "Cancel"
+      redirect_to pipets_path
+    end
   end
 end

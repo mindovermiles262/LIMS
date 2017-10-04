@@ -9,7 +9,7 @@
         <th>Min Volume (μL)</th>
         <th>Max Volume (μL)</th>
         <th>Last Calibration Date</th>
-        <th colspan="3"></th>
+        <th></th>
       </tr>
       <% @pipets.each do |pipet| %>
         <tr>
@@ -24,27 +24,13 @@
             <% end %>
           </th>
           <th><%= pipet.calibration_date.strftime('%Y-%m-%d') %></th>
-          <th>
-            <%= 
-              button_to "Edit", edit_pipet_path(pipet), 
-              method: :get,
-              class: 'button is-info is-small' 
-            %>
-          </th>
-          <th>
-            <%= 
-              button_to "Delete", pipet_path(pipet), 
-              method: :delete, 
-              data: { confirm: 'Are you sure?' },
-              class: 'button is-danger is-small'
-            %>
-          </th>
+          <th><%= link_to "Edit", edit_pipet_path(pipet) %></th>
         </tr>
       <% end %>
     </table>
     <%= 
       button_to "New Pipet", new_pipet_path, 
-      method: :get, class: 'button is-primary' 
+      method: :get, class: 'button is-info' 
     %>
   </div>
 </div>

@@ -20,17 +20,29 @@
         <td><%= @test_method.unit %></td>
       </tr>
     </table>
+    <div class="field is-grouped">
+      <div class="control">
+        <%= 
+          button_to "Back", test_methods_path, method: :get, 
+          class: 'button is-primary' 
+        %>
+      </div>
+      <div class="control">
+        <%= 
+          button_to "Edit Test Method", edit_test_method_path, method: :get, 
+          class: 'button is-info' 
+        %>
+      </div>
+      <div class="control">
+        <%= 
+          button_to "Delete Test Method", test_method_path, 
+          method: :delete, data: { confirm: "Are you sure?" },
+          class: 'button is-danger' 
+        %>
+      </div>
+    </div>
   </div>
 </div>
-
-  <div class="columns">
-    <div class="column is-1 is-offset-1">
-    <%= button_to "Back", test_methods_path, method: :get, class: 'button is-primary' %>
-    </div>
-    <div class="column is-1">
-    <%= button_to "Edit", edit_test_method_path, method: :get, class: 'button is-info' %>
-    </div>
-  </div>
 
 
 <%# TODO: Recent Projects using method %>

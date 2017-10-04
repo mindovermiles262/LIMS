@@ -7,6 +7,8 @@
 * Add Cancel Buttons to views
 * Fix Pipet Saving to batch
 * Add PM to equipment
+* Fix Projects form to submit without jQuery
+    * Get "Cancel" button to work
 
 ## Completed
 * ~~Factor out `correct_user?` from projects and users controller~~

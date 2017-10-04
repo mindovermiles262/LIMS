@@ -2,7 +2,38 @@
 
 <div class="columns">
   <div class="column is-10 is-offset-1">
-      <%= form_for @batch do |batch| %>
+    <%= form_for @batch do |batch| %>
+      <table class="table is-striped is-fullwidth">
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Project</th>
+            <th>Description</th>
+            <th>Test ID</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody id='append_to_batch'>
+          <%= batch.fields_for :tests, remote: true do |test| %>
+            <tr>
+              <td><%= test.object.sample.project.user.company %></td>
+              <td><%= test.object.sample.project.description %></td>
+              <td><%= test.object.sample.description %></td>
+              <td><%= test.hidden_field :id %><%= test.object.id %></td>
+              <td>
+                <%= test.hidden_field :batch_id %>
+                <%= link_to('#', class: "destroy_row") do %>
+                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <br />
+      <div id="available_tests_section">
+        <h2 class='is-size-2 has-text-centered'>Available Tests to Add</h2>
         <table class="table is-striped is-fullwidth">
           <thead>
             <tr>
@@ -10,62 +41,37 @@
               <th>Project</th>
               <th>Description</th>
               <th>Test ID</th>
-              <th>Remove</th>
+              <th>Add</th>
             </tr>
           </thead>
-          <tbody id='append_to_batch'>
-            <%= batch.fields_for :tests, remote: true do |test| %>
+          <tbody id="append_to_unbatched">
+          <% if @tests_available_to_add.present? %>
+            <% @tests_available_to_add.each do |add| %>
               <tr>
-                <td><%= test.object.sample.project.user.company %></td>
-                <td><%= test.object.sample.project.description %></td>
-                <td><%= test.object.sample.description %></td>
-                <td><%= test.hidden_field :id %><%= test.object.id %></td>
+                <td><%= add.sample.project.user.company %></td>
+                <td><%= add.sample.project.description %></td>
+                <td><%= add.sample.description %></td>
+                <td><%= add.id %></td>
                 <td>
-                  <%= test.hidden_field :batch_id %>
-                  <%= link_to('#', class: "destroy_row") do %>
-                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                  <%= hidden_field :tests, :batch_id %>
+                  <%= link_to(batch_add_test_path(@batch.id, add.id), id: "add_test", remote: true) do %>
+                    <i class="fa fa-plus" aria-hidden="true"></i>
                   <% end %>
                 </td>
               </tr>
             <% end %>
+          <% end %>
           </tbody>
         </table>
-
-        <br />
-        <div id="available_tests_section">
-          <h2 class='is-size-2 has-text-centered'>Available Tests to Add</h2>
-          <table class="table is-striped is-fullwidth">
-            <thead>
-              <tr>
-                <th>Company</th>
-                <th>Project</th>
-                <th>Description</th>
-                <th>Test ID</th>
-                <th>Add</th>
-              </tr>
-            </thead>
-            <tbody id="append_to_unbatched">
-            <% if @tests_available_to_add.present? %>
-              <% @tests_available_to_add.each do |add| %>
-                <tr>
-                  <td><%= add.sample.project.user.company %></td>
-                  <td><%= add.sample.project.description %></td>
-                  <td><%= add.sample.description %></td>
-                  <td><%= add.id %></td>
-                  <td>
-                    <%= hidden_field :tests, :batch_id %>
-                    <%= link_to(batch_add_test_path(@batch.id, add.id), id: "add_test", remote: true) do %>
-                      <i class="fa fa-plus" aria-hidden="true"></i>
-                    <% end %>
-                  </td>
-                </tr>
-              <% end %>
-            <% end %>
-            </tbody>
-          </table>
+      </div>
+      <div class="field is-grouped">
+        <div class="control">
+          <%= batch.submit "Back", class: 'button is-danger' %>
         </div>
-
-        <%= batch.submit "Submit", class: 'button is-primary' %>
-        <% end %>
+        <div class="control">
+          <%= batch.submit "Submit", class: 'button is-primary' %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
