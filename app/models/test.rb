@@ -13,6 +13,16 @@ class Test < ApplicationRecord
     end
   end
 
+  def status
+    if self.result == nil && self.batched == false
+      "Not Started"
+    elsif self.result == nil && self.batched == true
+      "In Progresss"
+    elsif self.result != nil
+      "#{result} #{self.test_method.unit}"
+    end
+  end
+
   def Test.unbatched(test_method_id)
     Test.where('batched=?', false)
       .or(Test.where('batch_id=?', 0))

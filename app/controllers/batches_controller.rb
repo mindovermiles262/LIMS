@@ -1,6 +1,7 @@
 class BatchesController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_or_analyst
+  before_action :check_for_cancel, :only => [:create, :update]
   
   def index
     @batches = Batch.all
@@ -51,9 +52,14 @@ class BatchesController < ApplicationController
     end
   end
 
+  def results
+    @batch = Batch.find(params[:batch_id])
+  end
+
   def update
     @batch = Batch.find(params[:id])
     if @batch.update_attributes(new_batch_params)
+      raise
       flash[:success] = "Batch Updated"
       redirect_to @batch
     end
@@ -69,6 +75,12 @@ class BatchesController < ApplicationController
 
   def new_batch_params
     params.require(:batch).permit(:test_method_id, :tests_attributes => [
-      :id, :batch_id])
+      :id, :batch_id, :result])
+  end
+
+  def check_for_cancel
+    if ["Back", "Cancel", "back", "cancel"].include? params[:commit]
+      redirect_to batches_path
+    end
   end
 end

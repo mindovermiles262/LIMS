@@ -6,6 +6,7 @@
 * Fix update batch (enter results) redirect back to batch#show
 * Add Cancel Buttons to views
 * Fix Pipet Saving to batch
+* Add PM to equipment
 
 ## Completed
 * ~~Factor out `correct_user?` from projects and users controller~~

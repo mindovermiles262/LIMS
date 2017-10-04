@@ -1,0 +1,35 @@
+<h2 class='is-size-2 has-text-centered'>Batch <%= @batch.id %> - <%= @batch.test_method.name.upcase %></h2>
+
+<div class="columns">
+  <div class="column is-10 is-offset-1">    
+    <%= form_for @batch do |f| %>
+      <table class="table is-fullwidth">
+        <tr>
+          <th class="has-text-centered">Company</th>
+          <th class="has-text-centered">Project ID</th>
+          <th class="has-text-centered">Test ID</th>
+          <th class="has-text-centered" colspan="2">Result</th>
+        </tr>
+            <%= f.fields_for :tests do |test| %>
+              <tr>
+                <td class="has-text-centered"><%= test.object.project.user.company %></td>
+                <td class="has-text-centered"><%= test.object.project.id %></td>
+                <td class="has-text-centered"><%= test.object.id %></td>
+                <td class="has-text-centered">
+                  <%= test.text_field :result, class: 'has-text-centered' %>
+                  <%= test.object.test_method.unit %>
+                </td>
+              </tr>
+            <% end %>
+      </table>
+      <div class="field is-grouped">
+        <div class="control">
+          <%= f.submit "Cancel", class: 'button is-danger' %>
+        </div>
+        <div class="control">
+          <%= f.submit "Update Results", class: 'button is-info' %>  
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
