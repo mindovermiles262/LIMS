@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :correct_user?
-  before_action :admin_user?, except: [:show]
+  before_action :admin_only, except: [:show]
 
   def show
     @user = User.find(params[:id])
@@ -36,6 +36,10 @@ class UsersController < ApplicationController
 
   private
 
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :company, :admin, :analyst)
+  end
+
   def correct_user?
     if !(current_user && current_user.admin?)
       unless current_user == User.find(params[:id])
@@ -43,17 +47,6 @@ class UsersController < ApplicationController
         redirect_to root_path
       end
     end
-  end
-
-  def admin_user?
-    unless current_user.admin?
-      flash[:danger] = "Unauthroized"
-      redirect_to root_path
-    end
-  end
-
-  def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :company, :admin, :analyst)
   end
 
 end

@@ -5,9 +5,10 @@
 * Add Media Model
 * Fix update batch (enter results) redirect back to batch#show
 * Add Cancel Buttons to views
-* Factor out `correct_user?` from projects and users controller
+* Fix Pipet Saving to batch
 
 ## Completed
+* ~~Factor out `correct_user?` from projects and users controller~~
 * ~~Fix login form display~~
 * ~~Add analyst/admin checkbox to user profile~~
   * ~~for administrators only~~

@@ -49,11 +49,4 @@ class PipetsController < ApplicationController
     params.require(:pipet).permit(:calibration_date, :calibration_due,
                                   :min_volume, :max_volume, :adjustable)
   end
-
-  def admin_only
-    unless current_user && current_user.admin?
-      flash[:danger] = "Unauthorized Access"
-      redirect_to root_path
-    end
-  end
 end

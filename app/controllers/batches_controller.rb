@@ -1,6 +1,6 @@
 class BatchesController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_user_privledges
+  before_action :admin_or_analyst
   
   def index
     @batches = Batch.all
@@ -70,12 +70,5 @@ class BatchesController < ApplicationController
   def new_batch_params
     params.require(:batch).permit(:test_method_id, :tests_attributes => [
       :id, :batch_id])
-  end
-  
-  def check_user_privledges
-    unless current_user && (current_user.admin? || current_user.analyst?)
-      flash[:danger] = "Unauthorized"
-      redirect_to root_path
-    end
   end
 end
