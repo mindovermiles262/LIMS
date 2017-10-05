@@ -1,50 +1,51 @@
 <div class="columns">
   <div class="column is-half is-offset-one-quarter">
     <%= form_for @project, html: { id: 'project_form' } do |project| %>
-        <% if @project.errors.any? %>
-          <div id="error_explanation">
-            <h2>
-              <%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:
-            </h2>
-            <ul>
-              <% @project.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
-
-        <div class="field">
-          <div class="control">
-            <%= project.label :description, class: 'label' %>
-            <%= project.text_field :description, class: 'input' %>
-          </div>
+      <% if @project.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:
+          </h2>
+          <ul>
+            <% @project.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
         </div>
+      <% end %>
 
-        <div class="field">
-          <div class="control">
-            <%= project.label :lot, class: 'label' %>
-            <%= project.text_field :lot, class: 'input' %>
-          </div>
+      <div class="field">
+        <div class="control">
+          <%= project.label :description, class: 'label' %>
+          <%= project.text_field :description, class: 'input' %>
         </div>
+      </div>
 
-        <%= project.fields_for :samples, nil, {remote: true} do |sample| %>
-          <%= render 'sample_fields', :f => sample %>
-        <% end %>
-
-        <div class="field">
-          <div class="control">
-            <%= button_to_add_field('Add Additional Sample', project, :samples) %>
-          </div>
+      <div class="field">
+        <div class="control">
+          <%= project.label :lot, class: 'label' %>
+          <%= project.text_field :lot, class: 'input' %>
         </div>
+      </div>
+
+      <%= project.fields_for :samples, nil, {remote: true} do |s| %>
+        <%= render 'sample_fields', :f => s %>
+      <% end %>
+
+      <div class="field">
+        <div class="control">
+          <%= button_to_add_field('Add Additional Sample', project, :samples) %>
+        </div>
+      </div>
+      
       <hr>
 
       <div class="field is-grouped">
         <div class="control">
-          <%= project.submit "Submit", class: 'button is-success submit' %>
+          <%= project.submit "Submit", form: 'project_form', class: 'button is-success submit' %>
         </div>
         <div class="control">
-          <%= project.submit "Cancel", class: 'button is-danger submit' %>
+          <%= project.submit "Cancel", form: 'project_form', class: 'button is-danger submit' %>
         </div>
       </div>
     <% end %>

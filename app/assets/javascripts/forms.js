@@ -14,12 +14,6 @@ $( document ).on('turbolinks:load', function() {
     event.preventDefault()
   })
 
-  // Submit Projects Form
-  // TODO: Fix.  Submit button disabled due to above 'preventDefault()'
-  $('.submit').click(function() {
-    $('#project_form').submit()
-  })
-
   // Hides Available Tests Table if none available
   $('#available_tests_section').each(function() {
     if($(this).find('tr').children('td').length < 1) {

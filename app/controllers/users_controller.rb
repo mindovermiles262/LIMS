@@ -6,7 +6,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @projects = @user.projects
-    # @tests = @user.all_tests # Unused variable (?) 09/25/17 AD
   end
 
   def index

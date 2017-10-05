@@ -4,14 +4,14 @@
 * Add equpment model
 * Add Media Model
 * Fix update batch (enter results) redirect back to batch#show
-* Add Cancel Buttons to views
 * Fix Pipet Saving to batch
 * Add PM to equipment
-* Fix Projects form to submit without jQuery
-    * Get "Cancel" button to work
 * Factor out `check_for_cancel`
 
 ## Completed
+* ~~Fix Projects form to submit without jQuery~~
+    * ~~Get "Cancel" button to work~~
+* ~~Add Cancel Buttons to views~~
 * ~~Factor out `correct_user?` from projects and users controller~~
 * ~~Fix login form display~~
 * ~~Add analyst/admin checkbox to user profile~~

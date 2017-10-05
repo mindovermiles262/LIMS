@@ -26,11 +26,6 @@ ActiveRecord::Schema.define(version: 20170930161306) do
     t.integer "pipet_id"
   end
 
-  create_table "equipment", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "pipets", force: :cascade do |t|
     t.datetime "calibration_date"
     t.datetime "calibration_due"
