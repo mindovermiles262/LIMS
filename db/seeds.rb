@@ -136,5 +136,6 @@ Pipet.create!(
 # Seed Batches
 Batch.create!(
   test_method: TestMethod.first, 
-  tests: Test.where(test_method: TestMethod.first)
+  tests: Test.where(test_method: TestMethod.first),
+  pipets: [Pipet.first]
 )

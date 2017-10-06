@@ -31,6 +31,10 @@
         </tbody>
       </table>
 
+      <%= batch.fields_for :pipets do |p| %>
+        <%= p.label :pipets, class: 'label' %>
+        <%= p.text_field :pipet_ids %>
+      <% end %>
       <br />
       <div id="available_tests_section">
         <h2 class='is-size-2 has-text-centered'>Available Tests to Add</h2>

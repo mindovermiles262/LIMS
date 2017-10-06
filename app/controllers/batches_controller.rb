@@ -42,6 +42,7 @@ class BatchesController < ApplicationController
 
   def edit
     @batch = Batch.find(params[:id])
+    @pipets = Pipet.all.map { |p| [p.id, p.id] }
     if @batch.tests.count > 0
       # Batch has been made, populate Unbatched table
       @batch.tests
@@ -73,8 +74,11 @@ class BatchesController < ApplicationController
   private
 
   def new_batch_params
-    params.require(:batch).permit(:test_method_id, :tests_attributes => [
-      :id, :batch_id, :result])
+    params.require(:batch).permit(
+      :test_method_id, 
+      :tests_attributes => [:id, :batch_id, :result],
+      :pipets_attributes => [:id, :pipet_ids]
+    )
   end
 
   def check_for_cancel
