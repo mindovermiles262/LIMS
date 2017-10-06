@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170930154123) do
+ActiveRecord::Schema.define(version: 20171006164521) do
+
+  create_table "batch_pipets", force: :cascade do |t|
+    t.integer "batch_id"
+    t.integer "pipet_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "batches", force: :cascade do |t|
     t.integer "test_method_id"
