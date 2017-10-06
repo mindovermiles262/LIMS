@@ -4,6 +4,7 @@ class Batch < ApplicationRecord
   accepts_nested_attributes_for :tests, :allow_destroy => true
   has_many :batch_pipets
   has_many :pipets, through: :batch_pipets
+  accepts_nested_attributes_for :batch_pipets
 
   after_update { self.tests.update_all(batched: true) }
   after_update { self.destroy if self.tests.count < 1 }

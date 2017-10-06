@@ -31,10 +31,11 @@
         </tbody>
       </table>
 
-      <%= batch.fields_for :pipets do |p| %>
-        <%= p.label :pipets, class: 'label' %>
-        <%= p.text_field :pipet_ids %>
+      <%= batch.fields_for :batch_pipets do |p| %>
+        <%= p.label :pipet_id, "Pipet", class: 'label' %>
+        <%= p.select :pipet_id, options_for_select(@pipets) %>
       <% end %>
+
       <br />
       <div id="available_tests_section">
         <h2 class='is-size-2 has-text-centered'>Available Tests to Add</h2>
