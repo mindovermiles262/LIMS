@@ -42,11 +42,13 @@ class BatchesController < ApplicationController
 
   def edit
     @batch = Batch.find(params[:id])
+    @batch.pipets.clear
     @batch.batch_pipets.build(batch_id: @batch.id)
-    @pipets = Pipet.available_for_batches
+
+    @pipets = Pipet.all.map{ |p| ["P#{p.id} - #{p.max_volume}uL", p.id]}
+    
     if @batch.tests.count > 0
       # Batch has been made, populate Unbatched table
-      @batch.tests
       @tests_available_to_add = Test.unbatched(@batch.test_method_id)
     else
       # New Batch, fill with all unbatched tests with same test_method_id
@@ -63,6 +65,9 @@ class BatchesController < ApplicationController
     if @batch.update_attributes(new_batch_params)
       flash[:success] = "Batch Updated"
       redirect_to @batch
+    else
+      flash[:warning] = "Unable to Update"
+      render :edit
     end
   end
 
