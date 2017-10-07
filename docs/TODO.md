@@ -3,12 +3,13 @@
 ## Outstanding
 * Add equpment model
 * Add Media Model
-* Fix update batch (enter results) redirect back to batch#show
-* Fix Pipet Saving to batch
 * Add PM to equipment
 * Factor out `check_for_cancel`
+* Multiple pipets per batch
 
 ## Completed
+* ~~Fix update batch (enter results) redirect back to batch#show~~
+* ~~Fix Pipet Saving to batch~~
 * ~~Fix Projects form to submit without jQuery~~
     * ~~Get "Cancel" button to work~~
 * ~~Add Cancel Buttons to views~~

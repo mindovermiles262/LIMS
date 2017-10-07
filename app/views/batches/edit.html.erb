@@ -31,10 +31,39 @@
         </tbody>
       </table>
 
-      <%= batch.fields_for :batch_pipets do |p| %>
-        <%= p.label :pipet_id, "Pipet", class: 'label' %>
-        <%= p.select :pipet_id, options_for_select(@pipets) %>
-      <% end %>
+      <div class="columns">
+        <div class="column is-4">
+          <div class="field is-horizontal">
+            <%= batch.fields_for :batch_pipets do |p| %>
+              <div class="label">
+                <%= p.label :pipet_id, "Pipet", class: 'field-label' %>
+              </div>
+              <div class="select field-control">
+                <%= 
+                  p.select :pipet_id, options_for_select(@pipets, selected: @selected), 
+                  {include_blank: true}, 
+                  {} 
+                %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns">
+        <div class="column">
+          <div class="field is-grouped">
+            <div class="control">
+              <%= batch.submit "Back", class: 'button is-danger' %>
+            </div>
+            <div class="control">
+              <%= batch.submit "Submit", class: 'button is-primary' %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
 
       <br />
       <div id="available_tests_section">
@@ -68,14 +97,6 @@
           <% end %>
           </tbody>
         </table>
-      </div>
-      <div class="field is-grouped">
-        <div class="control">
-          <%= batch.submit "Back", class: 'button is-danger' %>
-        </div>
-        <div class="control">
-          <%= batch.submit "Submit", class: 'button is-primary' %>
-        </div>
       </div>
     <% end %>
   </div>

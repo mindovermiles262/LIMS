@@ -18,12 +18,19 @@
         </tr>
       <% end %>
     </table>
+
+    <div class="columns">
+      <div class="column">
+        Pipet: <%= @pipets %>
+      </div>
+    </div>
+
     <div class="field is-grouped">
       <div class="control">
         <%= button_to "Back", batches_path, method: :get, class: 'button is-primary' %>
       </div>
       <div class="control">
-        <%= button_to "Edit Samples", edit_batch_path, method: :get, class: 'button is-info' %>
+        <%= button_to "Edit Batch", edit_batch_path, method: :get, class: 'button is-info' %>
       </div>
       <div class="control">
         <%= button_to "Enter Results", batch_results_path(@batch.id), method: :get, class: 'button is-success' %>

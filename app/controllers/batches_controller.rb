@@ -9,7 +9,7 @@ class BatchesController < ApplicationController
   
   def show
     @batch = Batch.find(params[:id])
-    @pipets = Pipet.all.collect{ |p| [p.id, p.id] }
+    @pipets = @batch.pipets.map { |p| "P#{p.id}" }.join(" ")
   end
 
   def new
@@ -42,6 +42,7 @@ class BatchesController < ApplicationController
 
   def edit
     @batch = Batch.find(params[:id])
+    @selected = @batch.pipets.map{|p| p.id }
     @batch.pipets.clear
     @batch.batch_pipets.build(batch_id: @batch.id)
 
