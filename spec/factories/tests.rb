@@ -1,6 +1,11 @@
 FactoryGirl.define do
   factory :test do
-    test_method
+    association :test_method, factory: :test_method
     sample
+
+    factory :batched_test do
+      batched true
+    end
+
   end
 end

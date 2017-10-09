@@ -62,7 +62,14 @@ RSpec.describe BatchesController, type: :controller do
   end
 
   describe '#new' do
-    it 'sets available methods'
+    before :each do
+      sign_in(FactoryGirl.create(:analyst))
+    end
+    it 'sets available methods' do
+      # @batch2 = FactoryGirl.create(:batch, tests: [FactoryGirl.create(:batched_test)])
+      get :new
+      expect(assigns(:available_methods)).to eql([[@batch.test_method.name, @batch.test_method.id]])
+    end
     it 'sets batch'
     it 'builds tests'
   end
