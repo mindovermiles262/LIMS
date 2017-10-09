@@ -8,8 +8,4 @@ class Pipet < ApplicationRecord
   validates :max_volume, presence: true, numericality: { only_integer: true }
   validates :min_volume, presence: true, numericality: { only_integer: true }
   validates :adjustable, inclusion: { in: [true, false]}
-
-  def available_for_batches(batch_id)
-    Pipet.where(somethingsoethingsomething)
-  end
 end

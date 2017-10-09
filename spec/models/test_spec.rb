@@ -34,6 +34,21 @@ RSpec.describe Test, type: :model do
     end
   end
 
+  describe '#status' do
+    it 'returns not started when not batched' do
+      expect(@test.status).to eql("Not Started")
+    end
+    it 'returns in progress when batched' do
+      @test.batched = true
+      expect(@test.status).to eql("In Progress")
+    end
+    it 'returns results with units if completed' do
+      @test.batched = true
+      @test.result = 450
+      expect(@test.status).to eql("450 CFU/g")
+    end
+  end
+
   describe '#unbatched' do
     it 'sorts on Test ID' do
       @test = FactoryGirl.create(:test, id: 2, test_method_id: 1)

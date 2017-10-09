@@ -17,7 +17,7 @@ class Test < ApplicationRecord
     if self.result == nil && self.batched == false
       "Not Started"
     elsif self.result == nil && self.batched == true
-      "In Progresss"
+      "In Progress"
     elsif self.result != nil
       "#{result} #{self.test_method.unit}"
     end

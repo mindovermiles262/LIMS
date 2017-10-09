@@ -35,4 +35,7 @@ RSpec.describe PipetsController, type: :controller do
       end
     end
   end
+
+  it 'finishes the tests'
+
 end

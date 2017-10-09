@@ -6,6 +6,7 @@
 * Add PM to equipment
 * Factor out `check_for_cancel`
 * Multiple pipets per batch
+* Receiving page
 
 ## Completed
 * ~~Fix update batch (enter results) redirect back to batch#show~~
