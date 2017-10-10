@@ -63,58 +63,23 @@ end
 
 
 # Create Projects
-# 5.times do
-#   Project.create!(
-#     user: User.find(rand(User.first.id..User.last.id)),
-#     lot: Faker::Code.isbn,
-#     description: Faker::Coffee.blend_name,
-#     samples_attributes: [
-#       { description: Faker::Coffee.notes.capitalize,
-#         tests_attributes: [
-#           { test_method_id: TestMethod.first.id },
-#           { test_method_id: TestMethod.second.id }
-#         ]
-#       },
-#       { description: Faker::Coffee.notes.capitalize,
-#         tests_attributes: [
-#           { test_method_id: TestMethod.first.id },
-#           { test_method_id: TestMethod.second.id }
-#         ]
-#       },
-#       { description: Faker::Coffee.notes.capitalize,
-#         tests_attributes: [
-#           { test_method_id: TestMethod.first.id },
-#           { test_method_id: TestMethod.second.id }
-#         ]
-#       },
-#     ]
-#   )
-# end
-# Project.create!(
-#   user: User.first,
-#   lot: Faker::Code.isbn,
-#   description: Faker::Coffee.blend_name,
-#   samples_attributes: [
-#     { description: Faker::Coffee.notes.capitalize,
-#       tests_attributes: [
-#         { test_method_id: TestMethod.first.id },
-#         { test_method_id: TestMethod.second.id }
-#       ]
-#     },
-#     { description: Faker::Coffee.notes.capitalize,
-#       tests_attributes: [
-#         { test_method_id: TestMethod.first.id },
-#         { test_method_id: TestMethod.second.id }
-#       ]
-#     },
-#     { description: Faker::Coffee.notes.capitalize,
-#       tests_attributes: [
-#         { test_method_id: TestMethod.first.id },
-#         { test_method_id: TestMethod.second.id }
-#       ]
-#     },
-#   ]
-# )
+
+Project.create!(
+  description: "Test Project 1",
+  user: User.find_by(last_name: "Customer"),
+  samples_attributes: [
+    {
+      description: "Test Sample 1",
+      lot: "Test Lot 1",
+      test_method: TestMethod.first
+    },
+    {
+      description: "Test Sample 2",
+      lot: 'Test Lot 2',
+      test_method: TestMethod.second,
+    }
+  ]
+)
 
 # Seed Pipets
 Pipet.create!(

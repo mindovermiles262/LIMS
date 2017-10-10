@@ -54,14 +54,12 @@ ActiveRecord::Schema.define(version: 20171006164521) do
     t.string "lot"
     t.integer "result"
     t.boolean "batched", default: false
-    t.integer "user_id"
     t.integer "project_id"
     t.integer "test_method_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_samples_on_project_id"
     t.index ["test_method_id"], name: "index_samples_on_test_method_id"
-    t.index ["user_id"], name: "index_samples_on_user_id"
   end
 
   create_table "test_methods", force: :cascade do |t|

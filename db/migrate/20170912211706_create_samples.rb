@@ -7,7 +7,6 @@ class CreateSamples < ActiveRecord::Migration[5.1]
       t.integer :result, default: nil
       t.boolean :batched, default: false
 
-      t.references :user
       t.references :project
       t.references :test_method
 
