@@ -84,7 +84,10 @@ RSpec.describe BatchesController, type: :controller do
 
   describe '#create' do
     context 'with valid parameters' do
-      it 'creates new batch'
+      it 'creates new batch' do
+        sign_in(FactoryGirl.create(:analyst))
+        post :create, { batch: FactoryGirl.attributes_for(:batch) }
+      end
       it 'renders flash'
       it 'redirects to edit batch'
     end

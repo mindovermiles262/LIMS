@@ -21,6 +21,7 @@ class BatchesController < ApplicationController
   def create
     @batch = Batch.new(new_batch_params)
     if @batch.save
+      raise
       flash[:info] = "Select Tests"
       redirect_to edit_batch_path(@batch)
     else
