@@ -1,7 +1,7 @@
 class TestMethod < ApplicationRecord
   # Admin Only :new, :create, :edit, :destroy
   # Technician Only :index
-  has_many :tests
+  has_many :samples
   has_many :batches
 
   validates :name,              presence: true

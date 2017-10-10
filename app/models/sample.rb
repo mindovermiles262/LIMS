@@ -1,5 +1,6 @@
 class Sample < ApplicationRecord
   belongs_to :project
-  has_many :tests
-  accepts_nested_attributes_for :tests, allow_destroy: true, :reject_if => lambda { |a| a[:test_method_id].blank? }
+  has_one :user, through: :project
+  belongs_to :test_method
+  belongs_to :batch, optional: true
 end

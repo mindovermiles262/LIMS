@@ -1,7 +1,7 @@
 class Batch < ApplicationRecord
-  has_many :tests
-  belongs_to :test_method
-  accepts_nested_attributes_for :tests, :allow_destroy => true
+  has_many :samples
+  has_one :test_method
+
   has_many :batch_pipets
   has_many :pipets, through: :batch_pipets
   accepts_nested_attributes_for :batch_pipets

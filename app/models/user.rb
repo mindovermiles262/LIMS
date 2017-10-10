@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
          
   has_many :projects
-  has_many :tests, through: :projects
+  has_many :samples, through: :projects
 
   validates :first_name, presence: true
   validates :last_name, presence: true

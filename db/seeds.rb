@@ -1,7 +1,6 @@
 User.delete_all# if Rails.env.development?
 TestMethod.delete_all# if Rails.env.development?
 Project.delete_all# if Rails.env.development?
-Test.delete_all# if Rails.env.development?
 Pipet.delete_all
 Batch.delete_all# if Rails.env.development?
 
@@ -64,58 +63,58 @@ end
 
 
 # Create Projects
-5.times do
-  Project.create!(
-    user: User.find(rand(User.first.id..User.last.id)),
-    lot: Faker::Code.isbn,
-    description: Faker::Coffee.blend_name,
-    samples_attributes: [
-      { description: Faker::Coffee.notes.capitalize,
-        tests_attributes: [
-          { test_method_id: TestMethod.first.id },
-          { test_method_id: TestMethod.second.id }
-        ]
-      },
-      { description: Faker::Coffee.notes.capitalize,
-        tests_attributes: [
-          { test_method_id: TestMethod.first.id },
-          { test_method_id: TestMethod.second.id }
-        ]
-      },
-      { description: Faker::Coffee.notes.capitalize,
-        tests_attributes: [
-          { test_method_id: TestMethod.first.id },
-          { test_method_id: TestMethod.second.id }
-        ]
-      },
-    ]
-  )
-end
-Project.create!(
-  user: User.first,
-  lot: Faker::Code.isbn,
-  description: Faker::Coffee.blend_name,
-  samples_attributes: [
-    { description: Faker::Coffee.notes.capitalize,
-      tests_attributes: [
-        { test_method_id: TestMethod.first.id },
-        { test_method_id: TestMethod.second.id }
-      ]
-    },
-    { description: Faker::Coffee.notes.capitalize,
-      tests_attributes: [
-        { test_method_id: TestMethod.first.id },
-        { test_method_id: TestMethod.second.id }
-      ]
-    },
-    { description: Faker::Coffee.notes.capitalize,
-      tests_attributes: [
-        { test_method_id: TestMethod.first.id },
-        { test_method_id: TestMethod.second.id }
-      ]
-    },
-  ]
-)
+# 5.times do
+#   Project.create!(
+#     user: User.find(rand(User.first.id..User.last.id)),
+#     lot: Faker::Code.isbn,
+#     description: Faker::Coffee.blend_name,
+#     samples_attributes: [
+#       { description: Faker::Coffee.notes.capitalize,
+#         tests_attributes: [
+#           { test_method_id: TestMethod.first.id },
+#           { test_method_id: TestMethod.second.id }
+#         ]
+#       },
+#       { description: Faker::Coffee.notes.capitalize,
+#         tests_attributes: [
+#           { test_method_id: TestMethod.first.id },
+#           { test_method_id: TestMethod.second.id }
+#         ]
+#       },
+#       { description: Faker::Coffee.notes.capitalize,
+#         tests_attributes: [
+#           { test_method_id: TestMethod.first.id },
+#           { test_method_id: TestMethod.second.id }
+#         ]
+#       },
+#     ]
+#   )
+# end
+# Project.create!(
+#   user: User.first,
+#   lot: Faker::Code.isbn,
+#   description: Faker::Coffee.blend_name,
+#   samples_attributes: [
+#     { description: Faker::Coffee.notes.capitalize,
+#       tests_attributes: [
+#         { test_method_id: TestMethod.first.id },
+#         { test_method_id: TestMethod.second.id }
+#       ]
+#     },
+#     { description: Faker::Coffee.notes.capitalize,
+#       tests_attributes: [
+#         { test_method_id: TestMethod.first.id },
+#         { test_method_id: TestMethod.second.id }
+#       ]
+#     },
+#     { description: Faker::Coffee.notes.capitalize,
+#       tests_attributes: [
+#         { test_method_id: TestMethod.first.id },
+#         { test_method_id: TestMethod.second.id }
+#       ]
+#     },
+#   ]
+# )
 
 # Seed Pipets
 Pipet.create!(
@@ -134,8 +133,3 @@ Pipet.create!(
 )
 
 # Seed Batches
-Batch.create!(
-  test_method: TestMethod.first, 
-  tests: Test.where(test_method: TestMethod.first),
-  pipets: [Pipet.first]
-)
