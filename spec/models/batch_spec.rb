@@ -45,8 +45,8 @@ RSpec.describe Batch, type: :model do
     it 'returns true if all tests have results' do
       @test = FactoryGirl.create(:test, result: 20)
       @second_test = FactoryGirl.create(:test, test_method: @test.test_method, result: 10)
-      @batch = FactoryGirl.create(:batch, test_method: @test.test_method, tests: [@test, @second_test])
-      expect(@batch.completed?).to eql(true) 
+      @batch = Batch.create(test_method: @test.test_method, tests: [@test, @second_test])
+      expect(@batch.completed?).to eql(true)
     end
   end
 end
