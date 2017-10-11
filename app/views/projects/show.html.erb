@@ -1,7 +1,6 @@
 <div class="columns">
   <div class="column has-text-centered">
     <h3 class='is-size-3 has-text-centered'>Description: <%= @project.description %></h3>
-    <h4 class='is-size-4 has-text-centered'>Lot: <%= @project.lot %></h4>
     <h4 class='is-size-4 has-text-centered'>Customer: <%= @project.user.first_name %> <%= @project.user.last_name %></h4>
     <h4 class='is-size-4 has-text-centered'>Company: <%= @project.user.company %></h4>
   </div>
@@ -38,7 +37,6 @@
           <tr>
             <th>Sample ID</th>
             <th>Description</th>
-            <th>Tests</th>
           </tr>
         </thead>
         <tbody>
@@ -46,7 +44,6 @@
             <tr>
               <td><%= sample.id %></td>
               <td><%= sample.description %></td>
-              <td><%= sample.tests.count %></td>
               <%# TODO: Add Test Methods %>
             </tr>
           <% end %>

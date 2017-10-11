@@ -8,7 +8,6 @@
           <th>Project ID</th>
           <th>Description</th>
           <th>Customer</th>
-          <th>Lot</th>
           <th>Samples</th>
           <th>Status</th>
           <th></th>
@@ -20,7 +19,6 @@
               <th><%= project.id %></th>
               <th><%= project.description %></th>
               <th><%= project.user.first_name %> <%= project.user.last_name %></th>
-              <th><%= project.lot %></th>
               <th><%= project.samples.count %></th>
               <th><%= project.status %></th>
               <th><%= link_to "View", project_path(project)  %></th>

@@ -21,12 +21,12 @@
         </div>
       </div>
 
-      <div class="field">
+<!--      <div class="field">
         <div class="control">
-          <%= project.label :lot, class: 'label' %>
-          <%= project.text_field :lot, class: 'input' %>
+          <#%= project.label :lot, class: 'label' %>
+          <#%= project.text_field :lot, class: 'input' %>
         </div>
-      </div>
+      </div>-->
 
       <%= project.fields_for :samples, nil, {remote: true} do |s| %>
         <%= render 'sample_fields', :f => s %>
