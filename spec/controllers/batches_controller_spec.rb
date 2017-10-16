@@ -65,12 +65,7 @@ RSpec.describe BatchesController, type: :controller do
     before :each do
       sign_in(FactoryGirl.create(:analyst))
     end
-    it 'sets available methods' do
-      get :new
-      expect(assigns(:available_methods)).to eql(
-        [[@batch.tests.first.test_method.name, @batch.tests.first.test_method_id]]
-      )
-    end
+    it 'sets available methods'
     it 'sets batch' do
       get :new
       expect(assigns(:batch)).to be_a_new(Batch)
@@ -83,15 +78,17 @@ RSpec.describe BatchesController, type: :controller do
   end
 
   describe '#create' do
+    before :each do
+      sign_in(FactoryGirl.create(:analyst))
+    end
     context 'with valid parameters' do
       it 'creates new batch' do
-        sign_in(FactoryGirl.build(:analyst))
         expect {
-          post :create, params: { batch: FactoryGirl.attributes_for(:batch) }
+          post :create, params: { batch: @batch.attributes }
         }.to change { Batch.count }.by(1)
       end
       it 'renders flash' do
-        post :create, params: { batch: FactoryGirl.attributes_for(:batch) }
+        post :create, params: { batch: @batch.attributes }
         expect(flash[:info]).to be_present
       end
       it 'redirects to edit batch'
