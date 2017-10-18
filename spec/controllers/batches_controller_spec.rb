@@ -2,11 +2,12 @@ require 'rails_helper'
 
 RSpec.describe BatchesController, type: :controller do
   before :each do
-    @batch = FactoryGirl.create(:batch)
+    @batch = FactoryGirl.create(:valid_batch)
   end
 
   it 'has a valid factory' do
     expect(@batch).to be_valid
+    expect(FactoryGirl.create(:test)).to be_valid
   end
 
   describe 'before_actions' do
@@ -65,7 +66,17 @@ RSpec.describe BatchesController, type: :controller do
     before :each do
       sign_in(FactoryGirl.create(:analyst))
     end
-    it 'sets available methods'
+    it 'sets available methods' do
+      # @available_methods = Batch.available_methods
+      @test = FactoryGirl.create(:test)
+      @test2 = FactoryGirl.create(:test)
+      @test3 = FactoryGirl.create(:test, test_method_id: @test.test_method_id)
+      get :new
+      # binding.pry
+      expect(assigns(:available_methods)).to eql([
+        [@test.test_method.name, @test.test_method_id], [@test2.test_method.name, @test2.test_method_id]
+      ])
+    end
     it 'sets batch' do
       get :new
       expect(assigns(:batch)).to be_a_new(Batch)
@@ -91,10 +102,21 @@ RSpec.describe BatchesController, type: :controller do
         post :create, params: { batch: @batch.attributes }
         expect(flash[:info]).to be_present
       end
-      it 'redirects to edit batch'
+      it 'redirects to edit batch' do
+        post :create, params: { batch: @batch.attributes }
+        expect(response).to redirect_to edit_batch_path(assigns(:batch))
+      end
     end
+
     context 'with invalid parameters' do
-      it 'does not save new batch'
+      before :each do
+        @invalid_batch = FactoryGirl.create(:invalid_batch)
+      end
+      it 'does not save new batch' do
+        expect {
+          post :create, params: { batch: @invalid_batch.attributes }
+      }.to change{ Batch.count }.by(0)
+      end
       it 'flashes danger'
       it 'renders new template'
     end
