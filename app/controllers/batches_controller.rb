@@ -29,6 +29,7 @@ class BatchesController < ApplicationController
     end
   end
 
+  # Dynamically adds test to batch from batches#edit
   def add
     @test = Test.find(params[:id])
     @batch = Batch.find(params[:batch_id])
