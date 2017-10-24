@@ -8,6 +8,7 @@ RSpec.describe BatchesController, type: :controller do
   it 'has a valid factory' do
     expect(@batch).to be_valid
     expect(FactoryGirl.create(:test)).to be_valid
+    expect(FactoryGirl.create(:alternate_test_method)).to be_valid
   end
 
   describe 'before_actions' do
@@ -129,11 +130,50 @@ RSpec.describe BatchesController, type: :controller do
   describe '#add' do
     before :each do
       sign_in(FactoryGirl.create(:analyst))
+      @batch = FactoryGirl.create(:batch)
+      @test = FactoryGirl.create(:test, batch: @batch)
     end
-    it 'finds the test'
-    it 'finds the batch'
-    it 'add test with valid parameters'
-    it 'flashes danger with invalid params'
-    it 'redirects with invalid params'
+    it 'finds the test' do
+      get :add, :params => {batch_id: @batch.id, id: @test.id}
+      expect(assigns(:test)).to eql(@test)
+    end
+    it 'finds the batch' do
+      get :add, :params => {batch_id: @batch.id, id: @test.id}
+      expect(assigns(:batch)).to eql(@batch)
+    end
+    it 'add test with valid parameters' do
+      test = Test.create!(test_method: @batch.test_method, sample: Sample.first)
+      expect {
+        post :add, :params =>{batch_id: @batch.id, id: test.id}
+      }.to change { @batch.tests.count }.by(1)
+    end
+    it 'flashes danger with invalid params' do
+      alt_test_method = FactoryGirl.create(:alternate_test_method)
+      test = Test.create!(test_method: alt_test_method, sample: Sample.first)
+      post :add, :params => { batch_id: @batch.id, id: test.id }
+
+      expect(flash[:danger]).to be_present
+    end
+    it 'redirects with invalid params' do
+      alt_test_method = FactoryGirl.create(:alternate_test_method)
+      test = Test.create!(test_method: alt_test_method, sample: Sample.first)
+      post :add, :params => { batch_id: @batch.id, id: test.id }
+
+      expect(response).to redirect_to edit_batch_path(@batch)
+    end
   end
+
+  describe "#edit" do
+    it 'finish the batches_controller_spec'
+  end
+
+  describe "#results" do
+  end
+
+  describe "#update" do
+  end
+
+  describe "#destroy" do
+  end
+
 end
