@@ -46,7 +46,6 @@ class BatchesController < ApplicationController
     @selected = @batch.pipets.map{|p| p.id }
     @batch.pipets.clear
     @batch.batch_pipets.build(batch_id: @batch.id)
-
     @pipets = Pipet.all.map{ |p| ["P#{p.id} - #{p.max_volume}uL", p.id]}
 
     if @batch.tests.count > 0

@@ -164,13 +164,69 @@ RSpec.describe BatchesController, type: :controller do
   end
 
   describe "#edit" do
-    it 'finish the batches_controller_spec'
+    before :each do
+      sign_in(FactoryGirl.create(:analyst))
+    end
+    it 'finds the batch' do
+      get :edit, :params => { id: @batch }
+      expect(assigns(:batch)).to eql(@batch)
+    end
+    it 'adds previous pipets to @selected' do
+      @expected = @batch.pipets.map{|p| p.id}
+      get :edit, :params => { id: @batch }
+      expect(assigns(:selected)).to eql(@expected)
+    end
+    it 'clears the pipets' do
+      get :edit, :params => {id: @batch}
+      expect(@batch.pipets.count).to eql(0)
+    end
+    it 'rebuilds pipets' do
+      FactoryGirl.create(:pipet)
+      get :edit, :params => {id: @batch}
+      expect(assigns(:pipets).length).to eql(2)
+    end
+    it 'populates unbatched table if batch has no tests' do
+      get :edit, :params => {id: @batch}
+      @batch.tests.delete_all
+      expect(assigns(:tests_available_to_add)).to eql(Test.unbatched(@batch.test_method_id))
+    end
+    it 'populates batch with all unbatched tests' do
+      FactoryGirl.create(:test, test_method_id: @batch.test_method_id)
+      @new_batch = Batch.create!(test_method: @batch.test_method)
+      get :edit, :params => {id: @new_batch}
+      expect(assigns(:batch).tests.count).to eql(Test.unbatched(@new_batch.test_method_id).count)
+    end
   end
 
   describe "#results" do
+    it 'finds the batch' do
+      sign_in(FactoryGirl.create(:admin))
+      get :results, :params => {batch_id: @batch}
+      expect(assigns(:batch)).to eql(@batch)
+    end
   end
 
   describe "#update" do
+    context 'with valid params' do
+      before :each do
+        sign_in(FactoryGirl.create(:analyst))
+        @batch = FactoryGirl.create(:batch)
+      end
+      it 'updates batch' do
+        @new_test_method = FactoryGirl.create(:test_method)
+        @batch.test_method = @new_test_method
+        patch :update, :params => { batch: @batch.attributes }
+        @batch.reload
+        expect(@batch.test_method).to eql(@new_test_method)
+      end
+      it 'flashes success'
+      it 'redirects to batch'
+    end
+    context 'with invalid params' do
+      it 'does not update' 
+      it 'flashes warning'
+      it 'renders edit'
+    end
   end
 
   describe "#destroy" do
