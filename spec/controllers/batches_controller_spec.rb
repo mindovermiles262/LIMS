@@ -207,29 +207,74 @@ RSpec.describe BatchesController, type: :controller do
   end
 
   describe "#update" do
+    before :each do
+      sign_in(FactoryGirl.create(:analyst))
+      @batch = FactoryGirl.create(:batch)
+      @new_test_method = FactoryGirl.create(:test_method)
+    end
+
     context 'with valid params' do
-      before :each do
-        sign_in(FactoryGirl.create(:analyst))
-        @batch = FactoryGirl.create(:batch)
-      end
-      it 'updates batch' do
-        @new_test_method = FactoryGirl.create(:test_method)
+      before :each do 
         @batch.test_method = @new_test_method
-        patch :update, :params => { batch: @batch.attributes }
+      end
+
+      it 'updates batch' do
+        put :update, :params => { batch: @batch.attributes, id: @batch.id }
         @batch.reload
         expect(@batch.test_method).to eql(@new_test_method)
       end
-      it 'flashes success'
-      it 'redirects to batch'
+      it 'flashes success' do
+        put :update, :params => { batch: @batch.attributes, id: @batch.id }
+        @batch.reload
+        expect(flash[:success]).to be_present
+      end
+      it 'redirects to batch' do
+        put :update, :params => { batch: @batch.attributes, id: @batch.id }
+        @batch.reload
+        expect(response).to redirect_to batch_path(@batch)
+      end
     end
+
     context 'with invalid params' do
-      it 'does not update' 
-      it 'flashes warning'
-      it 'renders edit'
+      it 'does not update' do
+        @batch.test_method = nil
+        put :update, :params => { batch: @batch.attributes, id: @batch.id }
+        @batch.reload
+        expect(@batch.test_method).to_not eql(nil)
+      end
+      it 'flashes warning' do
+        @batch.test_method = nil
+        put :update, :params => { batch: @batch.attributes, id: @batch.id }
+        @batch.reload
+        expect(flash[:warning]).to be_present
+      end
+      it 'renders edit' do
+        @batch.test_method = nil
+        put :update, :params => { batch: @batch.attributes, id: @batch.id }
+        @batch.reload
+        expect(response).to render_template :edit
+      end
     end
   end
 
   describe "#destroy" do
-  end
 
+    before :each do
+      sign_in(FactoryGirl.create(:analyst))
+    end
+
+    it 'deletes batch' do
+      expect{
+        delete :destroy, :params => { id: @batch.id }        
+      }.to change(Batch, :count).by(-1)
+    end
+    it 'flashes success' do
+      delete :destroy, :params => { id: @batch.id }
+      expect(flash[:success]).to be_present
+    end
+    it 'redirects to batches path' do
+      delete :destroy, :params => { id: @batch.id }
+      expect(response).to redirect_to batches_path
+    end
+  end
 end
