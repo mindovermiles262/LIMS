@@ -14,8 +14,8 @@ class Batch < ApplicationRecord
   
   def Batch.available_methods
     available = Array.new
-    Test.select(:test_method_id).distinct.where('batched=? OR batch_id=?', false, '0').map do |method|
-      available << [TestMethod.find_by(id: method.test_method_id).name, method.test_method_id]
+    Test.select(:test_method_id).distinct.where('batched=? OR batch_id=?', false, '0').map do |test|
+      available << [TestMethod.find_by(id: test.test_method_id).name, test.test_method_id]
     end
     available
   end

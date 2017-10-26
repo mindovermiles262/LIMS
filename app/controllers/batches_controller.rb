@@ -29,6 +29,7 @@ class BatchesController < ApplicationController
     end
   end
 
+  # Dynamically adds test to batch from batches#edit
   def add
     @test = Test.find(params[:id])
     @batch = Batch.find(params[:batch_id])
@@ -45,9 +46,8 @@ class BatchesController < ApplicationController
     @selected = @batch.pipets.map{|p| p.id }
     @batch.pipets.clear
     @batch.batch_pipets.build(batch_id: @batch.id)
-
     @pipets = Pipet.all.map{ |p| ["P#{p.id} - #{p.max_volume}uL", p.id]}
-    
+
     if @batch.tests.count > 0
       # Batch has been made, populate Unbatched table
       @tests_available_to_add = Test.unbatched(@batch.test_method_id)
