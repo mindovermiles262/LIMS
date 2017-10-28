@@ -43,7 +43,20 @@ RSpec.describe PipetsController, type: :controller do
     end
 
     context '#check_for_cancel' do
-      it 'checks cancel on update and create'
+      it 'checks cancel on create' do
+        sign_in(FactoryGirl.create(:admin))
+        expect {
+          post :create, params: { pipet: @pipet.attributes, commit: "Cancel" } 
+        }.to change(Pipet, :count).by(0)
+      end
+      it 'checks cancel on update' do
+        sign_in(FactoryGirl.create(:admin))
+        starting_volume = @pipet.min_volume
+        
+        patch :update, params: { id: @pipet.id, pipet: {min_volume: 1}, commit: "Cancel"}
+        @pipet.reload
+        expect(@pipet.min_volume).to eql(starting_volume)
+      end
     end
   end
 
