@@ -6,10 +6,6 @@ class PipetsController < ApplicationController
   def index
     @pipets = Pipet.all
   end
-  
-  def show
-    @pipet = Pipet.find(params[:id])
-  end
 
   def new
     @pipet = Pipet.new

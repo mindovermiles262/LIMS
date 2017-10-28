@@ -52,7 +52,6 @@ RSpec.describe PipetsController, type: :controller do
       it 'checks cancel on update' do
         sign_in(FactoryGirl.create(:admin))
         starting_volume = @pipet.min_volume
-        
         patch :update, params: { id: @pipet.id, pipet: {min_volume: 1}, commit: "Cancel"}
         @pipet.reload
         expect(@pipet.min_volume).to eql(starting_volume)
@@ -61,15 +60,30 @@ RSpec.describe PipetsController, type: :controller do
   end
 
   describe '#index' do
-    it 'finds all pipets'
-  end
-
-  describe '#show' do
-    it 'finds the pipet'
+    before :each do
+      sign_in(FactoryGirl.create(:admin))
+      3.times { FactoryGirl.create(:pipet) }
+      get :index
+    end
+    it 'renders :index' do
+      expect(response).to render_template :index
+    end
+    it 'finds all pipets' do
+      expect(assigns(:pipets).count).to eql(4)
+    end
   end
 
   describe '#new' do
-    it 'makes new pipet object'
+    before :each do
+      sign_in(FactoryGirl.create(:admin))
+      get :new
+    end
+    it 'makes new pipet object' do
+      expect(assigns(:pipet)).to be_a_new(Pipet)
+    end
+    it 'renders :new' do
+      expect(response).to render_template :new
+    end
   end
 
   describe '#create' do
