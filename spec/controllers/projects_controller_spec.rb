@@ -50,6 +50,25 @@ RSpec.describe ProjectsController, type: :controller do
         expect(response).to redirect_to projects_path
       end
     end
+    context "checks cancel" do
+      it 'cancels on #create' do
+        expect{
+          post :create, 
+            params: {project: FactoryGirl.attributes_for(:project_with_samples), commit: "Cancel"}
+        }.to change(Project, :count).by(0)
+      end
+      it 'cancels on #update' do
+        @project = FactoryGirl.create(:project)
+        expect{
+          patch :update, 
+            params: {id: @project.id, project: @project.attributes, commit: "Cancel"}
+        }.to change(Project, :count).by(0)
+      end
+      it 'redirects to projects index' do
+        post :create, :params => { project: FactoryGirl.attributes_for(:project_with_samples), commit: "Cancel"}
+        expect(response).to redirect_to projects_path
+      end
+    end
   end
 
   describe 'GET #index' do
