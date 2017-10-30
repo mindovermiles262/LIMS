@@ -18,14 +18,4 @@ class User < ApplicationRecord
   def full_name
     self.first_name.capitalize + " " + self.last_name.capitalize
   end
-
-  # def all_tests # unused function (?) AD 09/25/17
-  #   tests = Array.new
-  #   self.projects.each do |proj|
-  #     proj.tests.each do |test|
-  #       tests << test
-  #     end
-  #   end
-  #   tests
-  # end
 end
