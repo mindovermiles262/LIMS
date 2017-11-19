@@ -2,7 +2,7 @@
 
 <div class="columns">
   <div class="column is-10 is-offset-1">
-    <%= form_for @batch do |batch| %>
+    <%= form_for @batch, remote: true do |batch| %>
       <table class="table is-striped is-fullwidth">
         <thead>
           <tr>
@@ -14,7 +14,7 @@
           </tr>
         </thead>
         <tbody id='append_to_batch'>
-          <%= batch.fields_for :tests, remote: true do |test| %>
+          <%= batch.fields_for :tests do |test| %>
             <tr>
               <td><%= test.object.sample.project.user.company %></td>
               <td><%= test.object.sample.project.description %></td>
@@ -39,11 +39,7 @@
                 <%= p.label :pipet_id, "Pipet", class: 'field-label' %>
               </div>
               <div class="select field-control">
-                <%= 
-                  p.select :pipet_id, options_for_select(@pipets, selected: @selected), 
-                  {include_blank: true}, 
-                  {} 
-                %>
+                <%= p.select :pipet_id, options_for_select(@pipets, selected: @selected) %>
               </div>
             <% end %>
           </div>

@@ -1,13 +1,13 @@
 $( document ).on('turbolinks:load', function() {
   // Removes Sample fields from Projects Form
-  $('form').on('click', '.destroy_fields', function() {
+  $('form').on('click', '.destroy_fields', function(event) {
     $(this).prev('input[type=hidden]').val('1')
     $(this).closest('.fieldset').hide()
     event.preventDefault()
   })
 
   // Adds Test fields to Samples form
-  $('form').on('click', '.add_fields', function() {
+  $('form').on('click', '.add_fields', function(event) {
     time = new Date().getTime()
     regex = new RegExp($(this).data('id'), 'g')
     $(this).before($(this).data('fields').replace(regex, time))
@@ -22,19 +22,21 @@ $( document ).on('turbolinks:load', function() {
   })
 
   // Remove Table Rows from Batch
-  $('table').on('click', '.destroy_row', function() {
-    $('#available_tests_section').show()
+  $('table').on('click', '.destroy_row', function(event) {
+    $('#available_tests_section').show();
     var row = $(this).parents('tr:first');
-    $(this).prev('input[type=hidden]').val('nil')
-    $('#append_to_unbatched').append(row)
-    $(row).find('a').attr('class', 'add_test_to_batch')
-    $(row).find('i').attr("aria-hidden", "true")
-    $(row).find('i').attr("class", "fa fa-plus")
-    event.preventDefault()
+    $(this).prev('input[type=hidden]').val('nil');
+    $('#append_to_unbatched').append(row);
+    $(row).find('a').attr('class', 'add_test_to_batch');
+    $(row).find('i').attr("aria-hidden", "true");
+    $(row).find('i').attr("class", "fa fa-plus");
+    event.preventDefault();
+    console.log("return false")
+    return false;
   })
 
   // Add Table Rows to Batch
-  $('table').on('click', '#add_test', function() {
+  $('table').on('click', '#add_test', function(event) {
     var row = $(this).parents('tr:first');
     $('#append_to_batch').append(row)
     $(row).find('a').attr('class', 'destroy_row')

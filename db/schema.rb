@@ -70,7 +70,6 @@ ActiveRecord::Schema.define(version: 20171006164521) do
     t.string "reference_method"
     t.integer "turn_around_time"
     t.integer "detection_limit"
-    t.integer "batch_id"
     t.string "unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
