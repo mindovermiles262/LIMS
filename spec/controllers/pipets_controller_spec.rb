@@ -87,39 +87,101 @@ RSpec.describe PipetsController, type: :controller do
   end
 
   describe '#create' do
+    before :each { sign_in(FactoryGirl.create(:admin)) }
     context 'with valid params' do
-      it 'saves pipet'
-      it 'flashes success'
-      it 'redirects to index'
+        it 'saves pipet' do
+        expect {
+          post :create, :params => { pipet: @pipet.attributes }        
+        }.to change(Pipet, :count).by(1)
+      end
+      it 'flashes success' do
+        post :create, :params => { pipet: @pipet.attributes }
+        expect(flash[:success]).to be_present
+      end
+      it 'redirects to index' do
+        post :create, :params => { pipet: @pipet.attributes }
+        expect(response).to redirect_to pipets_path        
+      end
     end
 
     context 'with invalid params' do
-      it 'does not save pipet'
-      it 'flashes warning'
-      it 'renders new template'
+      it 'does not save pipet' do
+        @pipet.max_volume = nil
+        expect {
+          post :create, :params => { pipet: @pipet.attributes }        
+        }.to change(Pipet, :count).by(0)
+      end
+      it 'flashes warning' do
+        @pipet.max_volume = nil
+        post :create, :params => { pipet: @pipet.attributes }
+        expect(flash[:warning]).to be_present
+      end
+      it 'renders new template' do
+        @pipet.max_volume = nil
+        post :create, :params => { pipet: @pipet.attributes }
+        expect(response).to render_template :new
+      end
     end
   end
 
   describe '#edit' do
-    it 'finds the pipet'
+    before :each { sign_in(FactoryGirl.create(:admin)) }
+    it 'finds the pipet' do
+      get :edit, :params => { id: @pipet.id }
+      expect(assigns(:pipet)).to eql(@pipet)
+    end
   end
 
   describe '#update' do
+    before :each { sign_in(FactoryGirl.create(:admin)) }
     context 'with valid params' do
-      it 'updates the pipet'
-      it 'flashes success' 
-      it 'redirects to the index'
+      it 'updates the pipet' do
+        @pipet.max_volume = 500
+        patch :update, :params => { id: @pipet.id, pipet: @pipet.attributes }
+        @pipet.reload
+        expect(@pipet.max_volume).to eql(500)
+      end
+      it 'flashes success' do
+        @pipet.max_volume = 500
+        patch :update, :params => { id: @pipet.id, pipet: @pipet.attributes }
+        @pipet.reload
+        expect(flash[:success]).to be_present
+      end
+      it 'redirects to the index' do
+        @pipet.max_volume = 500
+        patch :update, :params => { id: @pipet.id, pipet: @pipet.attributes }
+        @pipet.reload
+        expect(response).to redirect_to pipets_path
+      end
     end
 
     context 'with invalid params' do
-      it 'does not update pipet'
+      it 'does not update pipet' do
+        sign_in(FactoryGirl.create(:admin))
+        volume = @pipet.max_volume
+        @pipet.max_volume = nil
+        patch :update, :params => { id: @pipet.id, pipet: @pipet.attributes }
+        @pipet.reload
+        expect(@pipet.max_volume).to eql(volume)
+      end
     end
   end
 
   describe '#destroy' do
-    it 'destroys the pipet'
-    it 'flashes success'
-    it 'redirects to index'
+    before :each { sign_in(FactoryGirl.create(:admin)) }
+    it 'destroys the pipet' do
+      expect {
+        delete :destroy, :params => { id: @pipet.id }                
+      }.to change(Pipet, :count).by(-1)
+    end
+    it 'flashes success' do
+      delete :destroy, :params => { id: @pipet.id }
+      expect(flash[:success]).to be_present
+    end
+    it 'redirects to index' do
+      delete :destroy, :params => { id: @pipet.id }
+      expect(response).to redirect_to pipets_path
+    end
   end
 
 end
