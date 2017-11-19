@@ -20,6 +20,10 @@ gem "bulma-rails", "~> 0.5.1"
 gem "font-awesome-rails"
 gem 'jquery-rails',   '~> 4.3', '>= 4.3.1'
 gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
+gem 'capistrano', '~> 3.7', '>= 3.7.1'
+gem 'capistrano-rails', '~> 1.2'
+gem 'capistrano-passenger', '~> 0.2.0'
+gem 'capistrano-rvm'
 
 group :development, :test do
   gem 'sqlite3'
