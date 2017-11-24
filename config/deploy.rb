@@ -5,7 +5,7 @@ set :application, "appert"
 set :repo_url, "git@github.com:mindovermiles262/appert.git"
 
 # Default branch is :master
-# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+ask :branch, `git rev-parse --abbrev-ref deploy`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/home/student/www/appertlims.com"
