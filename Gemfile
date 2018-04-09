@@ -32,7 +32,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'rspec-rails', '~> 3.6', '>= 3.6.1'
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.2'
-  gem 'factory_girl_rails', '~> 4.8'
+  gem 'factory_bot_rails', '~> 4.8'
   gem 'pry-rails'
 end
 

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :test_method do
     name "Aerobic Plate Count"
     target_organism "APC"
